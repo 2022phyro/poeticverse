@@ -1,0 +1,44 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+openai = "*"
+flask = "*"
+flask-admin = "*"
+dynaconf = "*"
+flask-sqlalchemy = "*"
+pymysql = "*"
+sqlalchemy-serializer = "*"
+flask-migrate = "*"
+flask-cors = "*"
+apiflask = "*"
+pyjwt = "*"
+flask-jwt-extended = "*"
+gunicorn = "*"
+python-dateutil = "*"
+langchain = "*"
+mysqlclient = "*"
+
+[dev-packages]
+ipython = "*"
+black = "*"
+mypy = "*"
+pytest = "*"
+isort = "*"
+coverage = "*"
+faker = "*"
+flask-shell-ipython = "*"
+ipdb = "*"
+python-dotenv = "*"
+pytest-flask = "*"
+pytest-cov = "*"
+gitchangelog = "*"
+codecov = "*"
+types-setuptools = "*"
+ruff = "*"
+
+[requires]
+python_version = "3.10"
+python_full_version = "3.10.5"
