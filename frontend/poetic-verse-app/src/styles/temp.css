@@ -1,0 +1,129 @@
+header {
+    height: 60px;
+    /* width: calc( 100vw - 10px); */
+    width:  100vw;
+    /* margin-left: 5px; */
+    position: fixed;
+    z-index: 100;
+    border-radius: 0 0 40px 40px;
+    display: flex;
+    background-color: rgba(216, 219, 225, 0.80);
+    justify-content: right;
+    align-content: right;
+}
+
+header > ul {
+    /* padding-top: 20px; */
+    display: flex;
+    list-style-type: none;
+    justify-content: left;
+    font-size: 14px;
+    font-family: 'Spline Sans Mono';
+    font-weight: 500;
+    vertical-align: center;
+    margin-left: 40px;
+}
+
+
+.section1 {
+    width: 100%;
+    height: 100vh;
+    /* background-image: url("./section2.png"); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    color: #FCFCFC;
+    font-family: 'League Gothic';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section1 > h1 {
+    text-align: center;
+    font-size: 150px;
+    padding-bottom: 40px;
+}
+.section1 > ul {
+    display: flex;
+    text-align: center;
+    gap: 60px;
+    font-family: 'Spline Sans Mono';
+    justify-content: center;
+}
+/* BackgroundSlideshow.css */
+
+.background-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 5s ease-in-out;
+  }
+  
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(12, 15, 21, 0.80); 
+}
+  
+  .content {
+    z-index: 1; /* Ensure the content is on top of the overlay */
+    display: flex;
+    flex-flow: column nowrap;
+    /* justify-content: center; */
+    flex-grow: 0;
+
+  }
+  
+  .content > h2 {
+    color: #FEFEFF;
+    font-family: League Gothic;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-bottom: 10;
+    text-align: center;
+    letter-spacing: 1.28px;
+  }
+
+.content > p {
+    text-align: center;
+    font-family: 'Spline Sans Mono';
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 0.52px;
+}
+.content .join {
+    height: 50px;
+    width: 130px;
+    align-self: center;
+    margin-top: 15px;
+    background-color: #3A4B6B;
+    border: none;
+    padding: 15px;
+    border-radius: 13px;
+    color: #FFF;
+    font-family: 'Spline Sans Mono';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
