@@ -1,0 +1,124 @@
+header {
+    width: 100vw;
+    height: 70px;
+    display: flex;
+    flex-flow: row nowrap;
+    position: fixed;
+    justify-content: right;
+    background-color: rgba(216, 219, 225, 0.80);
+    z-index: 100;
+}
+header ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: left;
+    font-size: 14px;
+    font-family: 'Spline Sans Mono', monospace;
+    font-weight: 500;
+    vertical-align: center;
+    margin-left: 40px;
+}
+header > ul > li {
+    margin-right: 20px;
+    padding-top: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--grey-grey-500, #6B7280);
+}
+header > ul > li:last-child {
+    border-radius: 18px;
+    background: #3A4B6B;
+    color: whitesmoke;
+    display: flex;
+    width: 97px;
+    height: 50px;
+    padding-top: 0;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.section1 {
+    width: 100%;
+    height: 100vh;
+    /* padding-top: 70px; */
+    background-image: url("./scrollandsheets.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    color: #FCFCFC;
+    font-family: 'League Gothic';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content {
+    max-width: 600px;
+    font-size: 24px;
+    line-height: 40px;
+    font-family: Spline Sans Mono;
+    margin: 40px;
+}
+.options {
+    /* text-align: center; */
+    display: flex;
+    width: 80vw;
+    justify-content: space-evenly;
+    font-size: 25px;
+    font-weight: 500;
+    font-family:  League Gothic;
+}
+.section3 {
+    background-color: #5B6984;
+    color: #FCFCFC;
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 40px;
+    gap: 40px;
+    /* width: 100vw; */
+}
+.section3 article {
+    margin-top:  40px;
+    display: flex;
+    flex-flow: row wrap;
+    font-family: 'Spline Sans Mono';
+    justify-content: space-around;
+}
+.section3 img {
+    width: 400px;
+    height: 490px;
+    align-self: left;
+}
+.section3 h2 {
+    color: #FFF;
+    font-family: League Gothic;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    padding: 40px 0;
+    line-height: normal;
+    letter-spacing: 0.96px; 
+}
+.section3 article .words {
+    max-width: 745px;
+    font-size: 28px;
+    align-self: left;
+
+}
+.section3 > .dp1 {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    /* gap: 40px; */
+}
+.dp1 article {
+    display: block;
+    width: fit-content;
+}
+
+.dp1 article .words {
+    align-self: left;
+
+    width: 540px;
+}
