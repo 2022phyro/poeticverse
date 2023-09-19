@@ -1,7 +1,7 @@
 from os import urandom
-from hashlib import sha256
 from datetime import datetime, timedelta
 from celery import shared_task
+from .templates import welcome_email_msg, send_email, reset_email_msg
 import os
 # from api import celery
 BASE_URL = os.getenv('BASE_SECURITY_URL')
@@ -51,7 +51,6 @@ def extract_cred(token: str) -> tuple :
 @shared_task
 def send_verification_mail(user_id):
     user = store.get_one("User", user_id)
-    print(user)
     expire = (datetime.utcnow() + timedelta(minutes=7)).timestamp()
     hexmail = user.email.encode().hex()
     token = generate_token()
@@ -61,12 +60,8 @@ def send_verification_mail(user_id):
     link = f"{hexmail}-{token}-{expire}"
     link =  (BASE_URL + f"verify/{link}")
     store.save()
-    message = f"""
-Hello {user.pen_name}, Thank you for joining Poeticverse
-To continue, please click on this button to
-verify your account. Here is the link
-{link}"""
-    print(message)
+    msg = welcome_email_msg(link, 7, user.pen_name)
+    send_email(user.email, 'Greetings from Poeticverse', msg[0], msg[1])
 
 @shared_task
 def send_reset_password_mail(user_id, tochange="email"):
@@ -81,8 +76,5 @@ def send_reset_password_mail(user_id, tochange="email"):
     link = f"{hexmail}-{token}-{expire}"
     link = (BASE_URL + f"reset_password/{link}")
     store.save()
-    message = f"""
-Hello {user.pen_name} You requested for a reset link
-Click on this link to continue to change your {tochange}
-Here it is {link}"""
-    print(message)
+    msg = reset_email_msg(link, 7, user.pen_name, tochange)
+    send_email(user.email, 'Greetings from Poeticverse', msg[0], msg[1])

@@ -13,13 +13,13 @@ def make_celery(app: APIFlask):
         task_cls=FlaskTask, backend="redis://127.0.0.1:6379/0"
         )
     schedules = {
-        'Notification Job': {
-            'task': 'utils.mailer.cleanup_notifications',
+        'Cleanup Job': {
+            'task': 'utils.mailer.cleanup_unverified_users',
             'schedule': crontab(day_of_week='*', minute=0,
                                 hour=0, day_of_month='*/2'),
         },
-        'Cleanup job': {
-            'task': 'utils.mailer.cleanup_unverified_users',
+        'Notification job': {
+            'task': 'utils.mailer.cleanup_notifications',
             'schedule': crontab(day_of_week='*', minute=0,
                                 hour=0, day_of_month='*/7'),
         },
