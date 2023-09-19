@@ -1,18 +1,24 @@
 from celery import shared_task
-from models import store, Notification
+from models import store, Notification, User
+from datetime import datetime, timedelta
 
 @shared_task
 def cleanup_notifications():
-    nots = store.get_many('Notification', seen=True)
+    """Cleans up notifications after every seven days"""
+    nots = store.get_many('Notification')
     for n in nots:
         store.delete(n)
         
     store.save()
-    print("Sucessfully deleted all unread notifications")
 
 @shared_task
 def cleanup_unverified_users():
-    users = store.get_many('User', verified=False)
+    """Cleans up unverified users"""
+    seven_days_ago = datetime.now() - timedelta(days=7)
+    users = store.sess.query(User).filter(
+        User.verified==False,
+        User.created_at <= seven_days_ago     
+    ).all()
     for u in users:
         store.delete(u)
     store.save()
