@@ -196,3 +196,12 @@ class CommentView(MethodView):
             abort(403, "Comment must reply either a \
                 poem or another comment")
 app.add_url_rule("/comment", view_func=CommentView.as_view("comment"))  # type: ignore
+
+@app.get('/notifications')
+@auth_required()
+def get_all_notifications():
+    user = get_current_user()
+    return jsonify([
+        n.toDict()
+        for n in user.notifications
+    ])
