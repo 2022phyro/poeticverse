@@ -163,6 +163,12 @@ class TokenMixin:
         for token in inactive_tokens.all():
             if with_expired or not token.atoken_has_expired():
                 yield token
+    def purge_tokens(self):
+        """Purges all revoked or expired_tokens"""
+        for token in self.tokens:
+            if token.atoken_has_expired() or token.revoked:
+                token.delete()
+        
 
     def request_token(self) -> "Token":
         """Requests a jwt token"""

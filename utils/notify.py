@@ -8,7 +8,9 @@ def cleanup_notifications():
     nots = store.get_many('Notification')
     for n in nots:
         store.delete(n)
-        
+    #Purges all revoked or expired tokens
+    for u in store.get_many('User'):
+        u.purge_tokens()        
     store.save()
 
 @shared_task
