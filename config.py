@@ -32,6 +32,7 @@ class DevelopmentConfig(BaseConfig):
     CELERY = dict(
         broker_url=os.getenv('BROKER_URL_DEV'),
         result_backend=os.getenv('RESULT_BACKEND_DEV'),
+        broker_connection_retry_on_startup=True
     )
     CELERY_BROKER = os.getenv('BROKER_URL_DEV')
     CELERY_RESULTS_BACKEND = os.getenv('RESULT_BACKEND_DEV')
@@ -80,7 +81,8 @@ class ProductionConfig(BaseConfig):
     )
     CELERY = dict(
         broker_url=os.getenv('BROKER_URL_DEV'),
-        result_backend=os.getenv('RESULT_BACKEND_DEV')       
+        result_backend=os.getenv('RESULT_BACKEND_DEV'),
+        broker_connection_retry_on_startup=True     
     )
     CELERY_BROKER = os.getenv('BROKER_URL_DEV')
     CELERY_RESULTS_BACKEND = os.getenv('RESULT_BACKEND_DEV')

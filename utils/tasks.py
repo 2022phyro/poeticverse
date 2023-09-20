@@ -12,6 +12,7 @@ def make_celery(app: APIFlask):
         app.import_name, broker=app.config['CELERY_BROKER'],
         task_cls=FlaskTask, backend=app.config['CELERY_RESULTS_BACKEND']
         )
+    celery.conf['broker_connection_retry_on_startup'] = True
     schedules = {
         'Cleanup Job': {
             'task': 'utils.mailer.cleanup_unverified_users',
