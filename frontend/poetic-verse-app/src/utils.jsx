@@ -9,7 +9,17 @@ export const inst = axios.create({
       'Content-Type': 'application/json', // Set your desired content type
     },
   });
-  
+
+export const apiRequest = async (url, method = 'GET', requestData = null, auth=false) => {
+  return await inst({
+    method: method,
+      url: url,
+      headers: {
+        'Authorization': auth?  localStorage.getItem(myData)['a_token'] : null
+      },
+      data: requestData, // Optional request data (for POST, PUT, etc.)
+    });
+};
 
 export const passwordValidationSchema = Yup.string()
   .min(5, 'Password must be at least 5 characters')

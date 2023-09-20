@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "home",
-        element: <Poem/>
+        element: <Poem url='poems' method='GET' />
       },
       {
         path: "discover",
