@@ -303,28 +303,29 @@ class Storage:
             return None, None, None
         print(curr)
         prev = next = val = None
-        if not query or (query and curr == "max"):
-            query = self.__session.query(cls).filter_by(**filters)
+        if not query: query = self.__session.query(cls).filter_by(**filters)
+        if curr == 0:
             val = query.order_by(desc(cls.sn)).limit(page_size).all()
             if val:
                 next = None
                 prev = val[-1].sn
                 return prev, val, next
         query = query.filter_by(**filters)
-        if curr == "min":  # You want the first 10
-            _age = "newest"
-            curr = 0
-        elif _age == "newest":
+        if _age == "newest":
             query = query.filter(cls.sn > curr)
             val = query.order_by(cls.sn).limit(page_size).all()
+            val = list(reversed(val))
         elif _age == "oldest":
             query = query.filter(cls.sn < curr)
             val = query.order_by(desc(cls.sn)).limit(page_size).all()
         if val:
-            prev = val[0].sn
-            next = val[-1].sn
+            prev = val[-1].sn if val[-1].sn != 1 else None
+            next = val[0].sn
         if next == prev:
             next = prev = None
+        if val == []:
+            next = None
+            prev = curr + 1
         return prev, val, next
 
     def return_user_preferences(
