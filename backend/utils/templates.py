@@ -185,7 +185,7 @@ def reset_email_msg(reset_link, validity, pen_name, toChange):
         </a>
         <p>This link shall remain enchanted for {validity} hours. Afterward,
             should your poetic spirit yearn for another refresh, simply
-             visit our settinggs page and invoke the 'Change {toChange.title()}'.
+             visit our settings page and invoke the 'Change {toChange.title()}'.
         </p>
         <p>
             With each reset, you unfold a new stanza in your poetic
