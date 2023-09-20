@@ -1,6 +1,5 @@
 from .all_schemas import MessageSchema
 from .base import Base, db
-from .crypt import encrypt, key
 
 
 class Message(Base, db.Model):

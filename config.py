@@ -28,13 +28,13 @@ class DevelopmentConfig(BaseConfig):
     JWT_REFRESH_TOKEN_EXPIRES = {'days':5}
     JWT_REFRESH_TOKEN_LEEWAY = {'minutes': 15}
     # SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(BaseDir, "dev.db")
-    SQLALCHEMY_DATABASE_URI = (
-        f"mysql+mysqlconnector://{DB_USER}:{os.environ['DB_PASSWORD']}@{os.environ['DB_HOST']}/{os.environ['DB_NAME']}"
-    )
+    SQLALCHEMY_DATABASE_URI = os.environ["DB_URI_DEV"]
     CELERY = dict(
         broker_url=os.getenv('BROKER_URL_DEV'),
         result_backend=os.getenv('RESULT_BACKEND_DEV'),
     )
+    CELERY_BROKER = os.getenv('BROKER_URL_DEV')
+    CELERY_RESULTS_BACKEND = os.getenv('RESULT_BACKEND_DEV')
     REDIS = dict(
         host = '127.0.0.1',
         port = 6379
@@ -61,13 +61,7 @@ class ProductionConfig(BaseConfig):
     DEBUG = False
     TOKEN_EXPIRY = timedelta(days=7)
     TOKEN_REISSUANCE_LEEWAY = timedelta(days=5)
-    DB_NAME = os.environ["DB_NAME"]
-    DB_USER = os.environ["DB_USER"]
-    DB_PASSWORD = os.environ["DB_PASSWORD"]
-    DB_HOST = os.environ["DB_HOST"]
-    SQLALCHEMY_DATABASE_URI = (
-        f"mysql+mysqlconnector://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
-    )
+    SQLALCHEMY_DATABASE_URI = os.environ["DB_URI"]
     SECRET_KEY = os.getenv("SECRET_KEY")
     JWT_ACCESS_TOKEN_EXPIRES = {'days': 7}
     JWT_ACCESS_TOKEN_LEEWAY = {'days': 5}
@@ -88,6 +82,8 @@ class ProductionConfig(BaseConfig):
         broker_url=os.getenv('BROKER_URL_DEV'),
         result_backend=os.getenv('RESULT_BACKEND_DEV')       
     )
+    CELERY_BROKER = os.getenv('BROKER_URL_DEV')
+    CELERY_RESULTS_BACKEND = os.getenv('RESULT_BACKEND_DEV')
 
 
 if is_testing:

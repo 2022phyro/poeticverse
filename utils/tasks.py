@@ -9,8 +9,8 @@ def make_celery(app: APIFlask):
             with app.app_context():
                 return self.run(*args, **kwargs)
     celery = Celery(
-        app.import_name, broker="redis://127.0.0.1:6379/0",
-        task_cls=FlaskTask, backend="redis://127.0.0.1:6379/0"
+        app.import_name, broker=app.config['CELERY_BROKER'],
+        task_cls=FlaskTask, backend=app.config['CELERY_RESULTS_BACKEND']
         )
     schedules = {
         'Cleanup Job': {

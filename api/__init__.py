@@ -2,7 +2,6 @@ from apiflask import APIFlask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
-from flask_socketio import SocketIO
 from .auth import init_app
 from utils.tasks import make_celery
 import config
