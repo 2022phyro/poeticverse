@@ -11,11 +11,12 @@ export const inst = axios.create({
   });
 
 export const apiRequest = async (url, method = 'GET', requestData = null, auth=false) => {
+  const myData = JSON.parse(localStorage.getItem('myData'))
   return await inst({
     method: method,
       url: url,
       headers: {
-        'Authorization': auth?  localStorage.getItem(myData)['a_token'] : null
+        'Authorization': auth? `Bearer ${myData.atoken}` : null
       },
       data: requestData, // Optional request data (for POST, PUT, etc.)
     });

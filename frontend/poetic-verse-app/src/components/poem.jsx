@@ -10,7 +10,7 @@ export class Poem extends Component {
     this.state = {
       pages: [],
       loading: false,
-      page: 4,
+      page: 0,
       prev: 0,
       next: 0,
       age: 'newest',
@@ -19,11 +19,13 @@ export class Poem extends Component {
     this.url = props.url;
     this.method = props.method;
     this.data = props.data;
+    this.auth = props.auth
     this.loadingRef = React.createRef();
   }
 
   componentDidMount() {
     this.getPoems(this.state.page, this.state.age);
+  
     const options = {
       root: null,
       rootMargin: '0px',
@@ -38,16 +40,13 @@ export class Poem extends Component {
 
     this.setState({ loading: true });
 
-    apiRequest(`/${this.url}?_age=${age}&curr=${page}&page_size=10`, this.method, this.data)
+    apiRequest(`/${this.url}?_age=${age}&curr=${page}&page_size=3`, this.method, this.data, this.auth)
       .then((res) => {
-        this.setState((prevState) => ({
-          pages: age == 'newest'?[...res.data.pages, ...prevState.pages]: [...prevState.pages, ...res.data.pages],
-          prev: res.data.prev,
-          next: res.data.next,
-          loading: false,
-        }));
-        console.log(this.state.pages)
-
+        this.setState({pages: [...this.state.pages, ...res.data.pages]});
+        this.setState({prev: res.data.prev})
+        this.setState({next: res.data.next})
+        this.setState({loading: false})
+        console.log("this.state.pages.length")
       })
       .catch((error) => {
         console.error(error);
@@ -57,12 +56,8 @@ export class Poem extends Component {
 
   handleObserver(entities) {
     const y = entities[0].boundingClientRect.y;
-    if (this.state.prevY > y && this.state.prev > 0) {
+    if (this.state.prevY > y && this.state.prev > 1) {
       this.getPoems(this.state.prev, 'oldest');
-    }
-    if (y < 0 && this.state.next !== null && y < this.state.prevY) {
-      // Scrolled to the top
-      this.getPoems(this.state.next, 'newest');
     }
     this.setState({ prevY: y });
   }
@@ -106,36 +101,15 @@ export class Poem extends Component {
            })}
           </div>
           <div ref={this.loadingRef} style={loadingCSS}>
+            <div style={loadingTextCSS}>
             <Loader/>
+            </div>
           </div>
         </ul>
       </div>
     );
   }
 }
-
-
-export function Posem() {
-    const [ articles, setArticle ] = useState([])
-   useEffect(() => {
-     inst.get('/poems?_age=newest&curr=0&page_size=10')
-       .then((response) => {
-         const po = response.data.pages;
-         console.log(response.data)
-         setArticle(po); // Update the state with the received data
-       })
-       .catch((error) => {
-         console.error(error);
-       });
-     }, []);
-     return (
-       <ul className="poem">
-         {
-           
-         }
-       </ul>
-     )
-   }
 
 export function Discover() {
     const [ articles, setArticle ] = useState([])
