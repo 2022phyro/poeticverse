@@ -1,0 +1,75 @@
+.Profile-container{
+    background: var(--black);
+    width: 280px;
+    height: 100%;
+    position: absolute;
+    right: 40px;
+    padding: 20px 10px;
+}
+.divider{
+    width: 2px;
+    height: 100%;
+    background-color: var(--nav-dark);
+    position: fixed;
+    right: 25em;
+}
+.profile-img{
+    background: rgba(0, 0, 0, 0.502) url(../assets/react.svg);
+    background-position: center;
+    background-size: cover;
+    width: auto;
+    height: 300px;
+    background-repeat: no-repeat;
+    border: 1px solid red;
+    border-radius: 8px;
+    background-blend-mode: darken;
+}
+.edit-icon{
+    position: absolute;
+    right: 40px;
+    top: 40px;
+}
+.profile-body{
+    margin-top: 1em;
+    font-size: 20px;
+}
+.verse{
+    color: var(--primary-dark);
+}
+.list-group{
+    margin-top: 2em;
+}
+.list-item-1{
+    background-color: var(--nav-dark);
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 1em;
+    padding: 10px;
+    border-radius: 8px;
+    align-items: center;
+    transition: .3s ease all;
+}
+.list-item{
+    margin-top: 10px;
+    border: 1px solid var(--nav-dark);
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 1em;
+    padding: 10px;
+    border-radius: 8px;
+    align-items: center;
+    transition: .3s ease all;
+}
+ .list-item-1:hover{
+    background-color: var(--primary-dark);
+    cursor: pointer;
+}
+.list-item:hover{
+    background-color: var(--primary-dark);
+    cursor: pointer;
+}
+@media (max-width: 1199px) {
+    .divider,.Profile-container {
+        display: none;
+    }    
+}

@@ -11,6 +11,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Profile from './routes/Profile';
 const router = createBrowserRouter([
   {
     path:"/",
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: 'create',
         element: <Create/>
+      },
+      {
+        path: 'profile',
+        element: <Profile />
       }
     ]
   },
