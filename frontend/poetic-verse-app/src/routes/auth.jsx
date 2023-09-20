@@ -1,6 +1,7 @@
 import '../styles/auth.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect , useRef} from 'react';
 import { Outlet, Link } from 'react-router-dom';
+import { Loader } from '../components/loader';
 import { Field, Formik, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup';
 import { inst,
@@ -12,9 +13,24 @@ import { inst,
 
 export function Login() {
   const [apiError, setApiError] = useState(null);
+  const [style, setStyle] = useState({display: 'flex'})
+  const [item, setItem ] = useState({display: 'none'})
+  const loadingRef = useRef(true); // Initialize loading as true
+  useEffect(() => {
+    // Simulate an asynchronous operation (e.g., loading data) with a timeout
+    setTimeout(() => {
+      loadingRef.current = false; // Set loadingRef to false when the operation is complete
+      setStyle({display: 'none'})
+      setItem({display: 'flex'})
+    }, 2000); // Adjust the timeout duration as needed
+  }, []);
 
     return (
-      <div className="auth">
+      <>
+        <div ref={loadingRef} style={style}>
+                  <Loader/>
+        </div>
+        <div className="auth" style={item}>
         <div className='wrapper'>
           <div className="login">
             <h2>Login</h2>
@@ -33,8 +49,7 @@ export function Login() {
                 inst.post('/login', e)
                 .then((response) => {
                     const data = response.data
-                    console.log(data)   
-                    localStorage.setItem('myData', JSON.stringify(data));
+                    localStorage.setItem('myData',JSON.stringify(data));
                     window.location.href = '/feed'
                     setSubmitting(false)
                     setApiError(null)
@@ -63,14 +78,31 @@ export function Login() {
           </div>
         </div>
       </div>
+      </>
+
     )
 }
 
 export function Signup() {
   const [apiError, setApiError] = useState(null);
+  const [style, setStyle] = useState({display: 'flex'})
+  const [item, setItem ] = useState({display: 'none'})
+  const loadingRef = useRef(true); // Initialize loading as true
+  useEffect(() => {
+    // Simulate an asynchronous operation (e.g., loading data) with a timeout
+    setTimeout(() => {
+      loadingRef.current = false; // Set loadingRef to false when the operation is complete
+      setStyle({display: 'none'})
+      setItem({display: 'flex'})
+    }, 2000); // Adjust the timeout duration as needed
+  }, []);
 
   return (
-      <div className="auth">
+    <>
+        <div ref={loadingRef} style={style}>
+                  <Loader/>
+        </div>
+        <div className="auth" style={item}>
         <div className='wrapper'>
           <div className="signup">
             <h2>Signup</h2>
@@ -134,6 +166,8 @@ export function Signup() {
           </div>
         </div>   
       </div>
+  </>
+
   )
 }
 export function Preferences() {

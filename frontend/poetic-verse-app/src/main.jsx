@@ -1,12 +1,14 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom/client'
 import './styles/all.css'
+import './styles/loader.css'
 import Index from './routes/root.jsx'
 import Feed from './routes/feed.jsx';
 import ErrorPage from './routes/error-page.jsx';
 import { Auth, Login, Signup, Preferences} from './routes/auth'; 
 import Create from './routes/Create';
 import { Poem, Discover } from './components/poem';
+import { Search } from './components/explore'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -23,7 +25,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "home",
-        element: <Poem url='poems' method='GET' />
+        element: <Poem url='personify' method='GET' auth={true} />
       },
       {
         path: "discover",
@@ -32,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: 'create',
         element: <Create/>
+      },
+      {
+        path: 'explore',
+        element: <Search/>
       }
     ]
   },

@@ -51,7 +51,7 @@ function Index() {
           />
         </div>
         <button className="navbar-toggle">
-          <span className="navbar-toggle-icon"></span>
+          {/* <span className="navbar-toggle-icon"></span> */}
         </button>
         <div className="custom-links">
           <a href="#explore">EXPLORE</a>
@@ -59,8 +59,7 @@ function Index() {
           <a href="#envision">ENVISION</a>
           <a href="#connect">CONNECT</a>
           <div className="signup-button-container">
-          <li><Link to={`auth/signup`}></Link><button class="hover-button"><span>SIGN UP</span></button>
-</li>
+          <li><Link to={`/auth/signup`}><button className="hover-button"><span>SIGN UP</span></button></Link></li>
 </div>
         </div>
       </div>

@@ -34,3 +34,12 @@ export function Bookmark({ id, lik, like_count, ...props }) {
         </p>
       );
 }
+
+export function Switch() {
+    return (
+        <label className="switch">
+            <input type="checkbox"></input>
+            <span className="slider"></span>
+        </label>
+    )
+}
