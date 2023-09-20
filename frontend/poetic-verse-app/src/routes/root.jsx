@@ -1,8 +1,5 @@
 import '../styles/index.css';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, InputGroup, FormControl, Button } from 'react-bootstrap';
-import { FaSearch } from 'react-icons/fa';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../assets/logo.png';
 import iconImage from '../assets/icon.png'; 
 
@@ -29,44 +26,45 @@ function Section1() {
     )
 }
 function Index() {
-  const navbarStyle = {
-    backgroundColor: 'white',
-    borderRadius: '2px', 
-  };
     return (
         <>
-        <Navbar collapseOnSelect expand="lg" style={navbarStyle} variant="light">
-      <Container>
-        <Navbar.Brand>
+        <nav className="custom-navbar">
+      <div className="container">
+        <div className="navbar-brand">
           <img
             src={logo} 
             alt="Your Logo"
             height="50"
-            width={60}
+            width="60"
           />
-        </Navbar.Brand>
-        <InputGroup className="mx-auto" style={{ maxWidth: '400px' }}>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <InputGroup.Append>
-            <Button variant="outline-dark">
-              <a href={iconImage} target="_blank" rel="noopener noreferrer">
-                <img src={iconImage} alt="Custom Icon" height="20" width="20" />
-              </a>
-            </Button>
-          </InputGroup.Append>
-        </InputGroup>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ml-auto">
-            <Nav.Link href="#explore">EXPLORE</Nav.Link>
-            <Nav.Link href="#create">CREATE</Nav.Link>
-            <Nav.Link href="#envision">ENVISION</Nav.Link>
-            <Nav.Link href="#connect">CONNECT</Nav.Link>
-            <Nav.Link href="#signup">SIGN UP</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+        </div>
+        <div className="custom-search">
+          <button className="search-button">
+            <a href={iconImage} target="_blank" rel="noopener noreferrer">
+              <img src={iconImage} alt="Custom Icon" height="20" width="20" />
+            </a>
+          </button>
+          <input
+            type="text"
+            placeholder="Search"
+            className="search-input"
+          />
+        </div>
+        <button className="navbar-toggle">
+          <span className="navbar-toggle-icon"></span>
+        </button>
+        <div className="custom-links">
+          <a href="#explore">EXPLORE</a>
+          <a href="#create">CREATE</a>
+          <a href="#envision">ENVISION</a>
+          <a href="#connect">CONNECT</a>
+          <div className="signup-button-container">
+          <li><Link to={`auth/signup`}></Link><button class="hover-button"><span>SIGN UP</span></button>
+</li>
+</div>
+        </div>
+      </div>
+    </nav>
           <main>
             <Section1/> 
             <section className="section3">
