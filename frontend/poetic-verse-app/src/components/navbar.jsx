@@ -33,6 +33,7 @@ export function Nav() {
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [menuVisible, setMenuVisible] = useState(false);
+  const [Toggle, setToggle] = useState(false);
   const toggleMenu = () => {
     if (screenWidth <= 630) {
       setMenuVisible(!menuVisible)
@@ -45,6 +46,9 @@ export function Nav() {
   }
   const navStyle = {
     transform: menuVisible||  screenWidth > 630  ? 'translateX(0)' : 'translateX(-100%)',
+  }
+  const handleToggle = () => {
+    setToggle(!Toggle)
   }
   useEffect(() => {
     const handleResize = () => {
@@ -67,7 +71,7 @@ export function Nav() {
         <img src='/PV.png' className='logo'/>
         </header>
         <div className='contain'style={menuStyle}>
-        <nav className="nav" style={{...navStyle}} >
+        <nav className="nav" style={{...navStyle}}>
           <ul>
             <Link to={`/feed/home`}><li className='active'><Icon className='hint' path='home-3'/><span>Home</span></li></Link>
             <Link to={`/search`}><li><Icon className='hint'  path='compass-navigator'/><span>Explore</span></li></Link>
@@ -77,13 +81,24 @@ export function Nav() {
             <Link to={`/ranking`}><li><Icon className='hint'  path='rank'/><span>Ranking</span></li></Link>
             <Link to={`/about`}><li><Icon className='hint'  path='about-us'/><span>About us</span></li></Link>
             <Link to={`/feed/discover`}><li className={hiddenClass}><Icon className='hint'  path='ai-discover'/><span>Discover</span></li></Link>
-            <Link to={`/new`}><li className="create"><Icon className='hint'  path='create'/><span>Create</span></li></Link>
+            <Link to={`/feed/create`}><li className="create"><Icon className='hint'  path='create'/><span>Create</span></li></Link>
           </ul>
-          <div className="me">
+          {Toggle && <div className='toggle-settings'>
+            <div className="settings">
+              settings<Icon path= 'bookmark' />
+            </div>
+            <div className="logout">
+              LogOut<Icon path= 'bookmark' />
+            </div>
+            </div>}
+          <div className="me" onClick={handleToggle}>
             <Avatar source={null}/>
             <div className="b_info">
-              <p>PhyroKel</p>
-              <p className="rank">Enchanted Muse</p>
+              <div>
+                <p>PhyroKel</p>
+              <p>Enchanted Muse</p>
+              </div>
+              <Icon path= 'menu-circle-with-dots' />
             </div>
           </div>
         </nav>

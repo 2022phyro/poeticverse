@@ -1,0 +1,82 @@
+.create-txt{
+    background: var(--primary-dark);
+    height: auto;
+    padding: 15px 20px;
+    border-radius: 7px;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.txt-area-1{
+    height: 10em;
+}
+.parent{
+    background: var(--nav-dark);
+    width: 100%;
+}
+.input-1{
+    background: var(--primary-dark);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin-top: 3PX;
+    width: 70%;
+    padding: 6px 10px;
+    font-size: 18px;
+    color: white;
+}
+.txt-area-1{
+    background: var(--primary-dark);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin-top: 3PX;
+    width: 70%;
+    height: 300px;
+    padding: 6px 10px;
+    font-size: 18px;
+    color: white;
+}
+.txt-area{
+    background: var(--primary-dark);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin-top: 3PX;
+    width: 50%;
+    padding: 6px 10px;
+    font-size: 18px;
+    color: white;
+}
+.filter-section{
+    margin-top: 2em;
+    background-color: var(--nav-dark);
+    padding: 20px;
+    margin-bottom: 5em;
+}
+.box{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    row-gap: 1em;
+    flex-direction: column;
+}
+.btn:hover{
+    transform: scale(1.1);
+}
+.btn{
+    align-self: flex-end;
+    border: none;
+    outline: none;
+    padding: 7px 20px;
+    background-color: var(--primary-dark);
+    color: white;
+    border-radius: 8px;
+    transition: .3s ease all;
+}
+.section-2, .canvas{
+    margin-top: 2em;
+    background-color: var(--nav-dark);
+    padding: 20px;
+}

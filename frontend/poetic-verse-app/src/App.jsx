@@ -15,7 +15,7 @@ function App() {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ml-auto">
           <Nav.Link href="#explore">EXPLORErrr</Nav.Link>
-          <Nav.Link href="#create">CREATE</Nav.Link>
+          <Nav.Link to ="/create">CREATE</Nav.Link>
           <Nav.Link href="#envision">ENVISION</Nav.Link>
           <Nav.Link href="#connect">CONNECT</Nav.Link>
           <Nav.Link href="#signup">SIGN UP</Nav.Link>
