@@ -36,7 +36,7 @@ function Feed() {
     <div className="f-main">
       <main className='mainfeed'>
         <Outlet/>
-        <Discover/>
+        {/* <Discover/> */}
       </main>
     </div>
 

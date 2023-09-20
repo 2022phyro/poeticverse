@@ -1,19 +1,10 @@
-.create-txt{
-    background: var(--primary-dark);
-    height: auto;
-    padding: 15px 20px;
-    border-radius: 7px;
-    font-size: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 .txt-area-1{
     height: 10em;
 }
 .parent{
     background: var(--nav-dark);
     width: 100%;
+    border: 1px solid red;
 }
 .input-1{
     background: var(--primary-dark);
