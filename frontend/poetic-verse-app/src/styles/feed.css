@@ -7,19 +7,21 @@ body{
 }
 .home-header {
     width: 100vw;
-    height: 50px;
+    height: 70px;
+    border: 1px solid red;
     background-color: var(--black);
+    z-index: 1000;
 }
 .logo {
     position: fixed; 
     right: 30px;
     top: 20px;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
 }
 .nav {
    margin-left: 100px; 
-   padding-top: 30px;
+   padding-top: 70px;
    position: fixed;
    top: 0;
    height: 100vh;
@@ -196,7 +198,14 @@ body{
     background: transparent;
     height: auto;
 }
+.title h3 {
+    font-size: 32px;
+    font-weight: 600;
+}
 @media screen and (max-width: 630px) {
+    .home-header {
+        z-index:   0;
+    }
     .hamburger {
         position: fixed;
         top: 20px;
@@ -276,11 +285,26 @@ body{
         width: 48px;
         height: 48px;
     }
+    .title {
+            width: 40%;
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            justify-items: center;
+            border-radius: 7px;
+            position: fixed;
+            top: 0;
+            background: transparent;
+            height: auto;
+        z-index: 10000;
+    }
     .f-main {
         position: fixed;
+        top: 73px;
         left: 0px;
-        height: 100vh;
+        height: calc(100vh - 75px);
         margin-left: 0;
+        border: 1px solid red;
         display: block;
         /* flex-flow: column; */
         width: 100vw;
@@ -377,8 +401,9 @@ body{
     }
     .f-main {
         position: fixed;
+        top: 75px;
         left: 260px;
-        height: 100vh;
+        height: calc(100vh - 70px);
         margin-left: 0;
         display: block;
         width: calc(100vw - 260px);
@@ -476,9 +501,9 @@ body{
     }
     .f-main {
         position: fixed;
-        top: 60px;
+        top: 70px;
         left: 260px;
-        height: calc(100vh - 65px);
+        height: calc(100vh - 75px);
         margin-left: 0;
         display: block;
         border: 1px solid red;

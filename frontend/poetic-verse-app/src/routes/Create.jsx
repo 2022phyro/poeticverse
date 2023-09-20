@@ -6,8 +6,8 @@ const Create = () => {
   return (
     <>
    <div className="parent">
-   <div className="create-txt">
-            <h3>create</h3>
+   <div className="title">
+            <h3>Create  </h3>
             <Icon className = 'create-icon' path = 'create' />
         </div>
 
