@@ -21,9 +21,9 @@ from api.schemas.poems import (
 def personify_feed(data):
     from models import store, Poem
     user = get_current_user()
-    prev, pages, nex = store.return_user_preferences(user, **data)
-    if not pages:
-        prev, pages, nex = store.paginate(Poem, **data)
+    # prev, pages, nex = store.return_user_preferences(user, **data)
+    # if not pages:
+    prev, pages, nex = store.paginate(Poem, **data)
     response = jsonify({
         'prev': prev,
         'pages': [
@@ -39,6 +39,7 @@ def personify_feed(data):
                         'author_rank': poem.author.rank.value,
                         'created_when': poem.created_at,
                         'tags': [_.name for _ in poem.tags],
+                        'liked': poem in user.fav_poems
                     } for poem in pages
                 ],
         'next': nex
@@ -46,7 +47,6 @@ def personify_feed(data):
     return response, 200
 
 @app.get('/poems')
-# @app.output()
 @app.input(PoemFeed, location='query')
 def get_all_poems(data):
     from models import store, Poem
