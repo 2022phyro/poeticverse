@@ -1,8 +1,8 @@
 -- Sets up the database
-CREATE USER IF NOT EXISTS 'poet'@'localhost' IDENTIFIED BY 'poet1';
+CREATE USER IF NOT EXISTS 'root_poet'@'%' IDENTIFIED BY '123root_poeticverse';
 CREATE DATABASE IF NOT EXISTS poeticverse;
 
-GRANT ALL PRIVILEGES ON poeticverse.* TO 'poet'@'localhost';
+GRANT ALL PRIVILEGES ON poeticverse.* TO 'root-poet'@'%';
 
 DELIMITER $$
 CREATE FUNCTION FUZZY( s1 VARCHAR(255), s2 VARCHAR(255) )
