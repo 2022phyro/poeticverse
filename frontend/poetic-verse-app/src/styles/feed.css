@@ -10,11 +10,13 @@ body{
     height: 50px;
     background-color: var(--black);
 }
-/* .logo {
+.logo {
     position: fixed; 
-    right: 0;
-    top: 0;
-} */
+    right: 30px;
+    top: 20px;
+    width: 60px;
+    height: 60px;
+}
 .nav {
    margin-left: 100px; 
    padding-top: 30px;
@@ -101,7 +103,7 @@ body{
     position: fixed;
     top: 60px;
     left: 350px;
-    height: 100vh;
+    height: calc(100vh - 60px);
     margin-left: 25px;
     display: flex;
     width: calc(100vw - 375px);
@@ -111,6 +113,9 @@ body{
     /* border: 1px solid red; */
     width: 598px;
     overflow:visible;
+}
+.poem {
+    width: auto;
 }
 
 .mainfeed .poem li {
@@ -186,6 +191,18 @@ body{
     width: 20px;
     height: 20px;
     margin-right: 4px;
+}
+.title {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    justify-items: center;
+    border-radius: 7px;
+    position: fixed;
+    top: 0;
+    background: transparent;
+    height: auto;
 }
 @media screen and (max-width: 630px) {
     .hamburger {
@@ -491,19 +508,19 @@ body{
     }
     .f-main {
         position: fixed;
+        top: 60px;
         left: 260px;
-        height: 100vh;
+        height: calc(100vh - 65px);
         margin-left: 0;
         display: block;
         border: 1px solid red;
-        /* flex-flow: column; */
         width: calc(100vw - 260px);
         overflow: scroll;
         z-index: 10000;
     }   
 
     .mainfeed {
-        border: 1px solid red;
+        /* border: 1px solid red; */
         width: 100%;
         margin: 0;
         overflow:visible;
