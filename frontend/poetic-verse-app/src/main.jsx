@@ -4,7 +4,8 @@ import './styles/all.css'
 import Index from './routes/root.jsx'
 import Feed from './routes/feed.jsx';
 import ErrorPage from './routes/error-page.jsx';
-import { Auth, Login, Signup, Preferences } from './routes/auth';
+import { Auth, Login, Signup, Preferences} from './routes/auth'; 
+import Create from './routes/Create';
 import { Poem, Discover } from './components/poem';
 import {
   createBrowserRouter,
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "discover",
         element: <Discover/>
+      },
+      {
+        path: 'create',
+        element: <Create/>
       }
     ]
   },
