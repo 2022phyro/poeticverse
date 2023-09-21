@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Icon } from '../components/navbar';
 import '../styles/Profile.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import FloatingProfile from '../components/FloatingProfile';
 
 const Profile = () => {
   const [activeButton, setActiveButton] = useState(null);
-  const [HandleDelete, setHandleDelete] = useState(false)
+  const [HandleDelete, setHandleDelete] = useState(false);
 
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName);
@@ -17,6 +18,14 @@ const Profile = () => {
 
   const handleDelete = () => {
     setHandleDelete(!HandleDelete)
+  }
+
+  //add the functionality to delte a users account
+  const location = useNavigate();
+
+  const handleDeleteAccount = () => {
+    //delete account logic
+    location() //replace with the actual route
   }
 
   return (
@@ -115,6 +124,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
+      <FloatingProfile handleDeleteAccount={handleDeleteAccount} handleButtonClick = {handleButtonClick} getButtonBackgroundColor={getButtonBackgroundColor} handleDelete = {handleDelete} />
     </>
   );
 };

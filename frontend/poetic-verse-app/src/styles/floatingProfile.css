@@ -1,0 +1,25 @@
+.floatingProfile{
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+}
+.floater{
+    background-color: var(--primary-dark);
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.floater-content{
+    background-color: var(--nav-dark);
+    width: 50px;
+    height: auto;
+    color: white;
+    position: absolute;
+    right: 60px;
+    bottom: 100px;
+    z-index: 1;
+}

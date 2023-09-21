@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 export function Icon({ path, className, ...props }) {
@@ -56,6 +56,12 @@ export function Nav() {
   const handleLogout = () => {
     setLogout(!Logout)
   }
+  const logoutLocation = useNavigate();
+
+  const handleUserLogout = () => {
+    //delete account logic
+    logoutLocation() //replace with the actual route
+  }
   useEffect(() => {
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
@@ -72,7 +78,16 @@ export function Nav() {
   const containClass = screenWidth <= 630 ? 'close-nav' : screenWidth <= 950 ? 'mid-nav': "";
     return (
       <>
-      {Logout &&  <div className="overlay-2">
+     
+        <header className='home-header'>
+        <Icon path={'menu-circle-with-dots'} className={`hamburger ${hiddenClass}`} onClick={toggleMenu}/>
+        <img src='/PV.png' className='logo'/>
+        </header>
+
+        <div className='contain'style={menuStyle}>
+        <nav className="nav" style={{...navStyle}}>
+        {Logout &&  
+      <div className="overlay-3">
                     <div className="log">
                     <div className="logout-header">
                       <h2>LogOut</h2>
@@ -90,14 +105,8 @@ export function Nav() {
                         Yes
                       </button>
                     </div>
-                  </div>
+                    </div>
                   </div>}
-        <header className='home-header'>
-        <Icon path={'menu-circle-with-dots'} className={`hamburger ${hiddenClass}`} onClick={toggleMenu}/>
-        <img src='/PV.png' className='logo'/>
-        </header>
-        <div className='contain'style={menuStyle}>
-        <nav className="nav" style={{...navStyle}}>
           <ul> 
             <Link to={`/feed/home`}><li className='active'><Icon className='hint' path='home-3'/><span>Home</span></li></Link>
             <Link to={`/feed/explore`}><li><Icon className='hint'  path='compass-navigator'/><span>Explore</span></li></Link>
