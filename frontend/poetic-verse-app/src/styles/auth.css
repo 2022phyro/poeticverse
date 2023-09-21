@@ -224,6 +224,9 @@ a {
     font-weight: 600;
     cursor: pointer;
 }
+.signupButton:active, .LoginButton:active {
+    background: grey;
+}
 .signup > form >  p {
   margin-top: 10px;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
