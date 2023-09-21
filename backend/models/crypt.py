@@ -1,7 +1,5 @@
 import os
-
 from cryptography.fernet import Fernet
-
 key = os.getenv("ENCRYPTION_KEY", b"NdJsn2CpmKCGb227pry06hsQ33WSpsXTPMMIfCDQrSM=")
 
 

@@ -157,9 +157,11 @@ def get_poem_likes(data):
 class PoemView(MethodView):
     """Poems view"""
     @app.input(PoemGet.poem_get_In, location='query')
+    @auth_required()
     # @app.output(PoemCreate.poem_create_Out, 201, example=ex.PoemGet.Out)
     def get(self, data):
         """get poem details"""
+        user = get_current_user()
         from models import Poem, store
         poem = store.get_one('Poem', data['poem_id'])
         if not poem:
@@ -179,6 +181,8 @@ class PoemView(MethodView):
             'author_rank': poem.author.rank.value,
             'created_when': poem.created_at,
             'tags': [_.name for _ in poem.tags],
+            'liked': poem in user.fav_poems
+
         })
         return response, 200
 
@@ -208,6 +212,7 @@ class PoemView(MethodView):
             'author_rank': poem.author.rank.value,
             'created_when': poem.created_at,
             'tags': [_.name for _ in poem.tags],
+            'liked': poem in user.fav_poems
         })
         return response, 200
 
@@ -258,7 +263,7 @@ class PoemView(MethodView):
                 'author_rank': user.rank.value,
                 'created_when': poem.created_at,
                 'tags': [_.name for _ in poem.tags],
-
+                'liked': poem in user.fav_poems
             })
         return response, 201
 app.add_url_rule("/poem", view_func=PoemView.as_view("poem"))  # type: ignore
