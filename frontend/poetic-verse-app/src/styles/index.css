@@ -239,3 +239,15 @@ header > ul > li:last-child {
 
   width: 540px;
 }
+.delete-acc-container {
+  width: 465px;
+  height: 420px;
+  border-radius: 24px;
+  background: #0c0f15;
+}
+.delete-acc-icon {
+  width: 92px;
+  height: 95.407px;
+  transform: rotate(-31.119deg);
+  flex-shrink: 0;
+}
