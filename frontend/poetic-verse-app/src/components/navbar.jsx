@@ -9,6 +9,7 @@ export function Icon({ path, className, ...props }) {
 }
 export function Avatar({ source }) {
   const [img, setImg] = useState('/person.png');
+  
 
   useEffect(() => {
     if (source !== null) {
@@ -34,6 +35,8 @@ export function Nav() {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [menuVisible, setMenuVisible] = useState(false);
   const [Toggle, setToggle] = useState(false);
+  const [Logout, setLogout] = useState(false);
+
   const toggleMenu = () => {
     if (screenWidth <= 630) {
       setMenuVisible(!menuVisible)
@@ -49,6 +52,9 @@ export function Nav() {
   }
   const handleToggle = () => {
     setToggle(!Toggle)
+  }
+  const handleLogout = () => {
+    setLogout(!Logout)
   }
   useEffect(() => {
     const handleResize = () => {
@@ -66,13 +72,33 @@ export function Nav() {
   const containClass = screenWidth <= 630 ? 'close-nav' : screenWidth <= 950 ? 'mid-nav': "";
     return (
       <>
+      {Logout &&  <div className="overlay-2">
+                    <div className="log">
+                    <div className="logout-header">
+                      <h2>LogOut</h2>
+                      <button className="close-button" onClick={handleLogout}>
+                        <span>&times;</span>
+                      </button>
+                      <Icon width='60' className='logout-icon' path= 'logout' />
+                      <p>You will have to Log In Again. Are You Sure?</p>
+                    </div>
+                    <div className="delete-acc-footer">
+                      <button className="delete-acc-button-1" onClick={handleLogout}>
+                        No
+                      </button>&nbsp;&nbsp;
+                      <button className="delete-acc-button-2">
+                        Yes
+                      </button>
+                    </div>
+                  </div>
+                  </div>}
         <header className='home-header'>
         <Icon path={'menu-circle-with-dots'} className={`hamburger ${hiddenClass}`} onClick={toggleMenu}/>
         <img src='/PV.png' className='logo'/>
         </header>
         <div className='contain'style={menuStyle}>
         <nav className="nav" style={{...navStyle}}>
-          <ul>
+          <ul> 
             <Link to={`/feed/home`}><li className='active'><Icon className='hint' path='home-3'/><span>Home</span></li></Link>
             <Link to={`/feed/explore`}><li><Icon className='hint'  path='compass-navigator'/><span>Explore</span></li></Link>
             <Link to={`/notifications`}><li><Icon className='hint' path='notification'/><span>Notifications</span></li></Link>
@@ -83,12 +109,16 @@ export function Nav() {
             <Link to={`/feed/discover`}><li className={hiddenClass}><Icon className='hint'  path='ai-discover'/><span>Discover</span></li></Link>
             <Link to={`/feed/create`}><li className="create"><Icon className='hint'  path='create'/><span>Create</span></li></Link>
           </ul>
-          {Toggle && <div className='toggle-settings'>
+          
+          {Toggle && <div className='toggle-settings' onClick={handleToggle}>
+            <Link to = '/feed/settings'>
             <div className="settings">
-              settings<Icon path= 'bookmark' />
+              settings<Icon path= 'settings' />
             </div>
-            <div className="logout">
-              LogOut<Icon path= 'bookmark' />
+            </Link>
+          
+            <div className="logout" onClick={handleLogout}>
+              LogOut<Icon path= 'logout' />
             </div>
             </div>}
           <div className="me" onClick={handleToggle}>

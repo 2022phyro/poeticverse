@@ -14,6 +14,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Profile from './routes/Profile';
+import UserInfo from './components/UserInfo'
+import PasswordReset from './components/PasswordReset'
+import ChangeEmail from './components/ChangeEmail'
+import VerifyUser from './components/VerifyUser'
 const router = createBrowserRouter([
   {
     path:"/",
@@ -41,8 +45,24 @@ const router = createBrowserRouter([
         element: <Search/>
       },
       {
-        path: 'profile',
+        path: 'settings',
         element: <Profile />
+      },
+      {
+        path: 'userinfo',
+        element: <UserInfo />
+      },
+      {
+        path: 'resetpassword',
+        element: <PasswordReset />
+      },
+      {
+        path: 'changeEmail',
+        element: <ChangeEmail />
+      },
+      {
+        path: 'verifyUser',
+        element: <VerifyUser />
       }
     ]
   },

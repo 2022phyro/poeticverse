@@ -3,7 +3,9 @@
   background-color: lightgray; /* Set your desired background color */
   padding: 10px 120px;
 }
-
+Link{
+  color: white;
+}
 .container {
   display: flex;
   justify-content: space-between;
