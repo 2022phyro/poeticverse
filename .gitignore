@@ -22,4 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
+__pycache__
+.env
+.vscode
+celerybeat-schedule.bak
+celerybeat-schedule.dat
+celerybeat-schedule.dir
