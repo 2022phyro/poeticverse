@@ -2,7 +2,7 @@ from celery import shared_task
 from models import store, Notification, User
 from datetime import datetime, timedelta
 
-@shared_task
+# @shared_task
 def cleanup_notifications():
     """Cleans up notifications after every seven days"""
     nots = store.get_many('Notification')
@@ -13,7 +13,7 @@ def cleanup_notifications():
         u.purge_tokens()        
     store.save()
 
-@shared_task
+# @shared_task
 def cleanup_unverified_users():
     """Cleans up unverified users"""
     seven_days_ago = datetime.now() - timedelta(days=7)
@@ -27,7 +27,7 @@ def cleanup_unverified_users():
     print("Successfully deleted all unverified users")
     
 x = 0
-@shared_task
+# @shared_task
 def test():
     global x
     """Test celery beats"""
@@ -54,7 +54,7 @@ def like(_type, recipent_id, user, user_id, user_avatar, msg, poem_id):
     notified.save()
     print(f"Successfully notified user {user_id}  with  notification {notified.id}")
 
-# @shared_task
+@shared_task
 def comment(_type, recipent_id, user, user_id, user_avatar, msg, cmm_id):
     user = store.get_one(recipent_id)
     if not user: return
