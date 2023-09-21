@@ -19,7 +19,8 @@ export class Poem extends Component {
     this.url = props.url;
     this.method = props.method;
     this.data = props.data;
-    this.auth = props.auth
+    this.auth = props.auth;
+    this.main = props.main;
     this.loadingRef = React.createRef();
   }
 
@@ -74,10 +75,13 @@ export class Poem extends Component {
     console.log(this.state.pages)
     return (
       <div className="poem">
-        <div className="title">
+        {
+          this.main ?  <div className="title">
           <h3>Home</h3>
           <Icon path={'home-3'}/>
-        </div>
+        </div> : <></>
+        }
+
         <ul>
           <div style={{ minHeight: '800px' }}>
             {this.state.pages.map((at) => {
