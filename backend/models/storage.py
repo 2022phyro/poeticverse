@@ -301,7 +301,6 @@ class Storage:
         cls = self._get_model(cls)
         if not cls:
             return None, None, None
-        print(curr)
         prev = next = val = None
         if not query: query = self.__session.query(cls).filter_by(**filters)
         if curr == 0:
