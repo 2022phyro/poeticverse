@@ -1,0 +1,14 @@
+.search-bar {
+    background: var(--primary-dark);
+    display: flex;
+    border-radius: 50px;
+    width: 250px;
+    padding: 10px, 20px;
+}
+.search-bar > input {
+    background: transparent;
+    outline: none;
+    border: none;
+    color: white;
+    margin: auto;
+}

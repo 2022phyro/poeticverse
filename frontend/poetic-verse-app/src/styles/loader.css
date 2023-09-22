@@ -50,8 +50,8 @@
     font-size: 17px;
     position: relative;
     display: inline-block;
-    width: 120px;
-    height: 50px;
+    width: 100px;
+    height: 45px;
   }
   
   /* Hide default HTML checkbox */
@@ -75,8 +75,11 @@
   .slider:before {
     position: absolute;
     content: "";
-    height: 40px;
-    width:75px;
+    background-image: url('/icon/compass-navigator.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 35px;
+    width: 50px;
     right: 0.3em;
     bottom: 0.3em;
     transform: translateX(150%);
@@ -88,8 +91,11 @@
   .slider:after {
     position: absolute;
     content: "";
-    height: 40px;
-    width: 75px;
+    background-image: url('/icon/edit-ai.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 35px;
+    width: 50px;
     left: 0.3em;
     bottom: 0.3em;
     background-color: #cccccc;

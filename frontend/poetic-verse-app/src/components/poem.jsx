@@ -1,9 +1,25 @@
 import { useEffect, useState } from "react";
 import React, { Component } from "react";
-import { inst, getRelativeTime, apiRequest } from '../utils';
+import {getRelativeTime, api } from '../utils';
 import { Icon, Avatar } from "./navbar";
 import { Loader, Bookmark } from "./loader";
 
+export function PoemObject(props) {
+  return (
+    <article className="poem">
+      <div className="others">
+        <Avatar source={props.author_avatar}/>
+        <h3>{props.author_pen_name}</h3>
+        <p className="rank">{props.author_rank}<span><i className="fa-solid fa-circle"></i>{getRelativeTime(props.created_when)}</span></p>
+      </div>
+      <h4>{props.title}</h4>
+      <p className='poem_body'>{props.body}</p>
+      <div className="likesComment">
+        <p><Icon className='poem_info'  path='comment'/><span>{props.comment_count}</span></p>
+        <Bookmark id={props.id} lik={props.liked} like_count={props.like_count}/>
+      </div>
+    </article>
+  )}
 export class Poem extends Component {
   constructor(props) {
     super(props);
@@ -17,8 +33,6 @@ export class Poem extends Component {
       prevY: 0,
     };
     this.url = props.url;
-    this.method = props.method;
-    this.data = props.data;
     this.auth = props.auth;
     this.main = props.main;
     this.loadingRef = React.createRef();
@@ -41,7 +55,7 @@ export class Poem extends Component {
 
     this.setState({ loading: true });
 
-    apiRequest(`/${this.url}?_age=${age}&curr=${page}&page_size=3`, this.method, this.data, this.auth)
+    api(this.auth).get(`/${this.url}?_age=${age}&curr=${page}&page_size=3`)
       .then((res) => {
         this.setState({pages: [...this.state.pages, ...res.data.pages]});
         this.setState({prev: res.data.prev})
@@ -86,19 +100,7 @@ export class Poem extends Component {
             {this.state.pages.map((at) => {
              return (
              <li key={at.id}>
-               <article className="poem">
-                 <div className="others">
-                   <Avatar source={at.author_avatar}/>
-                   <h3>{at.author_pen_name}</h3>
-                   <p className="rank">{at.author_rank}<span><i className="fa-solid fa-circle"></i>{getRelativeTime(at.created_when)}</span></p>
-                 </div>
-                 <h4>{at.title}</h4>
-                 <p className='poem_body'>{at.body}</p>
-                 <div className="likesComment">
-                   <p><Icon className='poem_info'  path='comment'/><span>{at.comment_count}</span></p>
-                   <Bookmark id={at.id} lik={at.liked} like_count={at.like_count}/>
-                 </div>
-               </article>
+               <PoemObject {...at}/>
              </li>
              )
            })}
@@ -117,7 +119,7 @@ export class Poem extends Component {
 export function Discover() {
     const [ articles, setArticle ] = useState([])
     useEffect(() => {
-      inst.get('/explorepoems')
+      api().get('/explorepoems')
         .then((response) => {
           const po = response.data;
           setArticle(po); // Update the state with the received data
