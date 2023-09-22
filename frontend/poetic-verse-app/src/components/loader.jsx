@@ -13,14 +13,14 @@ export function Loader() {
     )
 }
 export function Bookmark({ id, lik, like_count, ...props }) {
-    const [liked, setLiked] = useState(lik)
+    const [count, setCount] = useState(like_count)
     const [path, setPath] = useState(lik ? 'bookmark-full': 'bookmark')
 
     const handleLike = () => {
-        apiRequest(`/poem/like?id=${id}`, 'GET', null, true )
+        apiRequest(`/poem/like?poem_id=${id}`, 'GET', null, true )
         .then ((res) => {
-            setLiked(res.liked);
-            setPath(res.liked ? 'bookmark-full': 'bookmark' )
+            setPath(res.data.liked ? 'bookmark-full' : 'bookmark');
+            setCount(res.data.liked ? count + 1 : count - 1)
         })
         .catch((err) => {
             console.error(err)
@@ -30,7 +30,7 @@ export function Bookmark({ id, lik, like_count, ...props }) {
     return (
         <p onClick={handleLike}> {/* Add an onClick handler to trigger the like action */}
           <Icon className='poem_info' path={path} />
-          <span>{like_count}</span>
+          <span>{count}</span>
         </p>
       );
 }

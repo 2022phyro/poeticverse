@@ -1,6 +1,6 @@
 import '../styles/auth.css';
 import { useState, useEffect , useRef} from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { Loader } from '../components/loader';
 import { Field, Formik, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup';
@@ -16,6 +16,7 @@ export function Login() {
   const [style, setStyle] = useState({display: 'flex'})
   const [item, setItem ] = useState({display: 'none'})
   const loadingRef = useRef(true); // Initialize loading as true
+  const navigate = useNavigate()
   useEffect(() => {
     // Simulate an asynchronous operation (e.g., loading data) with a timeout
     setTimeout(() => {
@@ -50,7 +51,7 @@ export function Login() {
                 .then((response) => {
                     const data = response.data
                     localStorage.setItem('myData',JSON.stringify(data));
-                    window.location.href = '/feed'
+                    navigate('/feed/home')
                     setSubmitting(false)
                     setApiError(null)
                 })
@@ -94,7 +95,7 @@ export function Signup() {
       loadingRef.current = false; // Set loadingRef to false when the operation is complete
       setStyle({display: 'none'})
       setItem({display: 'flex'})
-    }, 2000); // Adjust the timeout duration as needed
+    }, 3000); // Adjust the timeout duration as needed
   }, []);
 
   return (

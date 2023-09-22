@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import React, { Component } from "react";
 import { inst, getRelativeTime, apiRequest } from '../utils';
 import { Icon, Avatar } from "./navbar";
-import { Loader } from "./loader";
+import { Loader, Bookmark } from "./loader";
 
 export class Poem extends Component {
   constructor(props) {
@@ -97,7 +97,7 @@ export class Poem extends Component {
                  <p className='poem_body'>{at.body}</p>
                  <div className="likesComment">
                    <p><Icon className='poem_info'  path='comment'/><span>{at.comment_count}</span></p>
-                   <p><Icon className='poem_info'  path='bookmark'/><span>{at.like_count}</span></p>
+                   <Bookmark id={at.id} lik={at.liked} like_count={at.like_count}/>
                  </div>
                </article>
              </li>

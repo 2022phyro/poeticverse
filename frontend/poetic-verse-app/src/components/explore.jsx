@@ -7,11 +7,10 @@ export function Search() {
         <div>
             <div className='title'>
                 <h3>Search</h3>
-                <Icon path={'compass-navigator'}/>
                 <div className='searchbar'>
                     <input></input>
                 </div>
-                <Poem url='/df'/>
+                <Icon path={'compass-navigator'}/>
             </div>
         </div>
     )

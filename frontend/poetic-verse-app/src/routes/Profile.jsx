@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import { Icon } from '../components/navbar';
+import React, { useState, useEffect } from 'react';
+import { Icon, Avatar } from '../components/navbar';
 import '../styles/Profile.css';
 import { Link, useNavigate } from 'react-router-dom';
 import FloatingProfile from '../components/FloatingProfile';
+import { apiRequest, inst } from '../utils';
 
 const Profile = () => {
   const [activeButton, setActiveButton] = useState(null);
   const [HandleDelete, setHandleDelete] = useState(false);
-
+  const [pro, setPro] = useState({});
+  
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName);
   };
@@ -25,9 +27,22 @@ const Profile = () => {
 
   const handleDeleteAccount = () => {
     //delete account logic
-    location() //replace with the actual route
+    apiRequest('/user', 'DELETE', null, true)
+    .then((res) => {
+      localStorage.removeItem('myData')
+      location('/') //replace with the actual route
+    })
   }
-
+  useEffect(() => {
+    const user_id = JSON.parse(localStorage.getItem('myData'))['id'];
+  
+    inst.get(`/user?user_id=${user_id}`)
+      .then((res) => {
+        const myData = res.data;
+        console.log(myData)
+        setPro(myData);
+      });
+  }, []);
   return (
     <>
     {HandleDelete && 
@@ -64,14 +79,15 @@ const Profile = () => {
         </div>
         <div className="profile-sidebar">
           <div className="profile-content">
-            <div className="profile-img">
+            <div className="">
+              <Avatar source={pro.profile_picture} className='profile-img'/>
               <Icon className="edit-icon" path="create" />
             </div>
             <div className="profile-body">
-              <b>AFAM SOMETHING</b>&nbsp;&nbsp;
-              <small className="verse">Verse Apprentice</small>
+              <b>{`${pro.first_name} ${pro.last_name}`}</b>&nbsp;&nbsp;
+              <small className="verse">{pro.rank}</small>
               <div className="list-group">
-                <Link to="/feed/userinfo">
+                <Link to="/feed/userinfo" data={pro}>
                   <div
                     className="list-item"
                     style={{ backgroundColor: getButtonBackgroundColor('userinfo') }}
@@ -82,7 +98,7 @@ const Profile = () => {
                   </div>
                 </Link>
 
-                <Link to="/feed/resetpassword">
+                <Link to={{pathname:"/feed/resetpassword", state: pro}}>
                   <div
                     className="list-item"
                     style={{ backgroundColor: getButtonBackgroundColor('resetpassword') }}

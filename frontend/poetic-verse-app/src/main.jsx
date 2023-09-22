@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "home",
-        element: <Poem url='personify' method='GET' auth={true} />
+        element: <Poem url='personify' method='GET' auth={true} main={true} />
       },
       {
         path: "discover",
@@ -86,7 +86,7 @@ const router = createBrowserRouter([
   }
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  // <React.StrictMode>
+  // </React.StrictMode>
+  <RouterProvider router={router} />
 )

@@ -30,12 +30,12 @@ class DevelopmentConfig(BaseConfig):
     # SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(BaseDir, "dev.db")
     SQLALCHEMY_DATABASE_URI = os.environ["DB_URI_DEV"]
     CELERY = dict(
-        broker_url=os.getenv('BROKER_URL_DEV'),
-        result_backend=os.getenv('RESULT_BACKEND_DEV'),
+        broker_url="redis://127.0.0.1:6379/0",
+        result_backend="redis://127.0.0.1:6379/0",
         broker_connection_retry_on_startup=True
     )
-    CELERY_BROKER = os.getenv('BROKER_URL_DEV')
-    CELERY_RESULTS_BACKEND = os.getenv('RESULT_BACKEND_DEV')
+    CELERY_BROKER = "redis://127.0.0.1:6379/0"
+    CELERY_RESULTS_BACKEND = "redis://127.0.0.1:6379/0"
     REDIS = dict(
         host = '127.0.0.1',
         port = 6379

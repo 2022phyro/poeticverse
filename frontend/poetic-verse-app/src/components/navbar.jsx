@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { apiRequest } from '../utils';
 
 export function Icon({ path, className, ...props }) {
   const route = '/icon/' + path + '.svg'
@@ -7,13 +8,15 @@ export function Icon({ path, className, ...props }) {
     <img className={`icon ${className}`} src={route} {...props}/>
   )
 }
-export function Avatar({ source }) {
+export function Avatar({ source, ...props }) {
   const [img, setImg] = useState('/person.png');
   
 
   useEffect(() => {
     if (source !== null) {
       setImg(source);
+    } else {
+      setImg('/person.png')
     }
   }, [source]);
 
@@ -27,6 +30,7 @@ export function Avatar({ source }) {
       className='p_photo'
       alt='Avatar'
       onError={handleImageError} // Add error handler
+      {...props}
     />
   );
 }
@@ -59,8 +63,8 @@ export function Nav() {
   const logoutLocation = useNavigate();
 
   const handleUserLogout = () => {
-    //delete account logic
-    logoutLocation() //replace with the actual route
+    apiRequest('/logout', 'POST', null, true)
+    .then((res) => logoutLocation('/'))
   }
   useEffect(() => {
     const handleResize = () => {
@@ -101,7 +105,7 @@ export function Nav() {
                       <button className="delete-acc-button-1" onClick={handleLogout}>
                         No
                       </button>&nbsp;&nbsp;
-                      <button className="delete-acc-button-2">
+                      <button className="delete-acc-button-2" onClick={handleUserLogout}>
                         Yes
                       </button>
                     </div>

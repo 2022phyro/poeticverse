@@ -7,7 +7,7 @@ from utils.tasks import make_celery
 import config
 app = APIFlask(__name__)
 cors = CORS(app, resources={r"/v1/*": {"origins": "*"}})
-app.config.from_object(config.config)
+app.config.from_object(config.DevelopmentConfig())
 app.app_context().push()
 db = SQLAlchemy(app)
 make_celery(app)
