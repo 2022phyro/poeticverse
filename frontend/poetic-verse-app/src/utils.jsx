@@ -21,7 +21,24 @@ export const apiRequest = async (url, method = 'GET', requestData = null, auth=f
       data: requestData, // Optional request data (for POST, PUT, etc.)
     });
 };
+// eslint-disable-next-line react-refresh/only-export-components
+export const api = (auth) => {
+  const inst = axios.create({
+    baseURL: 'http://127.0.0.1:5000/v1',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    if (auth) {
+      const myData = JSON.parse(localStorage.getItem('myData'))
+      inst.defaults.headers.common['Authorization'] = `Bearer ${myData.atoken}`;
+    }
+    return inst
+}
+// context.js
 
+
+// Create the context
 export const passwordValidationSchema = Yup.string()
   .min(5, 'Password must be at least 5 characters')
   .matches(

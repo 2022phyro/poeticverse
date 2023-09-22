@@ -75,7 +75,7 @@
 @media (max-width: 1199px) {
     .divider,.Profile-container {
         display: none;
-    }    
+    }
 }
 .delete-acc{
     position: absolute;
@@ -111,6 +111,7 @@
     padding: 5px 10px;
     color: white;
     border-radius: 8px;
+    cursor: pointer;
 }
 .delete-acc-button-1{
     border: 1px solid var(--nav-dark);
@@ -119,6 +120,7 @@
     padding: 5px 10px;
     color: white;
     border-radius: 8px;
+    cursor: pointer;
 }
 .del{
     transform: rotate(31deg);

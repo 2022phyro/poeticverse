@@ -1,9 +1,12 @@
 .parent-container{
     width: 100%;
     padding: 20px;
+    overflow: hidden;
 }
 .field{
-    margin-top: 2em;
+    margin-top: 1rem;
+    font-family: 'Roboto', sans-serif;
+    display: block;
 }
 .input-field{
     background: var(--primary-dark);
@@ -33,4 +36,8 @@
 }
 .input-field::-webkit-input-placeholder{
     color: rgba(255, 255, 255, 0.507);
+}
+.btn {
+    display: block;
+    margin-top: 2em;
 }

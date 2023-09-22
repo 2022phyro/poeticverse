@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Icon, Avatar } from '../components/navbar';
 import '../styles/Profile.css';
 import { Link, useNavigate } from 'react-router-dom';
 import FloatingProfile from '../components/FloatingProfile';
-import { apiRequest, inst } from '../utils';
+import { api } from '../utils';
 
 const Profile = () => {
   const [activeButton, setActiveButton] = useState(null);
   const [HandleDelete, setHandleDelete] = useState(false);
-  const [pro, setPro] = useState({});
+  const [pro, setPro] = useState({hellow: "yeos"});
   
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName);
@@ -27,8 +27,8 @@ const Profile = () => {
 
   const handleDeleteAccount = () => {
     //delete account logic
-    apiRequest('/user', 'DELETE', null, true)
-    .then((res) => {
+    api(true).delete('/user')
+    .then(() => {
       localStorage.removeItem('myData')
       location('/') //replace with the actual route
     })
@@ -36,7 +36,7 @@ const Profile = () => {
   useEffect(() => {
     const user_id = JSON.parse(localStorage.getItem('myData'))['id'];
   
-    inst.get(`/user?user_id=${user_id}`)
+    api().get(`/user?user_id=${user_id}`)
       .then((res) => {
         const myData = res.data;
         console.log(myData)
@@ -58,13 +58,13 @@ const Profile = () => {
                       <div className="delete-acc-icon">
                        <Icon width='60' className='del' path= 'trash' />
                       </div>
-                      <p>We're saddened to see you considering departure from our poetic community. Before you go, we'd like to offer you a choice, a path that suits your poetic journey best. Please select one of the following options</p>
+                      <p>We&apos;re saddened to see you considering departure from our poetic community. Before you go, we&apos;d like to offer you a choice, a path that suits your poetic journey best. Please select one of the following options</p>
                     </div>
                     <div className="delete-acc-footer">
                       <button className="delete-acc-button-1" onClick={handleDelete}>
                         Cancel
                       </button>&nbsp;&nbsp;
-                      <button className="delete-acc-button-2">
+                      <button className="delete-acc-button-2" onClick={handleDeleteAccount}>
                         Delete
                       </button>
                     </div>
@@ -87,7 +87,7 @@ const Profile = () => {
               <b>{`${pro.first_name} ${pro.last_name}`}</b>&nbsp;&nbsp;
               <small className="verse">{pro.rank}</small>
               <div className="list-group">
-                <Link to="/feed/userinfo" data={pro}>
+                <Link to={{pathname:"/feed/userinfo", state:pro}}>
                   <div
                     className="list-item"
                     style={{ backgroundColor: getButtonBackgroundColor('userinfo') }}
@@ -98,7 +98,7 @@ const Profile = () => {
                   </div>
                 </Link>
 
-                <Link to={{pathname:"/feed/resetpassword", state: pro}}>
+                <Link to={{pathname:"/feed/resetpassword", state: {pro}}}>
                   <div
                     className="list-item"
                     style={{ backgroundColor: getButtonBackgroundColor('resetpassword') }}
