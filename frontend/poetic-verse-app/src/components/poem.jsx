@@ -47,7 +47,6 @@ export class Poem extends Component {
         this.setState({prev: res.data.prev})
         this.setState({next: res.data.next})
         this.setState({loading: false})
-        console.log("this.state.pages.length")
       })
       .catch((error) => {
         console.error(error);
