@@ -253,3 +253,83 @@ header > ul > li:last-child {
   transform: rotate(-31.119deg);
   flex-shrink: 0;
 }
+.confirmation-popup {
+  width: 465px;
+  height: 420px;
+  border-radius: 24px;
+  background: #0c0f15;
+}
+.confirmation-icon {
+  width: 90px;
+  height: 90px;
+  transform: rotate(-18.243deg);
+  flex-shrink: 0;
+}
+.network-error {
+  width: 465px;
+  height: 420px;
+  border-radius: 24px;
+  background: #0c0f15;
+}
+.network-error-icon {
+  width: 90px;
+  height: 86.785px;
+  flex-shrink: 0;
+}
+.success {
+  width: 465px;
+  height: 420px;
+  border-radius: 24px;
+  background: #0c0f15;
+}
+.success-header {
+  color: #d8dbe1;
+  font-family: League Gothic;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.success-text {
+  color: #fff;
+  font-family: Spline Sans Mono;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.success-button {
+  fill: #3a4b6b;
+  stroke-width: 1px;
+  stroke: #3a4b6b;
+}
+.sent-email {
+  border-radius: 24px;
+  background: #0c0f15;
+}
+.sent-email-header {
+  color: #d8dbe1;
+  font-family: League Gothic;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.sent-email-icon {
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+}
+.sent-email-text {
+  color: #fff;
+  font-family: Spline Sans Mono;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.sent-email-button {
+  fill: #3a4b6b;
+  stroke-width: 1px;
+  stroke: #3a4b6b;
+}
