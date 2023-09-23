@@ -18,6 +18,7 @@ import UserInfo from './components/UserInfo'
 import PasswordReset from './components/PasswordReset'
 import ChangeEmail from './components/ChangeEmail'
 import VerifyUser from './components/VerifyUser'
+import { UserProvider } from './utils'
 const router = createBrowserRouter([
   {
     path:"/",
@@ -46,23 +47,26 @@ const router = createBrowserRouter([
       },
       {
         path: 'settings',
-        element: <Profile />
-      },
-      {
-        path: 'userinfo',
-        element: <UserInfo />
-      },
-      {
-        path: 'resetpassword',
-        element: <PasswordReset />
-      },
-      {
-        path: 'changeEmail',
-        element: <ChangeEmail />
-      },
-      {
-        path: 'verifyUser',
-        element: <VerifyUser />
+        element: <Profile />,
+        children: [
+          {
+            path: 'userinfo',
+            element: <UserInfo />
+          },
+          {
+            path: 'resetpassword',
+            element: <PasswordReset />
+          },
+          {
+            path: 'changeEmail',
+            element: <ChangeEmail />
+          },
+          {
+            path: 'verifyUser',
+            element: <VerifyUser />
+          }
+    
+        ]
       }
     ]
   },
@@ -89,5 +93,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
   // <React.StrictMode>
   // </React.StrictMode>
-    <RouterProvider router={router} />
+  <UserProvider>
+        <RouterProvider router={router} />
+  </UserProvider>
 )

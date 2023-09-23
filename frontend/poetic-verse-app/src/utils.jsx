@@ -1,6 +1,10 @@
+/**
+ * utils - a file to hold all of the functions that are not necessary components that
+ * i may ned elsewhere throughout the code
+ */
 import axios from 'axios'
 import * as Yup from 'yup';
-// import { } from 'public'
+import { createContext, useContext, useReducer } from 'react';
 
 export const inst = axios.create({
     baseURL: 'http://127.0.0.1:5000/v1', // Set your base URL here
@@ -36,9 +40,47 @@ export const api = (auth) => {
     return inst
 }
 // context.js
+// UserContext.js
+
+const UserContext = createContext();
+
+export const initialState = {
+  profile: {},
+  rank: {},
+  isLoggedIn: false,
+  authToken: '',
+};
+
+export const UserProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(userReducer, initialState);
+
+  return (
+    <UserContext.Provider value={{ state, dispatch }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
+
+export const useUserContext = () => {
+  return useContext(UserContext);
+};
+// Reducer for switching up the functions
+export const userReducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_PROFILE':
+      return { ...state, profile: action.payload };
+    case 'SET_RANK':
+      return { ...state, rank: action.payload };
+    case 'SET_LOGGED_IN':
+      return { ...state, isLoggedIn: action.payload };
+    case 'SET_AUTH_TOKEN':
+      return { ...state, authToken: action.payload };
+    default:
+      return state;
+  }
+};
 
 
-// Create the context
 export const passwordValidationSchema = Yup.string()
   .min(5, 'Password must be at least 5 characters')
   .matches(

@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { apiRequest } from '../utils';
+import { api, useUserContext } from '../utils';
 
 export function Icon({ path, className, ...props }) {
   const route = '/icon/' + path + '.svg'
@@ -40,6 +40,8 @@ export function Nav() {
   const [menuVisible, setMenuVisible] = useState(false);
   const [Toggle, setToggle] = useState(false);
   const [Logout, setLogout] = useState(false);
+  const { state, dispatch}  = useUserContext()
+  const [loadedProfile, setLoadedProfile] = useState(false)
 
   const toggleMenu = () => {
     if (screenWidth <= 630) {
@@ -63,8 +65,12 @@ export function Nav() {
   const logoutLocation = useNavigate();
 
   const handleUserLogout = () => {
-    apiRequest('/logout', 'POST', null, true)
-    .then((res) => logoutLocation('/'))
+    api(true).post('/logout')
+    .then(() => {
+      dispatch({ type: 'SET_LOGGED_IN', payload: false });
+      logoutLocation('/')
+    })
+    .catch((err) => console.error(err))
   }
   useEffect(() => {
     const handleResize = () => {
@@ -76,7 +82,21 @@ export function Nav() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
+  useEffect(() => {
+    // Make the API request to get the profile data
+    if (!loadedProfile) {
+    api(true)
+      .get('/profile')
+      .then((res) => {
+        dispatch({ type: 'SET_PROFILE', payload: res.data });
+        setLoadedProfile(true)
+      })
+      .catch((error) => {
+        // Handle the error, e.g., show a message to the user
+        console.error('Error fetching profile:', error);
+      });
+    }
+  }, [dispatch]);
   // Conditionally apply CSS classes based on screen width
   const hiddenClass = screenWidth <= 950 ? '' : 'hidden';
   const containClass = screenWidth <= 630 ? 'close-nav' : screenWidth <= 950 ? 'mid-nav': "";
@@ -135,11 +155,11 @@ export function Nav() {
             </div>
             </div>}
           <div className="me" onClick={handleToggle}>
-            <Avatar source={null}/>
+            <Avatar source={state.profile.profile_picture}/>
             <div className="b_info">
               <div>
-                <p>PhyroKel</p>
-              <p>Enchanted Muse</p>
+                <p>{state.profile.pen_name}</p>
+              <p>{state.profile.rank}</p>
               </div>
               <Icon path= 'menu-circle-with-dots' />
             </div>
