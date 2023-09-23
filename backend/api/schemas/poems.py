@@ -61,4 +61,5 @@ class PoemFeed(Schema):
     _age = fields.String(metadata = {'description': 'direction', 'example': 'newest'})
     curr = fields.Integer()
     page_size = fields.Integer()
+    author_id = fields.UUID(required=False, metadata={'description': "The author's id not required"})
     

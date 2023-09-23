@@ -8,11 +8,13 @@ import ErrorPage from './routes/error-page.jsx';
 import { Auth, Login, Signup, Preferences} from './routes/auth'; 
 import Create from './routes/Create';
 import { Poem, Discover } from './components/poem';
-import { Search } from './components/explore'
+import { Search } from './routes/explore'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import { PoemSection } from './components/poemCsection'
+import CommentSection from './components/commentSection'
 import Profile from './routes/Profile';
 import UserInfo from './components/UserInfo'
 import PasswordReset from './components/PasswordReset'
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
       {
         path: "discover",
         element: <Discover/>
+      },
+      {
+        path: "poem",
+        element: <PoemSection/>
+      },
+      {
+        path: "comment",
+        element: <CommentSection/>
       },
       {
         path: 'create',

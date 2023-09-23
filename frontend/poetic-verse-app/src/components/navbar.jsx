@@ -10,7 +10,7 @@ export function Icon({ path, className, ...props }) {
 }
 export function Avatar({ source, ...props }) {
   const [img, setImg] = useState('/person.png');
-  
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (source !== null) {
@@ -23,7 +23,12 @@ export function Avatar({ source, ...props }) {
   const handleImageError = () => {
     setImg('/person.png');
   };
-
+   const handleClick = (event) => {
+    event.stopPropagation()
+    if (props.id) {
+      navigate(`/feed/poet?id=${props.id}`)
+    }
+   }
   return (
     <img
       src={img}
@@ -31,6 +36,7 @@ export function Avatar({ source, ...props }) {
       alt='Avatar'
       onError={handleImageError} // Add error handler
       {...props}
+      onClick={handleClick}
     />
   );
 }
@@ -68,6 +74,7 @@ export function Nav() {
     api(true).post('/logout')
     .then(() => {
       dispatch({ type: 'SET_LOGGED_IN', payload: false });
+      localStorage.clear()
       logoutLocation('/')
     })
     .catch((err) => console.error(err))
@@ -96,7 +103,7 @@ export function Nav() {
         console.error('Error fetching profile:', error);
       });
     }
-  }, [dispatch]);
+  }, [dispatch, loadedProfile]);
   // Conditionally apply CSS classes based on screen width
   const hiddenClass = screenWidth <= 950 ? '' : 'hidden';
   const containClass = screenWidth <= 630 ? 'close-nav' : screenWidth <= 950 ? 'mid-nav': "";

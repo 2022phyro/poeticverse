@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import React, { Component } from "react";
 import {getRelativeTime, api } from '../utils';
+import { useNavigate } from "react-router-dom";
 import { Icon, Avatar } from "./navbar";
 import { Loader, Bookmark } from "./loader";
 
 export function PoemObject(props) {
+  const navig = useNavigate()
+  const toComment = (event) => {
+    event.stopPropagation();
+    navig(`/feed/poem?id=${props.id}`)
+  }
   return (
-    <article className="poem">
+    <article className="poem-object" onClick={toComment} >
       <div className="others">
-        <Avatar source={props.author_avatar}/>
+        <Avatar source={props.author_avatar} id={props.author_id}/>
         <h3>{props.author_pen_name}</h3>
         <p className="rank">{props.author_rank}<span><i className="fa-solid fa-circle"></i>{getRelativeTime(props.created_when)}</span></p>
       </div>

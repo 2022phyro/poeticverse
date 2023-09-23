@@ -51,6 +51,9 @@ def extract_cred(token: str) -> tuple :
 @shared_task
 def send_verification_mail(user_id):
     user = store.get_one("User", user_id)
+    if not user:
+        print(f"User {user_id} can no more be found. He has been likely deleted")
+        return
     expire = (datetime.utcnow() + timedelta(minutes=7)).timestamp()
     hexmail = user.email.encode().hex()
     token = generate_token()
@@ -66,6 +69,9 @@ def send_verification_mail(user_id):
 @shared_task
 def send_reset_password_mail(user_id, tochange="email"):
     """This sends a safe point to reset user's password"""
+    if not user:
+        print(f"User {user_id} can no more be found. He has been likely deleted")
+        return
     user = store.get_one("User", user_id)
     expire = (datetime.utcnow() + timedelta(minutes=7)).timestamp()
     hexmail = user.email.encode().hex()

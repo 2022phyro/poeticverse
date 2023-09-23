@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import '../styles/explore.css'
-import { Icon } from './navbar'
+import { Icon } from '../components/navbar'
 import { api } from '../utils'
-import { Loader } from './loader'
-import { PoemObject } from './poem'
-import { Avatar } from './navbar'
+import { Loader } from '../components/loader'
+import { PoemObject } from '../components/poem'
+import { Avatar } from '../components/navbar'
 
 
 export function Search() {

@@ -234,7 +234,7 @@ class PoemView(MethodView):
     @auth_required()
     @app.input(PoemCreate.poem_create_In, example=ex.PoemCreate.In)
     # @app.output(PoemCreate.Out, 201, example=ex.PoemGet.Out)
-    def post(json_data):
+    def post(self, json_data):
         """Creates a new poem"""
         from models import Poem, Tag, store
         user = get_current_user()
@@ -280,3 +280,4 @@ def gen_random_poems():
             'author_pen_name': poem.author.pen_name            
         } for poem in poems
     ])
+

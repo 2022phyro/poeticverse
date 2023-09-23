@@ -16,7 +16,8 @@ export function Bookmark({ id, lik, like_count, ...props }) {
     const [count, setCount] = useState(like_count)
     const [path, setPath] = useState(lik ? 'bookmark-full': 'bookmark')
 
-    const handleLike = () => {
+    const handleLike = (event) => {
+        event.stopPropagation();
         apiRequest(`/poem/like?poem_id=${id}`, 'GET', null, true )
         .then ((res) => {
             setPath(res.data.liked ? 'bookmark-full' : 'bookmark');
@@ -28,7 +29,7 @@ export function Bookmark({ id, lik, like_count, ...props }) {
     }
 
     return (
-        <p onClick={handleLike}> {/* Add an onClick handler to trigger the like action */}
+        <p onClick={handleLike} {...props}> {/* Add an onClick handler to trigger the like action */}
           <Icon className='poem_info' path={path} />
           <span>{count}</span>
         </p>

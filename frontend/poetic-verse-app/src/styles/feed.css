@@ -114,25 +114,25 @@ body{
 .poem {
     width: auto;
 }
-
-.mainfeed .poem li {
+.poem-object {
     display: flex;
     min-height: 230px;
     padding: 12px 16px;
     align-items: flex-start;
     gap: 13px;
+    flex-flow: column;
     /* flex-shrink: 0; */
     white-space: pre-line;
     border-radius: 19px;
     background: var(--nav-dark);
     margin-bottom: 9px;
 }
-.poem h4 {
+.poem-object h4 {
     font-family: 'Spline Sans Mono', serif;
     font-weight: 500;
 }
 
-.poem p {
+.poem-object p {
     color: #D8DBE1;
     font-family: Roboto;
     font-size: 15px;
@@ -173,7 +173,7 @@ body{
     margin-top: -3rem;
     margin-right: 0.2rem;
 }
-.poem > .likesComment {
+.poem-object > .likesComment {
     display: flex;
     font-size: 13px;
     font-style: normal;
@@ -525,13 +525,14 @@ body{
         /* justify-content: center; */
         gap: 30px;
     }
-    .mainfeed .poem li {
+    .poem-object {
         display: flex;
         min-height: 230px;
         padding: 12px 16px;
         width: calc(100vw - 260px - 420px);
         align-items: flex-start;
         gap: 13px;
+        flex-flow: column;
         /* flex-shrink: 0; */
         white-space: pre-line;
         border-radius: 19px;

@@ -200,6 +200,14 @@ class UserUpdate:
         message = fields.String()
         user = fields.Nested(User.get_Out)
 
+    class user_update_email(Schema):
+        old_email = Email()
+        new_email = Email()
+        
+    class user_update_password(Schema):
+        old_password = Password()
+        new_password = Password()
+
     class Error(Schema):
         message = fields.String()
 

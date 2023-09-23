@@ -211,7 +211,7 @@ class UserView(MethodView):
 
     @auth_required()
     @app.input(UserUpdate.user_update_In, example=ex.User.update_in)
-    @app.output(UserSchema.get_Out, example=ex.User.update_out)
+    # @app.output(UserSchema.get_Out, example=ex.User.update_out)
     def patch(self, json_data):
         """update user details"""
         from models import User
@@ -224,7 +224,16 @@ class UserView(MethodView):
             user.update(**json_data)
         except ValueError as err:
             return {"message": err.args[0]}, 422
-        return user
+        return  {
+            'id': user.id,
+            'rank' : user.rank.value,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'pen_name': user.pen_name,
+            'email' : user.email,
+            'bio': user.bio,
+            'profile_picture': user.profile_picture
+        }
 
     @auth_required()
     @app.output(UserDelete.user_delete_Out, example=ex.User.delete_out)
@@ -286,3 +295,31 @@ def post_file(data):
     # f.save(os.path.join('.', filename)) # Save to a folder to be changed with imagekit SDK
     upload_image(user, f)
     return {'message': f'file {filename} saved.'}
+
+
+@app.post('/change_logged_in_mail')
+@auth_required()
+@app.input(UserUpdate.user_update_email)
+def change_email_for_logged_in_users(data):
+    """Changes the email for logged in users"""
+    from models import store
+    user = get_current_user()
+    try:
+        user.email = data['email']
+        store.save()
+        return jsonify({"updated": True})
+    except ValueError as e:
+        return ({"message":  e.args[0]}), 422
+
+@app.post('/change_logged_in_password')
+@auth_required()
+@app.input(UserUpdate.user_update_password)
+def change_password_for_logged_in_users(data):
+    from models import store, User
+    user: User = get_current_user()
+    if not user.verifyPassword(data['old_password']):
+        print("Incorrect")
+        return {"message": "The old password is incorrect, Try again"}, 422
+    else:
+        user.update_password(data['new_password'])
+    return jsonify({"updated": True})
