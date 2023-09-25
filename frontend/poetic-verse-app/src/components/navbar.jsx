@@ -141,12 +141,11 @@ export function Nav() {
           <ul> 
             <Link to={`/feed/home`}><li className='active'><Icon className='hint' path='home-3'/><span>Home</span></li></Link>
             <Link to={`/feed/explore`}><li><Icon className='hint'  path='compass-navigator'/><span>Explore</span></li></Link>
-            <Link to={`/notifications`}><li><Icon className='hint' path='notification'/><span>Notifications</span></li></Link>
-            <Link to={`/messages`}><li><Icon className='hint'  path='message'/><span>Messages</span></li></Link>
-            <Link to={`/bookmarks`}><li><Icon className='hint'  path='bookmark'/><span>Bookmarks</span></li></Link>
-            <Link to={`/ranking`}><li><Icon className='hint'  path='rank'/><span>Ranking</span></li></Link>
+            <Link to={`/feed/messages`}><li><Icon className='hint'  path='message'/><span>Messages</span></li></Link>
+            <Link to={`/feed/poet?id=${state.profile.id}`}><li><Icon className='hint'  path='bookmark'/><span>Me</span></li></Link>
+            <Link to={`/feed/ranking`}><li><Icon className='hint'  path='rank'/><span>Ranking</span></li></Link>
             <Link to={`/about`}><li><Icon className='hint'  path='about-us'/><span>About us</span></li></Link>
-            <Link to={`/feed/discover`}><li className={hiddenClass}><Icon className='hint'  path='ai-discover'/><span>Discover</span></li></Link>
+            <Link to={`/feed/discover`}><li><Icon className='hint'  path='notification'/><span>Discover</span></li></Link>
             <Link to={`/feed/create`}><li className="create"><Icon className='hint'  path='create'/><span>Create</span></li></Link>
           </ul>
           

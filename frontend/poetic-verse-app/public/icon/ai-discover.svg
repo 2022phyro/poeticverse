@@ -1,14 +1,12 @@
-<svg width="28" height="28" viewBox="0 0 28 28" fill="none"  xmlns="http://www.w3.org/2000/svg">
-<g id="ai-upscale-spark--magnifier-zoom-view-find-search-ai" clip-path="url(#clip0_135_14212)">
-<g id="ai-upscale-spark--magnifier-zoom-view-find-search-ai_2">
-<path id="Vector" d="M6.5 12.5C9.81371 12.5 12.5 9.81371 12.5 6.5C12.5 3.18629 9.81371 0.5 6.5 0.5C3.18629 0.5 0.5 3.18629 0.5 6.5C0.5 9.81371 3.18629 12.5 6.5 12.5Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_2" d="M10.74 10.7402L13.5 13.5002" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector 2136" d="M3.44944 6.82811C3.08163 6.76412 3.08163 6.23612 3.44944 6.17213C4.78195 5.94031 5.84177 4.92537 6.13099 3.60414L6.15316 3.50286C6.23274 3.13935 6.75033 3.13709 6.83308 3.49989L6.86 3.61792C7.15993 4.93291 8.22004 5.93928 9.54885 6.17046C9.91853 6.23477 9.91853 6.76547 9.54885 6.82979C8.22004 7.06096 7.15993 8.06733 6.86 9.38233L6.83308 9.50035C6.75033 9.86316 6.23274 9.8609 6.15316 9.49738L6.13099 9.39611C5.84177 8.07487 4.78195 7.05993 3.44944 6.82811Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-</g>
-</g>
-<defs>
-<clipPath id="clip0_135_14212">
-<rect width="28" height="28" fill="white"/>
-</clipPath>
-</defs>
+<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#clip0_135_14212)">
+    <path d="M6.5 12.5C9.81371 12.5 12.5 9.81371 12.5 6.5C12.5 3.18629 9.81371 0.5 6.5 0.5C3.18629 0.5 0.5 3.18629 0.5 6.5C0.5 9.81371 3.18629 12.5 6.5 12.5Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M10.74 10.7402L13.5 13.5002" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M3.44944 6.82811C3.08163 6.76412 3.08163 6.23612 3.44944 6.17213C4.78195 5.94031 5.84177 4.92537 6.13099 3.60414L6.15316 3.50286C6.23274 3.13935 6.75033 3.13709 6.83308 3.49989L6.86 3.61792C7.15993 4.93291 8.22004 5.93928 9.54885 6.17046C9.91853 6.23477 9.91853 6.76547 9.54885 6.82979C8.22004 7.06096 7.15993 8.06733 6.86 9.38233L6.83308 9.50035C6.75033 9.86316 6.23274 9.8609 6.15316 9.49738L6.13099 9.39611C5.84177 8.07487 4.78195 7.05993 3.44944 6.82811Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <defs>
+    <clipPath id="clip0_135_14212">
+      <rect width="14" height="14" fill="white"/>
+    </clipPath>
+  </defs>
 </svg>

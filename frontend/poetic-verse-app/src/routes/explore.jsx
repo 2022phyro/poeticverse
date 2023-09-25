@@ -67,9 +67,10 @@ export function Search() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
-            <button onClick={handleSearch}>Search</button> {/* Search button */}
+            <button onClick={handleSearch}>
+              <Icon path='compass-navigator'/>
+            </button>
           </div>
-          <Icon path='compass-navigator'/>
         </div>
         {loading ? (
           <Loader/>
@@ -80,10 +81,10 @@ export function Search() {
                 return (
                     <li key={at.id}>
                         {mode === 'poem' ? (
-                            <PoemObject {...at}/>
+                            <PoemObject touser={true} {...at}/>
                         ) : (
                         <article>
-                            <Avatar source={at.profile_picture}/>
+                            <Avatar source={at.profile_picture} id={at.id}/>
                             <div>
                                 <span>{at.first_name}</span> <span>{at.last_name}</span>
                             </div>

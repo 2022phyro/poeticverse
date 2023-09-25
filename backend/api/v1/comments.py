@@ -16,7 +16,7 @@ from api.v1 import app_views as app
 @app.input(CommentGet.C_get_In, location='query')
 def get_comments_for_poem(data):
     from models import store, Comment
-    comments = store.get_many(Comment, poem_id=data['id'])
+    comments  = store.get_many(Comment, poem_id=data['id'])
     response =  jsonify([{
         'id': cmm.id,
         'body': cmm.body,
@@ -27,7 +27,7 @@ def get_comments_for_poem(data):
         'author_avatar': cmm.author.profile_picture,
         'author_rank': cmm.author.rank.value,
         'created_when': cmm.created_at,
-        } for cmm in comments ])
+        } for cmm in comments])
     return response, 200
 
 @app.get('/comment/comments')
@@ -113,12 +113,12 @@ class CommentView(MethodView):
         return response, 200
 
     @auth_required()
-    @app.input(CommentCreate.C_In)
+    @app.input(CommentCreate.C_Update)
     def patch(self, data):
         """Update comment details"""
         from models import User, Comment, store
         user: User = get_current_user()  # type: ignore
-        cmm: Comment = store.get_one(Comment, data.pop('comment_id'))
+        cmm: Comment = store.get_one(Comment, data.pop('id'))
         if not cmm:
             abort(404, "Not found, The poem you requested\
                 may have been deleted ")
@@ -144,7 +144,7 @@ class CommentView(MethodView):
         """Deletes a comment"""
         from models import User, Comment, store
         user: User = get_current_user()  # type: ignore
-        cmm: Comment = store.get_one(Comment, data.pop('comment_id'))
+        cmm: Comment = store.get_one(Comment, data.pop('id'))
         if not cmm:
             abort(404, "Not found, The poem you requested\
                 may have been deleted ")

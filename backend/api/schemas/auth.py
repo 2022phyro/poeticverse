@@ -124,6 +124,7 @@ class User:
         email = Email()
         bio = Bio()
         profile_picture = P_P()
+        created_at = fields.String()
 
 
 class UserCreate:

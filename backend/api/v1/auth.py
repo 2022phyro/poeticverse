@@ -323,3 +323,40 @@ def change_password_for_logged_in_users(data):
     else:
         user.update_password(data['new_password'])
     return jsonify({"updated": True})
+
+@app.get('/user/<user_id>/favorite_poems')
+@auth_required(optional=True)
+def get_favorite(user_id):
+    from models import store
+    user = get_current_user()
+    target = store.get_one("User", user_id)
+    if not target:
+        abort(404, "User not found")
+    return jsonify([
+        {
+            'id': poem.id,
+            'title': poem.title,
+            'body': poem.body,
+            'like_count': len(poem.likes),
+            'comment_count': len(poem.comments),
+            'author_id': poem.author_id,
+            'author_pen_name': poem.author.pen_name,
+            'author_avatar': poem.author.profile_picture,
+            'author_rank': poem.author.rank.value,
+            'created_when': poem.created_at,
+            'tags': [_.name for _ in poem.tags],
+            'liked': poem in user.fav_poems
+        } for poem in target.fav_poems
+    ])
+
+# @app.input(UserSchema.get_In, location='query', example=ex.User.get_in)
+# @app.output(UserSchema.get_Out, example=ex.User.get_out)
+
+# @Cacher.cache_profile
+# def get(self, data):
+#     """get user details"""
+#     from models import store, User
+#     user: User = store.get_one(User, data['user_id'])
+#     if not user:
+#         abort(404, "User not found")
+#     return user

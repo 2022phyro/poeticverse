@@ -1,0 +1,67 @@
+.poem-section {
+    display: block;
+}
+.comment-section {
+    background-color: var(--primary-dark);
+    padding: 20px;
+    margin-bottom: 150px;
+}
+
+.comment-object {
+    
+    border-bottom: 1px solid var(--nav-dark);
+    border-left: 1px solid var(--nav-dark);
+    border-right: 1px solid var(--nav-dark);
+    
+    padding: 20px;
+    border-radius: 30px;
+    margin-top: 20px;
+
+}
+.comment-object p {
+    font-family: Roboto;
+    font-size: 15px;
+}
+.comment-object .likesComment {
+    margin-top: 20px;
+    font-size: 16px;
+}
+.create-comment {
+    background: var(--primary-dark);
+    border: 1px solid black;
+    font-family: Roboto;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px black;
+    color: white;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 20px;
+
+}
+.create-comment > form {
+    width: 380px;
+    padding-left: 10px;
+    display: flex;
+    /* border: 1px solid red; */
+}
+.create-comment textarea {
+    background: transparent ;
+    outline: none;
+    border: none;
+    width: 95%;
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+}
+.submit-button {
+    width: fit-content;
+    background: transparent;
+    border: none;
+}
+.submit-comment {
+    padding: 15px;
+    border: 1px solid red;
+}

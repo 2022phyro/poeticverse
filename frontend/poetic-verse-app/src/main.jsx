@@ -1,4 +1,3 @@
-import * as React from 'react'
 import * as ReactDOM from 'react-dom/client'
 import './styles/all.css'
 import './styles/loader.css'
@@ -7,14 +6,15 @@ import Feed from './routes/feed.jsx';
 import ErrorPage from './routes/error-page.jsx';
 import { Auth, Login, Signup, Preferences} from './routes/auth'; 
 import Create from './routes/Create';
-import { Poem, Discover } from './components/poem';
+import { Poem } from './components/poem';
 import { Search } from './routes/explore'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import { PoemSection } from './components/poemCsection'
-import CommentSection from './components/commentSection'
+import { ProfileSection } from './routes/user'
+import { ComingSoon } from './routes/comingsoon'
+import { PoemSection, CommentRepliesSection } from './components/poemCsection'
 import Profile from './routes/Profile';
 import UserInfo from './components/UserInfo'
 import PasswordReset from './components/PasswordReset'
@@ -37,15 +37,31 @@ const router = createBrowserRouter([
       },
       {
         path: "discover",
-        element: <Discover/>
+        element: <ComingSoon/>
+      },
+      {
+        path: "discover",
+        element: <ComingSoon/>
+      }, 
+      {
+        path: "messages",
+        element: <ComingSoon/>
+      },
+      {
+        path: "ranking",
+        element: <ComingSoon/>
       },
       {
         path: "poem",
         element: <PoemSection/>
       },
       {
+        path: "poet",
+        element: <ProfileSection/>
+      },
+      {
         path: "comment",
-        element: <CommentSection/>
+        element: <CommentRepliesSection/>
       },
       {
         path: 'create',

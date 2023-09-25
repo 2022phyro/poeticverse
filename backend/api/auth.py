@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Callable, Optional
 
 from apiflask import HTTPTokenAuth
 from apiflask.scaffold import _annotate
-from flask_jwt_extended import JWTManager, jwt_required
+from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 
 if TYPE_CHECKING:
     from apiflask import APIFlask
@@ -43,9 +43,10 @@ def auth_required(
 def user_loader_callback(header, payload):
     """User loader callback"""
     from uuid import UUID
+    user_id = UUID(payload.get("sub"))
 
     from models import User, store
-    return store.get_one(User, UUID(payload["sub"]))
+    return store.get_one(User, user_id)
 
 
 """NOTE: For cookie-based authentication

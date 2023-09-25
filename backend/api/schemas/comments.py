@@ -18,8 +18,7 @@ class CommentCreate:
         parent_id = fields.UUID(required=False)
 
     class C_Update(Schema):
-        poem_id = fields.UUID()
-        title = fields.String()
+        id = fields.UUID()
         body = Body()
 
     class C_Out(Schema):

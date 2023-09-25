@@ -47,9 +47,11 @@ def personify_feed(data):
     return response, 200
 
 @app.get('/poems')
+@auth_required(optional=True)
 @app.input(PoemFeed, location='query')
 def get_all_poems(data):
     from models import store, Poem
+    user = get_current_user()
     prev, pages, nex = store.paginate(Poem, **data)
     response = jsonify(
         {
@@ -66,6 +68,7 @@ def get_all_poems(data):
                         'author_avatar': poem.author.profile_picture,
                         'author_rank': poem.author.rank.value,
                         'created_when': poem.created_at,
+                        'liked': poem in user.fav_poems if user else False,
                         'tags': [_.name for _ in poem.tags],
                     } for poem in pages
                 ],
@@ -102,7 +105,6 @@ def find_poem(data):
         'next': nex
         })
     return response, 200
-
 
 @app.get('/tags')
 def get_all_tags():
@@ -280,4 +282,3 @@ def gen_random_poems():
             'author_pen_name': poem.author.pen_name            
         } for poem in poems
     ])
-
