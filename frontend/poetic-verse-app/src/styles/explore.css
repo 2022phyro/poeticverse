@@ -22,3 +22,20 @@
     width: 300px;
     height: 300px;
 }
+
+.search-user-result {
+    background: var(--nav-dark);
+    padding: 20px;
+    border-radius: 10px;
+}
+.user-names {
+    font-size: 24px;
+}
+.user-pen {
+    margin-top: 5px;
+    font-family: Spline sans mono;
+}
+.user-rank {
+    margin-top: 3px;
+    color: #7E7E7E;
+}

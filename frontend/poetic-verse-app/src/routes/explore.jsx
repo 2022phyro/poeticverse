@@ -83,13 +83,13 @@ export function Search() {
                         {mode === 'poem' ? (
                             <PoemObject touser={true} {...at}/>
                         ) : (
-                        <article>
+                        <article className='search-user-result'>
                             <Avatar source={at.profile_picture} id={at.id}/>
-                            <div>
-                                <span>{at.first_name}</span> <span>{at.last_name}</span>
-                            </div>
-                            <p>{at.pen_name}</p>
-                            <p>{at.rank}</p>
+                            <p className='user-names'>
+                                {`${at.first_name} ${at.last_name}`}
+                            </p>
+                            <p className='user-pen'>{at.pen_name}</p>
+                            <p className="user-rank">{at.rank}</p>
                         </article>
                             )
 
