@@ -348,15 +348,41 @@ def get_favorite(user_id):
             'liked': poem in user.fav_poems
         } for poem in target.fav_poems
     ])
-
-# @app.input(UserSchema.get_In, location='query', example=ex.User.get_in)
-# @app.output(UserSchema.get_Out, example=ex.User.get_out)
-
-# @Cacher.cache_profile
-# def get(self, data):
-#     """get user details"""
-#     from models import store, User
-#     user: User = store.get_one(User, data['user_id'])
-#     if not user:
-#         abort(404, "User not found")
-#     return user
+@app.get('/user/<user_id>/comments')
+def get_user_comments(user_id):
+    from models import store, User
+    user: User = store.get_one(User, user_id)
+    if not user:
+        abort(404, "not found")
+    results = []
+    for cmm in user.comments:
+        part1 = {}
+        if cmm.parent:
+            part1 = {
+                'parent': 'comment',
+                'parent_author_id': cmm.parent.author_id,
+                'parent_id': cmm.parent.id,
+                'parent_author_pen_name': cmm.parent.author.pen_name,
+                'parent_author_avatar': cmm.parent.author.profile_picture,
+                'parent_author_rank': cmm.parent.author.rank.value,
+                'parent_body': cmm.parent.body if len(cmm.parent.body) <= 20 else cmm.parent.body[:20]
+            }
+        elif cmm.poem:
+            part1 = {
+                'parent': 'poem',
+                'parent_author_id': cmm.poem.author_id,
+                'parent_id': cmm.poem.id,
+                'parent_author_pen_name': cmm.poem.author.pen_name,
+                'parent_author_avatar': cmm.poem.author.profile_picture,
+                'parent_author_rank': cmm.poem.author.rank.value,
+                'parent_body': cmm.poem.title if len(cmm.poem.title) <= 20 else cmm.poem.title[:20]
+            }
+        part1.update(**{
+            'id': cmm.id,
+            'comment_count': len(cmm.replies),
+            'body': cmm.body,
+            'created_when': cmm.created_at
+        })
+        results.append(part1)
+    return jsonify(results)
+            

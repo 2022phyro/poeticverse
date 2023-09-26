@@ -138,7 +138,7 @@ class CommentView(MethodView):
         })
         return response, 200
     
-    @app.input(CommentGet.C_get_In)
+    @app.input(CommentGet.C_get_In, location='query')
     @auth_required()
     def delete(self, data):
         """Deletes a comment"""

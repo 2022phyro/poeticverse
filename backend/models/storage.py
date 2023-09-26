@@ -314,17 +314,20 @@ class Storage:
             query = query.filter(cls.sn > curr)
             val = query.order_by(cls.sn).limit(page_size).all()
             val = list(reversed(val))
+            if val:
+                prev = val[-1].sn 
+                next = val[0].sn if val[0].sn > curr  and  len(val) >= page_size else None
         elif _age == "oldest":
             query = query.filter(cls.sn < curr)
             val = query.order_by(desc(cls.sn)).limit(page_size).all()
-        if val:
-            prev = val[-1].sn if val[-1].sn != 1 else None
-            next = val[0].sn
+            if val:
+                prev = val[-1].sn if val[-1].sn > 1  and  len(val) >= page_size else None
+                next = val[0].sn
         if next == prev:
             next = prev = None
         if val == []:
             next = None
-            prev = curr + 1
+            prev = None
         return prev, val, next
 
     def return_user_preferences(

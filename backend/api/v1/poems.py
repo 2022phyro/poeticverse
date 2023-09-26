@@ -218,7 +218,7 @@ class PoemView(MethodView):
         })
         return response, 200
 
-    @app.input(PoemGet.poem_get_In)
+    @app.input(PoemGet.poem_get_In, location='query')
     @auth_required()
     def delete(self, data):
         """delete poem"""
