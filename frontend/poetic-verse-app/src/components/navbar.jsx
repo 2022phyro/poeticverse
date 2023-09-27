@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { api, useUserContext } from '../utils';
+import { api, checkAuth, useUserContext } from '../utils';
 
 export function Icon({ path, className, ...props }) {
   const route = '/icon/' + path + '.svg'
@@ -46,8 +46,10 @@ export function Nav() {
   const [menuVisible, setMenuVisible] = useState(false);
   const [Toggle, setToggle] = useState(false);
   const [Logout, setLogout] = useState(false);
+  const [isauth, setAuth] = useState(checkAuth)
   const { state, dispatch}  = useUserContext()
   const [loadedProfile, setLoadedProfile] = useState(false)
+  const navigate = useNavigate()
 
   const toggleMenu = () => {
     if (screenWidth <= 630) {
@@ -91,7 +93,7 @@ export function Nav() {
   }, []);
   useEffect(() => {
     // Make the API request to get the profile data
-    if (!loadedProfile) {
+    if (!loadedProfile && isauth) {
     api(true)
       .get('/profile')
       .then((res) => {
@@ -99,11 +101,13 @@ export function Nav() {
         setLoadedProfile(true)
       })
       .catch((error) => {
-        // Handle the error, e.g., show a message to the user
+        if (error.status_code == 401) {
+          navigate('/feed/loggedout')
+        }
         console.error('Error fetching profile:', error);
       });
     }
-  }, [dispatch, loadedProfile]);
+  }, [dispatch, loadedProfile, isauth]);
   // Conditionally apply CSS classes based on screen width
   const hiddenClass = screenWidth <= 950 ? '' : 'hidden';
   const containClass = screenWidth <= 630 ? 'close-nav' : screenWidth <= 950 ? 'mid-nav': "";
@@ -121,7 +125,7 @@ export function Nav() {
       <div className="overlay-3">
                     <div className="log">
                     <div className="logout-header">
-                      <h2>LogOut</h2>
+                      <h2>Log out</h2>
                       <button className="close-button" onClick={handleLogout}>
                         <span>&times;</span>
                       </button>
@@ -142,15 +146,15 @@ export function Nav() {
             <Link to={`/feed/home`}><li className='active'><Icon className='hint' path='home-3'/><span>Home</span></li></Link>
             <Link to={`/feed/explore`}><li><Icon className='hint'  path='compass-navigator'/><span>Explore</span></li></Link>
             <Link to={`/feed/messages`}><li><Icon className='hint'  path='message'/><span>Messages</span></li></Link>
-            <Link to={`/feed/poet?id=${state.profile.id}`}><li><Icon className='hint'  path='bookmark'/><span>Me</span></li></Link>
+            <Link to={isauth ? `/feed/poet?id=${state.profile.id}`: `/feed/loggedout`}><li><Icon className='hint'  path='bookmark'/><span>Me</span></li></Link>
             <Link to={`/feed/ranking`}><li><Icon className='hint'  path='rank'/><span>Ranking</span></li></Link>
             <Link to={`/about`}><li><Icon className='hint'  path='about-us'/><span>About us</span></li></Link>
             <Link to={`/feed/discover`}><li><Icon className='hint'  path='notification'/><span>Discover</span></li></Link>
-            <Link to={`/feed/create`}><li className="create"><Icon className='hint'  path='create'/><span>Create</span></li></Link>
+            <Link to={isauth ? `/feed/create`: `/feed/loggedout`}><li className="create"><Icon className='hint'  path='create'/><span>Create</span></li></Link>
           </ul>
           
           {Toggle && <div className='toggle-settings' onClick={handleToggle}>
-            <Link to = '/feed/settings'>
+            <Link to = {isauth ? `/feed/settings/userinfo`: `/feed/loggedout`}>
             <div className="settings">
               settings<Icon path= 'settings' />
             </div>
@@ -160,16 +164,21 @@ export function Nav() {
               LogOut<Icon path= 'logout' />
             </div>
             </div>}
-          <div className="me" onClick={handleToggle}>
-            <Avatar source={state.profile.profile_picture}/>
-            <div className="b_info">
-              <div>
-                <p>{state.profile.pen_name}</p>
-              <p>{state.profile.rank}</p>
-              </div>
-              <Icon path= 'menu-circle-with-dots' />
-            </div>
-          </div>
+            {
+              isauth ? (
+                <div className="me" onClick={handleToggle}>
+                  <Avatar source={state.profile.profile_picture}/>
+                  <div className="b_info">
+                    <div>
+                      <p>{state.profile.pen_name}</p>
+                    <p>{state.profile.rank}</p>
+                    </div>
+                    <Icon path= 'menu-circle-with-dots' />
+                  </div>
+                </div>
+              ) : <h3>You are not logged in</h3>
+            }
+
         </nav>
         <div className={containClass} onClick={toggleMenu}></div>
         </div>

@@ -16,7 +16,7 @@
     right: 25em;
 }
 .profile-img{
-    background: rgba(0, 0, 0, 0.502);
+    background: linear-gradient(200deg, var(--primary-dark), var(--nav-dark));
     background-position: center;
     background-size: cover;
     width: 250px;

@@ -2,16 +2,15 @@
     display: block;
 }
 .comment-section {
-    background-color: var(--primary-dark);
     padding: 20px;
     margin-bottom: 150px;
 }
 
 .comment-object {
     
-    border-bottom: 1px solid var(--nav-dark);
-    border-left: 1px solid var(--nav-dark);
-    border-right: 1px solid var(--nav-dark);
+    border-bottom: 1px solid var(--primary-dark);
+    border-left: 1px solid var(--primary-dark);
+    border-right: 1px solid var(--primary-dark);
     
     padding: 20px;
     border-radius: 30px;

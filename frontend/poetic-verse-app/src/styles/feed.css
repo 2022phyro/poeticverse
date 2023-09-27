@@ -95,6 +95,7 @@ body{
 .p_photo {
     width: 48px;
     height: 48px;
+    border-radius: 50%;
 }
 .f-main {
     position: fixed;

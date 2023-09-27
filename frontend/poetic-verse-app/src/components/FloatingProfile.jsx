@@ -14,26 +14,24 @@ const FloatingProfile = ({ handleDelete }) => {
     <>
     {floater && <div className='floater-content' onClick={handleFloater}>
 
-        <Link to = '/feed/userinfo'>
+        <Link to = '/feed/settings/userinfo'>
         <div className="list">
             <Icon path = 'user-info' className='inf'/>
         </div>
         </Link>
-        <Link to = '/feed/resetpassword'>
+        <Link to = '/feed/settings/resetpassword'>
         <div className="list">
             <Icon path = 'lock' width = '24'/>
         </div>
         </Link>
-        
-        <Link to = '/feed/changeEmail'>
-        <div className="list">
-            <Icon path = 'email' className='inf'/>
-        </div>
-        </Link>
-        
-        <Link to = '/feed/verifyUser'>
+        <Link to = '/feed/settings/verifyUser'>
         <div className="list">
             <Icon path = 'verify' className='inf'/>
+        </div>
+        </Link>
+        <Link to = '/feed/settings/changeEmail'>
+        <div className="list">
+            <Icon path = 'email' className='inf'/>
         </div>
         </Link>
 

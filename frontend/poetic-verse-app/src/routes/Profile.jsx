@@ -1,9 +1,67 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Icon, Avatar } from '../components/navbar';
 import '../styles/Profile.css';
 import { Link, useNavigate, Outlet } from 'react-router-dom';
 import FloatingProfile from '../components/FloatingProfile';
 import { api } from '../utils';
+
+function PictureUploader(props) {
+  const [selectedImage, setSelectedImage] = useState(null);
+  const fileInputRef = useRef(null);
+
+  const handleImageUpload = () => {
+    if (!selectedImage) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('profile_picture', selectedImage);
+
+    console.log('FormData:', formData);
+    // Use try-catch to handle errors
+    try {
+      api(true)
+        .post(`/profile_picture`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          }
+        }).then(() => {
+          console.log('Profile picture uploaded successfully');
+        })
+        .catch((err) => {
+          console.error('Error uploading profile picture:', err);
+        });
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const handleIconClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedImage(file);
+    console.log('file', file)
+    handleImageUpload(); // Automatically upload the image when selected
+  };
+
+  return (
+    <div className="profile-picture-uploader">
+      <Avatar source={selectedImage || props.avatar} className='profile-img' />
+      <Icon className="edit-icon" path="create" onClick={handleIconClick} />
+      <input
+        type="file"
+        ref={fileInputRef}
+        style={{ display: 'none' }}
+        accept="image/*"
+        onChange={handleFileInputChange}
+      />
+    </div>
+  );
+}
+
 
 const Profile = () => {
   const [activeButton, setActiveButton] = useState(null);
@@ -29,7 +87,7 @@ const Profile = () => {
     //delete account logic
     api(true).delete('/user')
     .then(() => {
-      localStorage.removeItem('myData')
+      localStorage.clear()
       location('/') //replace with the actual route
     })
   }
@@ -45,6 +103,10 @@ const Profile = () => {
   }, []);
   return (
     <>
+          <div className="title">
+            <h3>Settings</h3>
+            <Icon className="create-icon" path="settings" />
+          </div>
       <Outlet/>
       <>
       {HandleDelete && 
@@ -75,15 +137,12 @@ const Profile = () => {
                     
         <div className="divider"></div>
         <div className="Profile-container">
-          <div className="title">
-            <h3>Profile</h3>
-            <Icon className="create-icon" path="create" />
-          </div>
           <div className="profile-sidebar">
             <div className="profile-content">
               <div className="">
-                <Avatar source={pro.profile_picture} className='profile-img'/>
-                <Icon className="edit-icon" path="create" />
+                {/* <Avatar source={pro.profile_picture} className='profile-img'/>
+                <Icon className="edit-icon" path="create" /> */}
+                <PictureUploader avatar={pro.profile_picture}/>
               </div>
               <div className="profile-body">
                 <b>{`${pro.first_name} ${pro.last_name}`}</b>&nbsp;&nbsp;
@@ -110,17 +169,6 @@ const Profile = () => {
                       <b>Password Reset</b>
                     </div>
                   </Link>
-
-                  <Link to = '/feed/settings/changeEmail'>
-                  <div 
-                  className="list-item"
-                      style={{ backgroundColor: getButtonBackgroundColor('changeEmail') }}
-                      onClick={() => handleButtonClick('changeEmail')}>
-                    <Icon className="create-icon" path="email" />
-                    <b>Change Email</b>
-                  </div>
-                  </Link>
-
                   <Link to= '/feed/settings/verifyUser' >
                   <div 
                   className="list-item"
@@ -131,7 +179,15 @@ const Profile = () => {
                     <b>Verify user</b>
                   </div>
                   </Link>
-
+                  <Link to = '/feed/settings/changeEmail'>
+                  <div 
+                  className="list-item"
+                      style={{ backgroundColor: getButtonBackgroundColor('changeEmail') }}
+                      onClick={() => handleButtonClick('changeEmail')}>
+                    <Icon className="create-icon" path="email" />
+                    <b>Change Email</b>
+                  </div>
+                  </Link>
                   <div 
                   className="list-item" onClick={handleDelete}>
                     <Icon className="create-icon" path="trash" />

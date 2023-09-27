@@ -11,6 +11,14 @@
 .user-body {
     min-width: calc(100% - 370px);
 }
+.part {
+    position: relative;
+}
+.delete-icon {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+}
 .tab-option {
     width: calc(100% / 3);
     align-items: center;
@@ -24,6 +32,28 @@
 }
 .active-tab {
     background-color: var(--primary-dark);
+}
+.user-age {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start;
+    margin-top: 10px;
+    font-family: Roboto;
+    font-size: 16px;
+}
+.user-bio {
+    font-family: Cormorant Upright;
+    margin-top: 10px;
+    position: relative;
+}
+.user-bio .quote {
+    font-size: 46px;
+    font-weight: 600;
+}
+.q1 {
+    /* position: absolute; */
+    margin-top: -0.5em;
+    float: right;
 }
 
 .top-img {

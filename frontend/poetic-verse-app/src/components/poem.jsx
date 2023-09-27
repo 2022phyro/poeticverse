@@ -11,14 +11,10 @@ export function PoemObject(props) {
     event.stopPropagation();
     navig(`/feed/poem?id=${props.id}`)
   }
-  const avatarProps = {source: props.author_avatar}
-  if (props.touser) {
-    avatarProps['id'] = props.author_id
-  }
   return (
     <article className="poem-object" onClick={toComment} >
       <div className="others">
-        <Avatar {...avatarProps}/>
+        <Avatar source={props.author_avatar} id={props.author_id}/>
         <h3>{props.author_pen_name}</h3>
         <p className="rank">{props.author_rank}<span><i className="fa-solid fa-circle"></i>{getRelativeTime(props.created_when)}</span></p>
       </div>

@@ -94,6 +94,13 @@ def signup(json_data):
         return {"message": err.args[0]}, 422
     return {"message": "Successfully signed up"}, 201
 
+@app.get('/request_verification')
+@auth_required()
+def send_link():
+    user = get_current_user()
+    send_verification_mail.delay(user_id = user.id)
+    return {'message' : 'Successfully sent the mail'}, 200
+
 @app.post("/refresh")
 @auth_required(refresh=True)
 @app.output(TokenRefresh.token_refreshOut, 200, example=ex.TokenRefresh.t_Out)
@@ -150,7 +157,7 @@ def request_reset(data):
     from models import User, store
     user: User = store.get_one(User, email=data['email'])
     if not user:
-        abort(404, "User not found")
+        abort(404, "This user cannot be found. The user may have been deleted If you're the owner of the email please sign up")
     send_reset_password_mail.delay(user_id=user.id, tochange=data['tochange'])
     store.save()
     return jsonify("Reset link sent")
@@ -200,7 +207,6 @@ class UserView(MethodView):
     """User view"""
     @app.input(UserSchema.get_In, location='query', example=ex.User.get_in)
     @app.output(UserSchema.get_Out, example=ex.User.get_out)
-    @Cacher.cache_profile
     def get(self, data):
         """get user details"""
         from models import store, User
@@ -345,7 +351,7 @@ def get_favorite(user_id):
             'author_rank': poem.author.rank.value,
             'created_when': poem.created_at,
             'tags': [_.name for _ in poem.tags],
-            'liked': poem in user.fav_poems
+            'liked': poem in user.fav_poems if user else False
         } for poem in target.fav_poems
     ])
 @app.get('/user/<user_id>/comments')

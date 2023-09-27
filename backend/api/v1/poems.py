@@ -15,7 +15,7 @@ from api.schemas.poems import (
     Search
 )
 @app.get('/personify')
-@auth_required()
+@auth_required(optional=True)
 @app.input(PoemFeed, location='query')
 # @app.output()
 def personify_feed(data):
@@ -39,7 +39,7 @@ def personify_feed(data):
                         'author_rank': poem.author.rank.value,
                         'created_when': poem.created_at,
                         'tags': [_.name for _ in poem.tags],
-                        'liked': poem in user.fav_poems
+                        'liked': poem in user.fav_poems if user else False
                     } for poem in pages
                 ],
         'next': nex
@@ -78,10 +78,12 @@ def get_all_poems(data):
 
 #TODO
 @app.get('/searchpoem')
+@auth_required(optional=True)
 @app.input(Search.search_poem, location='query')
 def find_poem(data):
     """Looks for a particular poem"""
     from models import store
+    user = get_current_user()
     data['mode'] = 'Poem'
     prev, pages, nex = store.search(**data)
     response = jsonify(
@@ -100,6 +102,7 @@ def find_poem(data):
                         'author_rank': poem.author.rank.value,
                         'created_when': poem.created_at,
                         'tags': [_.name for _ in poem.tags],
+                        'liked': poem in user.fav_poems if user else False,
                     } for poem in pages
                 ],
         'next': nex
@@ -159,7 +162,7 @@ def get_poem_likes(data):
 class PoemView(MethodView):
     """Poems view"""
     @app.input(PoemGet.poem_get_In, location='query')
-    @auth_required()
+    @auth_required(optional=True)
     # @app.output(PoemCreate.poem_create_Out, 201, example=ex.PoemGet.Out)
     def get(self, data):
         """get poem details"""
@@ -183,7 +186,7 @@ class PoemView(MethodView):
             'author_rank': poem.author.rank.value,
             'created_when': poem.created_at,
             'tags': [_.name for _ in poem.tags],
-            'liked': poem in user.fav_poems
+            'liked': poem in user.fav_poems if user else False
 
         })
         return response, 200

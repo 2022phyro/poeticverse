@@ -68,7 +68,7 @@ export function Search() {
               onChange={(e) => setQuery(e.target.value)}
             />
             <button onClick={handleSearch}>
-              <Icon path='compass-navigator'/>
+              <Icon path='search-visual'/>
             </button>
           </div>
         </div>

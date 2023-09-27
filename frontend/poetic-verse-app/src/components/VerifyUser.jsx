@@ -1,11 +1,30 @@
-import React from 'react'
-import Profile from '../routes/Profile'
+import { api } from '../utils'
 import '../styles/VerifyUser.css'
+import { useState } from 'react'
 
 const VerifyUser = () => {
+  const [submit, setSubmit] = useState(false)
+  const [errm, setErr] = useState('')
+  const [response, setRes] = useState('')
+  const handleVerify = () => {
+    if (!submit) {
+        setSubmit(true)
+        api(true).get('/request_verification')
+        .then((res) => {
+            setRes('Check your email or spam folder for the verification email')
+            setErr('')
+        })
+        .catch(() => {
+            setRes('')
+            setErr('Error in sending verification email. Please try again later')
+        })
+        .finally(() => {
+            setSubmit(false)
+        })
+    }
+  }
   return (
     <>
-    <Profile />
     <div className="parent-container">
         <h3>Verify User</h3>
         <div className="field">
@@ -31,16 +50,13 @@ const VerifyUser = () => {
             </div>
             <div className='marg'> 
             <b>Email Address</b>
-            <form action="">
-            <input type= 'email' className="input-field" />
-          </form>
             </div>
         </div>
-
         <div className='push'>
-        <button className='btn'>Verify</button>
+            <button className='btn' onClick={handleVerify}>Verify</button>
+            <p>{response}</p>
+            <p className='loginerr'>{errm}</p>
         </div>
-
       </div>
     </>
   )

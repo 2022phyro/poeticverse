@@ -4,7 +4,7 @@ import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { Loader } from '../components/loader';
 import { Field, Formik, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup';
-import { inst,
+import { api,
   passwordValidationSchema,
   penNameValidationSchema,
   nameValidationSchema,
@@ -47,7 +47,10 @@ export function Login() {
                 // console.log(e)
                 // // alert(e)
                 setSubmitting(false);
-                inst.post('/login', e)
+                loadingRef.current = true
+                setStyle({display: 'flex'})
+                setItem({display: 'none'})
+                api().post('/login', e)
                 .then((response) => {
                     const data = response.data
                     localStorage.setItem('myData',JSON.stringify(data));
@@ -58,6 +61,11 @@ export function Login() {
                 .catch((error) => {
                     console.error(error)
                     setApiError('Invalid email or password')
+                })
+                .finally(() => {
+                  loadingRef.current = false;
+                  setStyle({display: 'none'})
+                  setItem({display: 'flex'}) 
                 })
               }}
             >
@@ -75,7 +83,7 @@ export function Login() {
             </Form>
             </Formik>
             <Link to={`/auth/signup`}>Don&apos;t have an account? Join here</Link>
-            <Link to={`remm`}>Forgot password? Click here</Link>
+            <Link to={`/auth/request_reset`}>Forgot password? Click here</Link>
           </div>
         </div>
       </div>
@@ -120,9 +128,11 @@ export function Signup() {
               validateOnChange={false}
               onSubmit={(e, { setSubmitting } ) => {
                 console.log(e)
-                // alert(e)
+                loadingRef.current = true;
+                setStyle({display: 'flex'})
+                setItem({display: 'none'})
                 setSubmitting(false);
-                inst.post('/signup', e)
+                api().post('/signup', e)
                 .then(() => {
                     localStorage.setItem('logininfo', JSON.stringify({ login: e['email'], password: e['password'] }));
                     // alert(response.data)
@@ -137,6 +147,11 @@ export function Signup() {
                   // console.error(statusCode)
                   console.error(errorMessage)
                   setApiError(errorMessage)
+                })
+                .finally(() => {
+                  loadingRef.current = false;
+                  setStyle({display: 'none'})
+                  setItem({display: 'flex'}) 
                 })
               }}
             >
@@ -185,12 +200,12 @@ export function Preferences() {
   const login = () => {
     const e = JSON.parse(localStorage.getItem('logininfo'));
     console.log(e)
-    inst.post('/login', e)
+    api().post('/login', e)
       .then((response) => {
           const data = response.data
           localStorage.setItem('myData', JSON.stringify(data));
           localStorage.removeItem('logininfo')
-          window.location.href = '/feed'
+          window.location.href = '/feed/home'
       })
       .catch((error) => {
           console.error(error)
@@ -202,7 +217,7 @@ export function Preferences() {
     login()
   };
   useEffect(() => {
-    inst.get('/tags')
+    api().get('/tags')
       .then((response) => {
         const po = response.data;
         setTags(po); // Update the state with the received data

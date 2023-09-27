@@ -1,6 +1,7 @@
 import { Icon } from "./navbar"; 
-import { apiRequest } from "../utils";
+import { api, checkAuth } from "../utils";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Loader() {
     return (
@@ -15,17 +16,25 @@ export function Loader() {
 export function Bookmark({ id, lik, like_count, ...props }) {
     const [liked, setLiked] = useState(lik);
     const [count, setCount] = useState(like_count);
-  
+    const [isauth, setAuth] = useState(checkAuth())
+    const navigate = useNavigate()
     const handleLike = (event) => {
       event.stopPropagation();
-      apiRequest(`/poem/like?poem_id=${id}`, 'GET', null, true)
-        .then((res) => {
-          setLiked(res.data.liked); // Update liked state from the response
-          setCount(res.data.liked ? count + 1 : count - 1);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+      if (isauth) {
+        api(true).get(`/poem/like?poem_id=${id}`)
+          .then((res) => {
+            setLiked(res.data.liked); // Update liked state from the response
+            setCount(res.data.liked ? count + 1 : count - 1);
+          })
+          .catch((err) => {
+            if (err.status_code == 401) {
+              navigate('/feed/loggedout')
+            }
+            console.error(err);
+          });
+      } else {
+        navigate('/feed/loggedout')
+      }
     };
   
     return (

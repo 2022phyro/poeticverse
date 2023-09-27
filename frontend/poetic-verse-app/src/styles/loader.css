@@ -66,7 +66,7 @@
     position: absolute;
     cursor: pointer;
     inset: 0;
-    background: white;
+    background: #ccc;
     border-radius: 50px;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.215, 0.610, 0.355, 1);
@@ -75,7 +75,7 @@
   .slider:before {
     position: absolute;
     content: "";
-    background-image: url('/icon/compass-navigator.svg');
+    background-image: url('/icon/user-profile.svg');
     background-repeat: no-repeat;
     background-position: center;
     height: 35px;
@@ -83,7 +83,7 @@
     right: 0.3em;
     bottom: 0.3em;
     transform: translateX(150%);
-    background-color: #59d102;
+    background-color: var(--nav-dark);
     border-radius: inherit;
     transition: all 0.4s cubic-bezier(0.215, 0.610, 0.355, 1);
   }
@@ -91,14 +91,14 @@
   .slider:after {
     position: absolute;
     content: "";
-    background-image: url('/icon/edit-ai.svg');
+    background-image: url('/icon/book-open.svg');
     background-repeat: no-repeat;
     background-position: center;
     height: 35px;
     width: 50px;
     left: 0.3em;
     bottom: 0.3em;
-    background-color: #cccccc;
+    background-color: var(--primary-dark);
     border-radius: inherit;
     transition: all 0.4s cubic-bezier(0.215, 0.610, 0.355, 1);
   }

@@ -3,7 +3,7 @@ import './styles/all.css'
 import './styles/loader.css'
 import Index from './routes/root.jsx'
 import Feed from './routes/feed.jsx';
-import ErrorPage from './routes/error-page.jsx';
+import {ErrorPage, ComingSoon, LoggedOut} from './routes/error-page.jsx';
 import { Auth, Login, Signup, Preferences} from './routes/auth'; 
 import Create from './routes/Create';
 import { Poem } from './components/poem';
@@ -13,14 +13,24 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { ProfileSection } from './routes/user'
-import { ComingSoon } from './routes/comingsoon'
 import { PoemSection, CommentRepliesSection } from './components/poemCsection'
 import Profile from './routes/Profile';
 import UserInfo from './components/UserInfo'
+import VerifyUser from './components/VerifyUser'
+import { VerifyUserToken, ResetPassword, RequestReset} from './components/security'
 import PasswordReset from './components/PasswordReset'
 import ChangeEmail from './components/ChangeEmail'
-import VerifyUser from './components/VerifyUser'
-import { UserProvider } from './utils'
+import { UserProvider, checkAuth } from './utils'
+import { Navigate } from 'react-router-dom';
+
+export function AuthGuarded({ isAuth, children }) {
+  console.log(isAuth)
+  if (!isAuth) {
+    return <Navigate to="/auth/login" />
+  } else {
+    return children
+  };
+}
 const router = createBrowserRouter([
   {
     path:"/",
@@ -34,10 +44,6 @@ const router = createBrowserRouter([
       {
         path: "home",
         element: <Poem url='personify' method='GET' auth={true} main={true} />
-      },
-      {
-        path: "discover",
-        element: <ComingSoon/>
       },
       {
         path: "discover",
@@ -56,6 +62,10 @@ const router = createBrowserRouter([
         element: <PoemSection/>
       },
       {
+        path: "loggedout",
+        element: <LoggedOut/>
+      },
+      {
         path: "poet",
         element: <ProfileSection/>
       },
@@ -65,7 +75,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'create',
-        element: <Create/>
+        element: <AuthGuarded isAuth={checkAuth()}><Create/></AuthGuarded>
       },
       {
         path: 'explore',
@@ -73,25 +83,25 @@ const router = createBrowserRouter([
       },
       {
         path: 'settings',
-        element: <Profile />,
+                  
+        element: <AuthGuarded isAuth={checkAuth()}><Profile /></AuthGuarded>,
         children: [
           {
             path: 'userinfo',
-            element: <UserInfo />
+            element: <AuthGuarded isAuth={checkAuth()}><UserInfo /></AuthGuarded>
           },
           {
             path: 'resetpassword',
-            element: <PasswordReset />
+            element: <AuthGuarded isAuth={checkAuth()}><PasswordReset /></AuthGuarded>
           },
           {
             path: 'changeEmail',
-            element: <ChangeEmail />
+            element: <AuthGuarded isAuth={checkAuth()}><ChangeEmail /></AuthGuarded>
           },
           {
             path: 'verifyUser',
-            element: <VerifyUser />
+            element: <AuthGuarded isAuth={checkAuth()}><VerifyUser /></AuthGuarded>
           }
-    
         ]
       }
     ]
@@ -111,7 +121,20 @@ const router = createBrowserRouter([
       {
         path: "preferences",
         element: <Preferences/>
-      }
+      },
+      {
+        path: `verify/:token`,
+        element: <VerifyUserToken/>
+      },
+      {
+        path: 'request_reset',
+        element: <RequestReset/>
+      },
+      {
+        path: 'password_reset/:token',
+        element: <ResetPassword/>
+      },
+
     ]
   }
 ])

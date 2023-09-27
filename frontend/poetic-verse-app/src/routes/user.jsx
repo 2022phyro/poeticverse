@@ -2,31 +2,51 @@ import { Icon } from '../components/navbar';
 import '../styles/Profile.css';
 import { useUserContext } from '../utils';
 import { useState, useEffect } from 'react';
-import { ProfileInfo, UserPoems, UserLikes } from '../components/profileSection';
+import { useLocation } from 'react-router-dom';
+import { ProfileInfo, UserPoems, UserLikes, UserComments } from '../components/profileSection';
 import { api } from '../utils';
 export function ProfileSection() {
     const { state } = useUserContext()
     const [active, setActive] = useState('poems')
-    const [userDetails, setUuser] = useState({})
+    const [userDetails, setUser] = useState({})
+    const [search, setSearch] = useState(true)
+    const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-    const authorId = queryParams.get('id'); // Replace 'parameterName' with the name of your query parameter
+    
+    // Create a state variable to hold the authorId
+    const [authorId, setAuthorId] = useState(queryParams.get('id'));
+    const id = state.profile.id;
+  
     const handleTabPoem = () => {
-        setActive('poems')
-    }
+      setActive('poems');
+    };
+  
     const handleTabLike = () => {
-        setActive('likes')
-    }
+      setActive('likes');
+    };
+  
     const handleTabComm = () => {
-        setActive('comm')
-    }
-    useEffect(() => {  
-        api().get(`/user?user_id=${authorId}`)
+      setActive('comm');
+    };
+  
+    useEffect(() => {
+      // Update the authorId state whenever it changes from the URL
+      const newId = queryParams.get('id')
+      if (newId !== authorId) {
+        setAuthorId(newId);
+        setSearch(true)
+      }
+      if (search) {
+        api()
+          .get(`/user?user_id=${authorId}`)
           .then((res) => {
             const myData = res.data;
-            setUuser(myData);
+            setUser(myData);
+            setSearch(false)
           })
           .catch((err) => console.error(err));
-      }, []);
+      }
+    }, [search, queryParams, authorId]); 
     return (
         <>
           <div className="title">
@@ -59,10 +79,10 @@ export function ProfileSection() {
                 <UserLikes user_id={authorId}/>
             </div>
             <div style={{display: active == 'comm'? 'flex': 'none'}}>
-                <UserLikes user_id={authorId}/>
+                <UserComments myId={id} user_id={authorId}/>
             </div>
             <div style={{display: active == 'poems'? 'flex': 'none'}}>
-                <UserPoems author={authorId}/>
+                <UserPoems myId={id} author={authorId}/>
             </div>
           </div>
 

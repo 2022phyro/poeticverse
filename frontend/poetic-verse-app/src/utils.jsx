@@ -6,26 +6,6 @@ import axios from 'axios'
 import * as Yup from 'yup';
 import { createContext, useContext, useReducer } from 'react';
 
-export const inst = axios.create({
-    baseURL: 'http://127.0.0.1:5000/v1', // Set your base URL here
-    headers: {
-    //   'Authorization': 'Bearer YourAuthToken', // Add your authentication token here
-      'Content-Type': 'application/json', // Set your desired content type
-    },
-  });
-
-export const apiRequest = async (url, method = 'GET', requestData = null, auth=false) => {
-  const myData = JSON.parse(localStorage.getItem('myData'))
-  return await inst({
-    method: method,
-      url: url,
-      headers: {
-        'Authorization': auth? `Bearer ${myData.atoken}` : null
-      },
-      data: requestData, // Optional request data (for POST, PUT, etc.)
-    });
-};
-// eslint-disable-next-line react-refresh/only-export-components
 export const api = (auth) => {
   const inst = axios.create({
     baseURL: 'http://127.0.0.1:5000/v1',
@@ -35,12 +15,12 @@ export const api = (auth) => {
   })
     if (auth) {
       const myData = JSON.parse(localStorage.getItem('myData'))
-      inst.defaults.headers.common['Authorization'] = `Bearer ${myData.atoken}`;
+      if (myData && myData.atoken) {
+        inst.defaults.headers.common['Authorization'] = `Bearer ${myData.atoken}`;
+      }
     }
     return inst
 }
-// context.js
-// UserContext.js
 
 const UserContext = createContext();
 
@@ -126,4 +106,16 @@ export function getRelativeTime(datetimeString) {
   } else {
     return `${elapsedSeconds} ${elapsedSeconds === 1 ? 'sec' : 'secs'}`;
   }
+}
+
+export const checkAuth = () => {
+  const auth = localStorage.getItem('myData');
+
+  if (auth) {
+    const myData = JSON.parse(auth);
+    if (myData && myData.atoken) {
+      return true
+    }
+  }
+  return false
 }

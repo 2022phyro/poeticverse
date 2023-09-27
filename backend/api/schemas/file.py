@@ -37,12 +37,12 @@ class UpdateAvatar(Schema):
     )
 
 def upload_image(user, file):
-    temp_dir = tempfile.mkdtemp()
-    temp_file_path = os.path.join(temp_dir, secure_filename(file.filename))
-    file.save(temp_file_path)
+    # temp_dir = tempfile.mkdtemp()
+    # temp_file_path = os.path.join(temp_dir, secure_filename(file.filename))
+    # file.save(temp_file_path)
     unique = user.get_id
     val = imagekit.upload_file(
-        file=file.read(),
+        file=file.stream,
         file_name=unique,
         options = UploadFileRequestOptions(
             use_unique_file_name=False,
@@ -50,16 +50,16 @@ def upload_image(user, file):
             )
     )
     print(val.response_metadata.raw)
-    os.remove(temp_file_path)
-    os.rmdir(temp_dir)
-    user.profile_picture = val.response_metadata.raw['url']
-    temp = user.secret.copy()
-    if len(temp) == 2:
-        temp.append(val.response_metadata.raw['fileId'])
-    elif len(temp) == 3:
-        temp[2] = val.response_metadata.raw['fileId']
-    user.secret = temp
-    store.save()
+    # os.remove(temp_file_path)
+    # os.rmdir(temp_dir)
+    # user.profile_picture = val.response_metadata.raw['url']
+    # temp = user.secret.copy()
+    # if len(temp) == 2:
+    #     temp.append(val.response_metadata.raw['fileId'])
+    # elif len(temp) == 3:
+    #     temp[2] = val.response_metadata.raw['fileId']
+    # user.secret = temp
+    # store.save()
 
 def delete_image(user):
     val = user.secret.copy()

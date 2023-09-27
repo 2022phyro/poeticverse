@@ -1,5 +1,5 @@
 import {useState, useEffect } from 'react';
-import { api } from '../utils';
+import { api, checkAuth } from '../utils';
 import { Icon, Avatar } from "./navbar";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Bookmark } from "./loader";
@@ -28,27 +28,34 @@ export const CommentObject = (props) => {
 function CommentSection({ id, type, ...props }) {
   const [comments, setCmm] = useState([]);
   const [newcmm, setLoad] = useState(true);
+  const [val, setVal] = useState('')
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const url = type === 'poem' ? '/poem/comments' : '/comment/comments';
   const data = type === 'poem' ? { poem_id: id } : { parent_id: id };
+  const navig = useNavigate()
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const bodyValue = formData.get('body').trim();
-
+    const bodyValue = val.trim();
+    setVal('')
     if (bodyValue) {
       data['body'] = bodyValue;
-      console.log('Form Data:', data);
-      api(true)
-        .post('/comment', data)
-        .then(() => {
-          setLoad(true);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+      if (checkAuth()) {
+        api(true)
+          .post('/comment', data)
+          .then(() => {
+            setLoad(true);
+          })
+          .catch((err) => {
+            if (err.status_code == 401) {
+              navig('/feed/loggedout')
+            }
+            console.error(err);
+          });
+      } else {
+        navig('/feed/loggedout')
+      }
     }
   };
 
@@ -75,6 +82,9 @@ function CommentSection({ id, type, ...props }) {
         });
     }
   }, [newcmm, id, url]);
+  const handleChange = (e) => {
+    setVal(e.target.value)
+  }
 
   return (
     <>
@@ -89,7 +99,7 @@ function CommentSection({ id, type, ...props }) {
       </ul>
       <div className='create-comment'>
         <form onSubmit={handleSubmit}>
-          <textarea type='text' required name='body' />
+          <textarea type='text' required name='body' value={val} onChange={handleChange}/>
           <button type='submit' className='submit-button'>
             <Icon path='paper-airplane' className='submit-comment' />
           </button>

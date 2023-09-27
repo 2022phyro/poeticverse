@@ -16,7 +16,7 @@ def generate_token() -> str:
     return urandom(16).hex()
 
 def create_verify_link(user):
-    expire = (datetime.utcnow() + timedelta(minutes=7)).timestamp()
+    expire = int((datetime.utcnow() + timedelta(minutes=7)).timestamp())
     hexmail = user.email.encode().hex()
     token = generate_token()
     val = user.secret.copy() if user.secret else ["", ""]
@@ -26,7 +26,7 @@ def create_verify_link(user):
     return (BASE_URL + f"verify/{link}") # TO change this to whatever we will host from
 
 def create_reset_link(user) -> str:
-    expire = (datetime.utcnow() + timedelta(minutes=7)).timestamp()
+    expire = int((datetime.utcnow() + timedelta(minutes=7)).timestamp())
     hexmail = user.email.encode().hex()
     token = generate_token()
     val = user.secret.copy() if user.secret else ["", ""]
@@ -54,33 +54,36 @@ def send_verification_mail(user_id):
     if not user:
         print(f"User {user_id} can no more be found. He has been likely deleted")
         return
-    expire = (datetime.utcnow() + timedelta(minutes=7)).timestamp()
+    expire = int((datetime.utcnow() + timedelta(minutes=7)).timestamp())
+    print(expire)
     hexmail = user.email.encode().hex()
     token = generate_token()
     val = user.secret.copy()
     val[0] = token
     user.secret = val
     link = f"{hexmail}-{token}-{expire}"
-    link =  (BASE_URL + f"verify/{link}")
+    link =  (BASE_URL + f"/verify/{link}")
     store.save()
+    print(link)
     msg = welcome_email_msg(link, 7, user.pen_name)
-    send_email(user.email, 'Greetings from Poeticverse', msg[0], msg[1])
+    # send_email(user.email, 'Greetings from Poeticverse', msg[0], msg[1])
 
 @shared_task
 def send_reset_password_mail(user_id, tochange="email"):
     """This sends a safe point to reset user's password"""
+    user = store.get_one("User", user_id)
     if not user:
         print(f"User {user_id} can no more be found. He has been likely deleted")
         return
-    user = store.get_one("User", user_id)
-    expire = (datetime.utcnow() + timedelta(minutes=7)).timestamp()
+    expire = int((datetime.utcnow() + timedelta(minutes=7)).timestamp())
     hexmail = user.email.encode().hex()
     token = generate_token()
     val = user.secret.copy()
     val[1] = token
     user.secret = val
     link = f"{hexmail}-{token}-{expire}"
-    link = (BASE_URL + f"reset_password/{link}")
+    link = (BASE_URL + f"/reset_password/{link}")
     store.save()
+    print(link)
     msg = reset_email_msg(link, 7, user.pen_name, tochange)
-    send_email(user.email, 'Greetings from Poeticverse', msg[0], msg[1])
+    # send_email(user.email, 'Greetings from Poeticverse', msg[0], msg[1])
