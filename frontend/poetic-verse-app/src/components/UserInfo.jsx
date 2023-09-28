@@ -40,7 +40,7 @@ function UserInfo() {
           .then(() => {
               setSubmitting(false)
               setApiError(null)
-              navigate('/feed/profile')
+              navigate(`/feed/poet?id=${state.profile.id}`)
           })
           .catch((error) => {
             const errorMessage = error.response.data.message;

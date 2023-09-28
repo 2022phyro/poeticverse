@@ -2,15 +2,23 @@
     background: var(--primary-dark);
     display: flex;
     border-radius: 50px;
-    width: 300px;
-    padding: 10px, 20px;
+    flex-flow: row;
+    gap: 0;
+    justify-content: center;
+    align-content: center;
+    width: 340px;
+    height: 40px;
+    /* padding: 0 20px; */
 }
 .search-bar > input {
     background: transparent;
     outline: none;
+    font-size: 14px;
     border: none;
     color: white;
-    margin: auto;
+    margin: 0;
+    width: 200px;
+    padding: 0 10px;
 }
 
 .search-bar button {
@@ -19,8 +27,10 @@
     margin-right: 20px;
 }
 .search-bar > img {
-    width: 300px;
-    height: 300px;
+    width: 30px;
+    height: 30px;
+    align-self: center;
+    margin-right: 10px;
 }
 
 .search-user-result {
@@ -38,4 +48,12 @@
 .user-rank {
     margin-top: 3px;
     color: #7E7E7E;
+}
+@media screen and (max-width: 800px) {
+    .title > h3 {
+        display: none;
+    }
+    .search-bar {
+        width: 100vw;
+    }   
 }

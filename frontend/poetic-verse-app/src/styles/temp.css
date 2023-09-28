@@ -1,129 +1,92 @@
-header {
-    height: 60px;
-    /* width: calc( 100vw - 10px); */
-    width:  100vw;
-    /* margin-left: 5px; */
-    position: fixed;
-    z-index: 100;
-    border-radius: 0 0 40px 40px;
-    display: flex;
-    background-color: rgba(216, 219, 225, 0.80);
-    justify-content: right;
-    align-content: right;
+.delete-acc-container {
+  width: 465px;
+  height: 420px;
+  border-radius: 24px;
+  background: #0c0f15;
 }
-
-header > ul {
-    /* padding-top: 20px; */
-    display: flex;
-    list-style-type: none;
-    justify-content: left;
-    font-size: 14px;
-    font-family: 'Spline Sans Mono';
-    font-weight: 500;
-    vertical-align: center;
-    margin-left: 40px;
+.delete-acc-icon {
+  width: 92px;
+  height: 95.407px;
+  transform: rotate(-31.119deg);
+  flex-shrink: 0;
 }
-
-
-.section1 {
-    width: 100%;
-    height: 100vh;
-    /* background-image: url("./section2.png"); */
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    color: #FCFCFC;
-    font-family: 'League Gothic';
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.confirmation-popup {
+  width: 465px;
+  height: 420px;
+  border-radius: 24px;
+  background: #0c0f15;
 }
-.section1 > h1 {
-    text-align: center;
-    font-size: 150px;
-    padding-bottom: 40px;
+.confirmation-icon {
+  width: 90px;
+  height: 90px;
+  transform: rotate(-18.243deg);
+  flex-shrink: 0;
 }
-.section1 > ul {
-    display: flex;
-    text-align: center;
-    gap: 60px;
-    font-family: 'Spline Sans Mono';
-    justify-content: center;
+.network-error {
+  width: 465px;
+  height: 420px;
+  border-radius: 24px;
+  background: #0c0f15;
 }
-/* BackgroundSlideshow.css */
-
-.background-slideshow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-  
-  .background-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 5s ease-in-out;
-  }
-  
-  
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(12, 15, 21, 0.80); 
+.network-error-icon {
+  width: 90px;
+  height: 86.785px;
+  flex-shrink: 0;
 }
-  
-  .content {
-    z-index: 1; /* Ensure the content is on top of the overlay */
-    display: flex;
-    flex-flow: column nowrap;
-    /* justify-content: center; */
-    flex-grow: 0;
-
-  }
-  
-  .content > h2 {
-    color: #FEFEFF;
-    font-family: League Gothic;
-    font-size: 64px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    padding-bottom: 10;
-    text-align: center;
-    letter-spacing: 1.28px;
-  }
-
-.content > p {
-    text-align: center;
-    font-family: 'Spline Sans Mono';
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 0.52px;
+.success {
+  width: 465px;
+  height: 420px;
+  border-radius: 24px;
+  background: #0c0f15;
 }
-.content .join {
-    height: 50px;
-    width: 130px;
-    align-self: center;
-    margin-top: 15px;
-    background-color: #3A4B6B;
-    border: none;
-    padding: 15px;
-    border-radius: 13px;
-    color: #FFF;
-    font-family: 'Spline Sans Mono';
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+.success-header {
+  color: #d8dbe1;
+  font-family: League Gothic;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.success-text {
+  color: #fff;
+  font-family: Spline Sans Mono;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.success-button {
+  fill: #3a4b6b;
+  stroke-width: 1px;
+  stroke: #3a4b6b;
+}
+.sent-email {
+  border-radius: 24px;
+  background: #0c0f15;
+}
+.sent-email-header {
+  color: #d8dbe1;
+  font-family: League Gothic;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.sent-email-icon {
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+}
+.sent-email-text {
+  color: #fff;
+  font-family: Spline Sans Mono;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.sent-email-button {
+  fill: #3a4b6b;
+  stroke-width: 1px;
+  stroke: #3a4b6b;
 }

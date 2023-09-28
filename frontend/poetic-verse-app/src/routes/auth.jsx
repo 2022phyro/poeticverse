@@ -1,4 +1,4 @@
-import '../styles/auth.css';
+// import '../styles/auth.css';
 import { useState, useEffect , useRef} from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { Loader } from '../components/loader';
@@ -33,7 +33,7 @@ export function Login() {
         </div>
         <div className="auth" style={item}>
         <div className='wrapper'>
-          <div className="login">
+          <div className="auth-body">
             <h2>Login</h2>
             <Formik
               initialValues={{login: "", password: ""}}
@@ -76,10 +76,10 @@ export function Login() {
                 <label htmlFor='lo_pwd'>Password</label>
                 <Field id='lo_pwd' type='password' name='password' placeholder='Password'/>
                 <ErrorMessage name='password' className='loginerr' component='div'/>
-                <button type="submit" className="LoginButton">
+                <button type="submit" className="auth-bodyButton">
                 Login
                 </button>
-                {apiError && <p className="login-err">{apiError}</p>}
+                {apiError && <p className="loginerr">{apiError}</p>}
             </Form>
             </Formik>
             <Link to={`/auth/signup`}>Don&apos;t have an account? Join here</Link>
@@ -113,7 +113,7 @@ export function Signup() {
         </div>
         <div className="auth" style={item}>
         <div className='wrapper'>
-          <div className="signup">
+          <div className="auth-body">
             <h2>Signup</h2>
             <Formik
               initialValues={{email: "", first_name: "", last_name: "", pen_name: "", password: ""}}
@@ -171,10 +171,10 @@ export function Signup() {
                 <label htmlFor="s_passwd">Password</label>
                 <Field type='password' id='s+passwd' name='password' placeholder='Password' autoComplete="on"/>
                 <ErrorMessage name='password' className='loginerr' component='div'/>
-                <button type="submit" className="signupButton">
+                <button type="submit" className="auth-bodyButton">
                 Signup
                 </button>
-                {apiError && <p className="login-err">{apiError}</p>}
+                {apiError && <p className="loginerr">{apiError}</p>}
                 <Link to={`/auth/login`}>Already have an account? Click here</Link>
             </Form>
 

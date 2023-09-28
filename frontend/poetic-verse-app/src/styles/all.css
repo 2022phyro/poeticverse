@@ -1,35 +1,4 @@
-:root {
-    --primary-dark: #3A4B6B;
-    --nav-dark: #0C0F15;
-    --primary-text-dark: #D8DBE1;
-    --black: #000;
-}
-*  {
-    margin: 0;
-    padding: 0;
-    overflow: auto;
-    scrollbar-color: #5B6984 rgb(0,0,0, 0.5);
-    scrollbar-width: thin;
-}
 
-*::-webkit-scrollbar {
-    width: 7px;
-    background-color: #F5F5F5;
-    border-radius: 50%;
-}
-*::-webkit-scrollbar-thumb {
-    background-color: #000000;
-    border-radius: 7px;
-    width: 3px;
-}
-*::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #F5F5F5;
-}
-
-.icon {
-    cursor: pointer;
-}
 .misc-wrapper {
     height: 80vh;
     /* width:  */

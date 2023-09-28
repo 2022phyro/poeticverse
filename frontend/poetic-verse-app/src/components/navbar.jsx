@@ -114,7 +114,7 @@ export function Nav() {
     return (
       <>
      
-        <header className='home-header'>
+        <header className='header'>
         <Icon path={'menu-circle-with-dots'} className={`hamburger ${hiddenClass}`} onClick={toggleMenu}/>
         <img src='/PV.png' className='logo'/>
         </header>

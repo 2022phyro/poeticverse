@@ -50,8 +50,9 @@
     font-size: 17px;
     position: relative;
     display: inline-block;
-    width: 100px;
-    height: 45px;
+    align-self: center;
+    width: 80px;
+    height: 40px;
   }
   
   /* Hide default HTML checkbox */
@@ -78,7 +79,7 @@
     background-image: url('/icon/user-profile.svg');
     background-repeat: no-repeat;
     background-position: center;
-    height: 35px;
+    height: 30px;
     width: 50px;
     right: 0.3em;
     bottom: 0.3em;
@@ -94,7 +95,7 @@
     background-image: url('/icon/book-open.svg');
     background-repeat: no-repeat;
     background-position: center;
-    height: 35px;
+    height: 30px;
     width: 50px;
     left: 0.3em;
     bottom: 0.3em;

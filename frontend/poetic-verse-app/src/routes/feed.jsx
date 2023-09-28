@@ -31,16 +31,15 @@ import { Poem, Discover } from '../components/poem';
 
 function Feed() {
     return (
-        <div className='body' id='body'>
-    <Nav/>
-    <div className="f-main">
-      <main className='mainfeed'>
-        <Outlet/>
-        {/* <Discover/> */}
-      </main>
-    </div>
-
+      <div className='body' id='body'>
+        <Nav/>
+        <div className="f-main">
+          <main className='mainfeed'>
+            <Outlet/>
+          </main>
         </div>
+
+      </div>
     )
 }
 

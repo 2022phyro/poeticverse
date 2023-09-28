@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import React, { Component } from "react";
 import {getRelativeTime, api } from '../utils';
 import { useNavigate } from "react-router-dom";
@@ -26,100 +26,109 @@ export function PoemObject(props) {
       </div>
     </article>
   )}
-export class Poem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      pages: [],
-      loading: false,
-      page: 0,
-      prev: 0,
-      next: 0,
-      age: 'newest',
-      prevY: 0,
-    };
-    this.url = props.url;
-    this.auth = props.auth;
-    this.main = props.main;
-    this.loadingRef = React.createRef();
-  }
 
-  componentDidMount() {
-    this.getPoems(this.state.page, this.state.age);
+export function Poem(props) {
+  const [pages, setPages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [prev, setPrev] = useState(0);
+  const [next, setNext] = useState(0);
+  const [initial, setInit] = useState(false);
+  const [prevY, setPrevY] = useState(0);
+
+  const url = props.url;
+  const auth = props.auth;
+  const main = props.main;
+  const author_id = props.author_id ? props.author_id : null
+  const loadingRef = useRef(null);
+
+  useEffect(() => {
+    if (!initial) {
+      getPoems(0, 'oldest');
+      setInit(true)
+    }
+    }, [initial])
   
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 1.0,
-    };
-    this.observer = new IntersectionObserver(this.handleObserver.bind(this), options);
-    this.observer.observe(this.loadingRef.current);
-  }
+    useEffect(() => {
+      const loadingRefCurrent = loadingRef.current; // Create a variable to hold the current reference
+      const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 1.0,
+      };
+      
+      const handleObserver = (entities) => {
+        const y = entities[0].boundingClientRect.y;
+        if (prevY > y && prev > 1) {
+          getPoems(prev, 'oldest');
+        }
+        setPrevY(y);
+      };
+  
+      const observer = new IntersectionObserver(handleObserver, options);
+      observer.observe(loadingRefCurrent);
+  
+      return () => {
+        // Clean up the observer when the component unmounts
+        observer.unobserve(loadingRefCurrent); // Use the variable here
+      };
+    }, [prevY, prev]);
+  
 
-  getPoems(page, age) {
-    if (this.state.loading) return;
-
-    this.setState({ loading: true });
-
-    api(this.auth).get(`/${this.url}?_age=${age}&curr=${page}&page_size=3`)
+  const getPoems = (page, age) => {
+    if (loading) return;
+    setLoading(true);
+    const search = author_id ?`${url}?_age=${age}&curr=${page}&page_size=3&author_id=${author_id}` :
+    `/${url}?_age=${age}&curr=${page}&page_size=3`
+    api(auth)
+      .get(search)
       .then((res) => {
-        this.setState({pages: [...this.state.pages, ...res.data.pages]});
-        this.setState({prev: res.data.prev})
-        this.setState({next: res.data.next})
-        this.setState({loading: false})
+        setPages([...pages, ...res.data.pages]);
+        setPrev(res.data.prev);
+        setNext(res.data.next);
+        setLoading(false);
       })
       .catch((error) => {
         console.error(error);
-        this.setState({ loading: false });
+        setLoading(false);
       });
-  }
+  };
 
-  handleObserver(entities) {
-    const y = entities[0].boundingClientRect.y;
-    if (this.state.prevY > y && this.state.prev > 1) {
-      this.getPoems(this.state.prev, 'oldest');
-    }
-    this.setState({ prevY: y });
-  }
+  // Additional CSS
+  const loadingCSS = {
+    height: '100px',
+    margin: '30px',
+  };
 
-  render() {
-    // Additional CSS
-    const loadingCSS = {
-      height: '100px',
-      margin: '30px',
-    };
+  // To change the loading icon behavior
+  const loadingTextCSS = { display: loading ? 'block' : 'none' };
 
-    // To change the loading icon behavior
-    const loadingTextCSS = { display: this.state.loading ? 'block' : 'none' };
-    console.log(this.state.pages)
-    return (
-      <div className="poem">
-        {
-          this.main ?  <div className="title">
+  return (
+    <div className="poem">
+      {main ? (
+        <div className="title">
           <h3>Home</h3>
-          <Icon path={'home-3'}/>
-        </div> : <></>
-        }
+          {/* Add your Icon component */}
+        </div>
+      ) : (
+        <></>
+      )}
 
-        <ul>
-          <div style={{ minHeight: '800px' }}>
-            {this.state.pages.map((at) => {
-             return (
-             <li key={at.id}>
-               <PoemObject {...at} touser={true}/>
-             </li>
-             )
-           })}
-          </div>
-          <div ref={this.loadingRef} style={loadingCSS}>
-            <div style={loadingTextCSS}>
+      <ul>
+        <div style={{ minHeight: '800px' }}>
+          {pages.map((at) => (
+            <li key={at.id}>
+              <PoemObject {...at} touser={true}/>
+            </li>
+          ))}
+        </div>
+        <div ref={loadingRef} style={loadingCSS}>
+          <div style={loadingTextCSS}>
             <Loader/>
-            </div>
           </div>
-        </ul>
-      </div>
-    );
-  }
+        </div>
+      </ul>
+    </div>
+  );
 }
 
 export function Discover() {
