@@ -46,7 +46,7 @@ export function Nav() {
   const [menuVisible, setMenuVisible] = useState(false);
   const [Toggle, setToggle] = useState(false);
   const [Logout, setLogout] = useState(false);
-  const [isauth, setAuth] = useState(checkAuth)
+  const isauth = checkAuth()
   const { state, dispatch}  = useUserContext()
   const [loadedProfile, setLoadedProfile] = useState(false)
   const navigate = useNavigate()
