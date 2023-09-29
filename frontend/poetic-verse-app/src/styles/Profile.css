@@ -22,7 +22,7 @@
     width: 250px;
     height: 270px;
     background-repeat: no-repeat;
-    border: 1px solid red;
+    
     border-radius: 10px;
     background-blend-mode: darken;
 }

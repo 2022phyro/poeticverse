@@ -4,13 +4,14 @@
 .parent{
     background: var(--nav-dark);
     width: 100%;
-    border: 1px solid red;
+    padding: 20px;
+    
 }
 .create-container {
-    padding: 20px;
     margin: auto;
     display: block;
     width: 90%;
+    overflow: visible;
 }
 .input-1{
     background: var(--primary-dark);
@@ -18,7 +19,7 @@
     outline: none;
     border-radius: 5px;
     margin-top: 3PX;
-    width: 70%;
+    width: 90%;
     padding: 6px 10px;
     font-size: 18px;
     color: white;
@@ -29,7 +30,7 @@
     outline: none;
     border-radius: 5px;
     margin-top: 3PX;
-    width: 70%;
+    width: 90%;
     height: 300px;
     padding: 6px 10px;
     font-size: 18px;
@@ -41,7 +42,7 @@
     outline: none;
     border-radius: 5px;
     margin-top: 3PX;
-    width: 50%;
+    width: 90%;
     padding: 6px 10px;
     font-size: 18px;
     color: white;
@@ -59,19 +60,7 @@
     row-gap: 1em;
     flex-direction: column;
 }
-.btn:hover{
-    transform: scale(1.1);
-}
-.btn{
-    align-self: flex-end;
-    border: none;
-    outline: none;
-    padding: 7px 20px;
-    background-color: var(--primary-dark);
-    color: white;
-    border-radius: 8px;
-    transition: .3s ease all;
-}
+
 .section-2, .canvas{
     margin-top: 2em;
     background-color: var(--nav-dark);

@@ -16,18 +16,24 @@ body{
     height: 50px;
 }
 .nav {
-   margin-left: 100px; 
    padding-top: 70px;
    position: fixed;
    top: 0;
+   left: 0;
    height: 100vh;
-   width: 251px;
-   /* border: 1px solid red; */
+   border: 1px solid red;
+   overflow: visible;
+   width: 300px;
+   background: #000;
+   
 }
 
 .contain {
     display: flex;
     flex-flow: row nowrap;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
 }
 .hidden, .mid-nav {
     display: none;
@@ -43,7 +49,7 @@ body{
     margin-bottom: 10px;
     font-size: 25px;
     font-weight: 400;
-    padding-left: 20px;
+    /* padding-left: 20px; */
     border-radius: 9999px;
     color: var(--primary-text-dark);
 }
@@ -74,12 +80,13 @@ body{
 }
 .me {
     display: flex;
-    height: 64px;
+    height: 70px;
     padding: 7px 24px 9px 13px;
     align-items: center;
     gap: 3px;
-    width: 214px;
+    width: 200px;
     height: 48px;
+    margin-left: 20px;
     border-radius: 9999px;
     background: var(--primary-dark);
     position: absolute;
@@ -102,7 +109,7 @@ body{
     overflow: scroll;
 }
 .mainfeed {
-    /* border: 1px solid red; */
+    
     width: 598px;
     overflow:visible;
 }
@@ -114,9 +121,10 @@ body{
     min-height: 230px;
     padding: 12px 16px;
     align-items: flex-start;
+    max-width: 550px;
+    width: 100%;
     gap: 13px;
     flex-flow: column;
-    /* flex-shrink: 0; */
     white-space: pre-line;
     border-radius: 19px;
     background: var(--nav-dark);
@@ -176,7 +184,7 @@ body{
     line-height: normal;
     color: #D8DBE1;
     font-family: Roboto;
-    /* border: 1px solid red; */
+    
 }
 
 .poem_info {
@@ -195,6 +203,7 @@ body{
     top: 0;
     background: transparent;
     height: auto;
+    overflow: visible;
 }
 .title h3 {
     font-size: 32px;
@@ -207,23 +216,6 @@ body{
         top: 20px;
         left: 20px;
     }
-    .contain {
-        display: flex;
-        flex-flow: row nowrap;
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        z-index: 3000;
-    }
-    .nav {
-        margin-left: 0;
-        width: 230px;
-        padding-left: 30px;
-        /* transition: transform 0.3s ease-in-out;
-        transform: translateX(0); */
-        background-color: #000;
-    }
     .nav li {
         background: var(--nav-dark);
         width: 180px;
@@ -233,6 +225,7 @@ body{
         line-height: 40px;
         position: relative;
         margin-bottom: 10px;
+        margin-left: 20px;
         font-size: 20px;
         font-weight: 400;
         padding-left: 20px;
@@ -241,7 +234,7 @@ body{
     .nav li .hint {
         width: 22px;
         height: 22px;
-        /* border: 1px solid red; */
+        
         /* overflow: visible; */
         margin-right: 5px;
         margin-top: 5px;
@@ -249,15 +242,20 @@ body{
         margin-bottom: 9px;
     }
     .close-nav {
-        width: calc( 100% - 260px);
+        width: calc( 100% - 300px);
         height: 100vh;
         position: absolute;
+        top: 0;
         right: 0;
         display: block;
         background-color: rgba(255, 255, 255, 0.2);
         cursor: pointer;
+        z-index: 0;
     }
 
+    .contain {
+        z-index: 2;
+    }
     .nav li.create {
         border-radius: 9999px;
         border: 1px solid var(--primary-dark);
@@ -270,7 +268,7 @@ body{
         padding: 7px 24px 9px 13px;
         align-items: center;
         gap: 3px;
-        width: 180px;
+        width: 200px;
         height: 48px;
         border-radius: 9999px;
         background: var(--primary-dark);
@@ -282,7 +280,7 @@ body{
         height: 48px;
     }
     .title {
-            width: 40%;
+            width: 80%;
             display: flex;
             justify-content: space-between;
             padding: 15px 20px;
@@ -291,6 +289,7 @@ body{
             position: fixed;
             top: 0;
             background: transparent;
+            overflow: visible;
             height: auto;
         z-index: 10000;
     }
@@ -300,14 +299,14 @@ body{
         left: 0px;
         height: calc(100vh - 75px);
         margin-left: 0;
-        border: 1px solid red;
+        
         display: block;
         /* flex-flow: column; */
         width: 100vw;
         overflow: scroll;
     }
     .mainfeed {
-        /* border: 1px solid red; */
+        
         width: 80%;
         overflow:visible;
         margin: auto;
@@ -318,23 +317,6 @@ body{
     .hamburger {
         display: none;
     }
-    .contain {
-        display: flex;
-        flex-flow: row nowrap;
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        z-index: 3000;
-    }
-    .nav {
-        margin-left: 0;
-        width: 230px;
-        padding-left: 30px;
-        /* transition: transform 0.3s ease-in-out;
-        transform: translateX(0); */
-        background-color: #000;
-    }
     .nav li {
         background: var(--nav-dark);
         width: 180px;
@@ -344,6 +326,7 @@ body{
         line-height: 40px;
         position: relative;
         margin-bottom: 10px;
+        margin-left: 20px;
         font-size: 20px;
         font-weight: 400;
         padding-left: 20px;
@@ -352,7 +335,7 @@ body{
     .nav li .hint {
         width: 22px;
         height: 22px;
-        /* border: 1px solid red; */
+        
         /* overflow: visible; */
         margin-right: 5px;
         margin-top: 5px;
@@ -372,7 +355,7 @@ body{
         padding: 7px 24px 9px 13px;
         align-items: center;
         gap: 3px;
-        width: 180px;
+        width: 200px;
         height: 48px;
         border-radius: 9999px;
         background: var(--primary-dark);
@@ -386,16 +369,15 @@ body{
     .f-main {
         position: fixed;
         top: 75px;
-        left: 260px;
+        left: 300px;
         height: calc(100vh - 70px);
         margin-left: 0;
         display: block;
-        width: calc(100vw - 260px);
+        width: calc(100vw - 300px);
         overflow: scroll;
-        z-index: 10000;
     }
     .mainfeed {
-        /* border: 1px solid red; */
+        
         width: 90%;
         overflow:visible;
         margin: auto;
@@ -405,23 +387,6 @@ body{
     .hamburger {
         display: none;
     }
-    .contain {
-        display: flex;
-        flex-flow: row nowrap;
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        z-index: 3000;
-    }
-    .nav {
-        margin-left: 0;
-        width: 230px;
-        padding-left: 30px;
-        /* transition: transform 0.3s ease-in-out;
-        transform: translateX(0); */
-        background-color: #000;
-    }
     .nav li {
         background: var(--nav-dark);
         width: 180px;
@@ -430,6 +395,7 @@ body{
         cursor: pointer;
         line-height: 40px;
         position: relative;
+        margin-left: 20px;
         margin-bottom: 10px;
         font-size: 20px;
         font-weight: 400;
@@ -439,7 +405,7 @@ body{
     .nav li .hint {
         width: 22px;
         height: 22px;
-        /* border: 1px solid red; */
+        
         /* overflow: visible; */
         margin-right: 5px;
         margin-top: 5px;
@@ -459,7 +425,7 @@ body{
         padding: 7px 24px 9px 13px;
         align-items: center;
         gap: 3px;
-        width: 180px;
+        width: 200px;
         height: 48px;
         border-radius: 9999px;
         background: var(--primary-dark);
@@ -473,20 +439,18 @@ body{
     .f-main {
         position: fixed;
         top: 75px;
-        left: 260px;
-        height: calc(100vh - 75px);
+        left: 300px;
+        height: calc(100vh - 70px);
         margin-left: 0;
         display: block;
-        border: 1px solid red;
-        width: calc(100vw - 260px);
+        width: calc(100vw - 300px);
         overflow: scroll;
-        z-index: 10000;
     }   
 
     .mainfeed {
-        /* border: 1px solid red; */
-        width: 100%;
-        margin: 0;
+        
+        width: 90%;
+        margin: auto;
         overflow:visible;
         display: flex;
         flex-flow: row nowrap;
@@ -497,14 +461,15 @@ body{
         display: flex;
         min-height: 230px;
         padding: 12px 16px;
-        width: calc(600px);
+        max-width: 550px;
+        width: 100%;
         align-items: flex-start;
         gap: 13px;
         flex-flow: column;
         /* flex-shrink: 0; */
         white-space: pre-line;
         border-radius: 19px;
-        background: var(--nav-dark);
+        background: var(--secondary);
         margin-bottom: 9px;
     }
     .explore {
@@ -518,6 +483,7 @@ body{
     height: auto;
     border-radius: 8px;
     padding: 10px;
+    margin-left: 20px;
     position: absolute;
     z-index: 1;
     bottom: 170px;
@@ -553,13 +519,4 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.overlay-3{
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.551);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    z-index: 3;
 }

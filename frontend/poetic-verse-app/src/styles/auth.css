@@ -28,7 +28,6 @@ a {
     background-repeat: no-repeat;
     background-size: 600px;
     display: flex;
-    /* border: 1px solid red; */
     flex-flow: row wrap;
     justify-content: center;
     align-content: center;
@@ -36,7 +35,6 @@ a {
 .auth > .wrapper {
     height: 100%;
     width: 100%;
-    /* border: 1px solid red; */
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
@@ -49,7 +47,6 @@ a {
     flex-flow: column nowrap;
     justify-content: center;
     color: #0C0F15;
-    /* border: 1px solid red; */
 }
 
 .login > form {
@@ -146,7 +143,6 @@ a {
     flex-flow: row wrap;
     justify-content: center;
     color: #0C0F15;
-    /* border: 1px solid red; */
     text-align: center;
     /* overflow: scroll; */
 }
@@ -234,7 +230,6 @@ a {
 
 .preferences {
     width: 80vw;
-    /* border: 1px solid red; */
     height: 75vh;
     border-radius: 16px;
     background: #222b3d;

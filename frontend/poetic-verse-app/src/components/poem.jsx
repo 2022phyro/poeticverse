@@ -107,7 +107,7 @@ export function Poem(props) {
       {main ? (
         <div className="title">
           <h3>Home</h3>
-          {/* Add your Icon component */}
+          <Icon path='home-3'/>
         </div>
       ) : (
         <></>

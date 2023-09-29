@@ -35,8 +35,8 @@ function Index() {
               width="60"
               className='logo'
           />
-          <button className='sign-up-button' onClick={() => nav('/auth/signup')}>Signup</button>
         </header>
+        <button className='sign-up-button' onClick={() => nav('/auth/signup')}>Signup</button>
           <main>
             <Section1/> 
           </main>

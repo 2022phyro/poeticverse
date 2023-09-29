@@ -1,17 +1,22 @@
-import { useState, useEffect, createRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Icon, Avatar } from '../components/navbar';
 import '../styles/Profile.css';
 import '../styles/userpage.css';
 import { Component } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { api } from '../utils';
+import { api, usePopup } from '../utils';
 import { getRelativeTime } from '../utils';
 import { Loader } from './loader';
 import { PoemObject } from './poem';
 
 const DeleteIcon = (props) => {
   const [submit, setSubmitting] = useState(false)
+  const openPopUp = usePopup()
+  const handleDel = () => {
+    const message = `Are you sure you want to delete this ${props.type}. Note the action is irreversible`
+    openPopUp(message, 'Delete', del)
+  }
   const x = []
   const del = () => {
     const url = props.type == 'poem' ? `/${props.type}?poem_id=${props.id}` : `/${props.type}?id=${props.id}`
@@ -30,7 +35,7 @@ const DeleteIcon = (props) => {
       })
     }
   }
-  return (<Icon path='recycle-bin' className='delete-icon' onClick={del}/> )
+  return (<Icon path='recycle-bin' className='delete-icon' onClick={handleDel}/> )
 }
 
 function CommentTab (props) {
@@ -95,117 +100,116 @@ export function ProfileInfo (props) {
   );
 };
 
-export class UserPoems extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        pages: [],
-        loading: false,
-        page: 0,
-        prev: 0,
-        next: 0,
-        age: 'newest',
-        prevY: 0,
-      };
-      this.url = props.url;
-      this.author = props.author;
-      this.main = props.main;
-      this.myId = props.myId
-      this.loadingRef = createRef();
-    }
+  export function UserPoems(props) {
+    const [pages, setPages] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [prev, setPrev] = useState(0);
+    const [next, setNext] = useState(0);
+    const [initial, setInit] = useState(false);
+    const [prevY, setPrevY] = useState(0);
   
-    componentDidMount() {
-      this.getPoems(this.state.page, this.state.age);
-    
-      const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 1.0,
-      };
-      this.observer = new IntersectionObserver(this.handleObserver.bind(this), options);
-      this.observer.observe(this.loadingRef.current);
-    }
-    componentDidUpdate(prevProps) {
-   const queryParams = new URLSearchParams(window.location.search);
-    this.author = queryParams.get('id');
-      if (prevProps.author !== this.props.author) {
-        this.setState({
-          pages: [],
-          loading: false,
-          page: 0,
-          prev: 0,
-          next: 0,
-          age: 'newest',
-          prevY: 0,
-        });
-        this.getPoems(this.state.page, this.state.age);
-      }
-    }
-    removeItem = (itemId) => {
-      const updatedItems = this.state.pages.filter((item) => item.id !== itemId);
-      this.setState({ pages: updatedItems });
+    const url = props.url;
+    const auth = props.auth;
+    const main = props.main;
+    const author_id = props.author_id ? props.author_id : null
+    const loadingRef = useRef(null);
+    const myId = props.myId
+
+    const removeItem = (itemId) => {
+      const updatedItems = pages.filter((item) => item.id !== itemId);
+      setPages(updatedItems);
     };
-    getPoems(page, age) {
-      if (this.state.loading) return;
+    useEffect(() => {
+      if (!initial) {
+        getPoems(0, 'oldest');
+        setInit(true)
+      }
+      }, [initial])
+    
+      useEffect(() => {
+        const loadingRefCurrent = loadingRef.current; // Create a variable to hold the current reference
+        const options = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 1.0,
+        };
+        
+        const handleObserver = (entities) => {
+          const y = entities[0].boundingClientRect.y;
+          if (prevY > y && prev > 1) {
+            getPoems(prev, 'oldest');
+          }
+          setPrevY(y);
+        };
+    
+        const observer = new IntersectionObserver(handleObserver, options);
+        observer.observe(loadingRefCurrent);
+    
+        return () => {
+          // Clean up the observer when the component unmounts
+          observer.unobserve(loadingRefCurrent); // Use the variable here
+        };
+      }, [prevY, prev]);
+    
   
-      this.setState({ loading: true });
-  
-      api(true).get(`/poems?_age=${age}&curr=${page}&page_size=3&author_id=${this.author}`)
+    const getPoems = (page, age) => {
+      if (loading) return;
+      setLoading(true);
+      const search = author_id ?`${url}?_age=${age}&curr=${page}&page_size=3&author_id=${author_id}` :
+      `/${url}?_age=${age}&curr=${page}&page_size=3`
+      api(auth)
+        .get(search)
         .then((res) => {
-          this.setState({pages: [...this.state.pages, ...res.data.pages]});
-          this.setState({prev: res.data.prev})
-          this.setState({next: res.data.next})
-          this.setState({loading: false})
+          setPages([...pages, ...res.data.pages]);
+          setPrev(res.data.prev);
+          setNext(res.data.next);
+          setLoading(false);
         })
         .catch((error) => {
           console.error(error);
-          this.setState({ loading: false });
+          setLoading(false);
         });
-    }
+    };
   
-    handleObserver(entities) {
-      const y = entities[0].boundingClientRect.y;
-      if (this.state.prevY > y && this.state.prev > 1) {
-        this.getPoems(this.state.prev, 'oldest');
-      }
-      this.setState({ prevY: y });
-    }
+    // Additional CSS
+    const loadingCSS = {
+      height: '100px',
+      margin: '30px',
+    };
   
-    render() {
-      // Additional CSS
-      const loadingCSS = {
-        height: '50px',
-        margin: '30px',
-      };
+    // To change the loading icon behavior
+    const loadingTextCSS = { display: loading ? 'block' : 'none' };
   
-      // To change the loading icon behavior
-      const loadingTextCSS = { display: this.state.loading ? 'block' : 'none' };
-      console.log(this.state.pages)
-      return (
-          <ul>
-            <div style={{ minHeight: '800px' }}>
-              {this.state.pages.map((at) => {
-               return (
-               <li key={at.id} className='part'>
-                { this.myId == this.author ?
-                  <DeleteIcon type='poem' id={at.id} removeItem={this.removeItem}/>:
+    return (
+      <div className="poem">
+        {main ? (
+          <div className="title">
+            <h3>Home</h3>
+            <Icon path='home-3'/>
+          </div>
+        ) : (
+          <></>
+        )}
+  
+        <ul>
+            {pages.map((at) => (
+              <li key={at.id}>
+                { myId == author_id ?
+                  <DeleteIcon type='poem' id={at.id} removeItem={removeItem}/>:
                   <></>
                 }
-                        <PoemObject {...at}/>
-               </li>
-               )
-             })}
-            </div>
-            <div ref={this.loadingRef} style={loadingCSS}>
-              <div style={loadingTextCSS}>
+                <PoemObject {...at} touser={true}/>
+              </li>
+            ))}
+          <div ref={loadingRef} style={loadingCSS}>
+            <div style={loadingTextCSS}>
               <Loader/>
-              </div>
             </div>
-          </ul>
-      );
-    }
+          </div>
+        </ul>
+      </div>
+    );
   }
-  
 export function UserLikes ({user_id, ...props}) {
     const [items, setItems] = useState([])
     console.log(user_id)
@@ -252,7 +256,6 @@ export function UserComments({user_id, myId,...props}) {
   }, [user_id])
   return (
     <ul>
-      <div style={{ minHeight: '800px' }}>
         {items.map((at) => {
           return (
           <li key={at.id} className='part'>
@@ -264,7 +267,6 @@ export function UserComments({user_id, myId,...props}) {
           </li>
           )
         })}
-      </div>
     </ul>
   )
 }

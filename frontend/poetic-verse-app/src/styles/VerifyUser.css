@@ -47,4 +47,5 @@
 }
 .push{
     margin-top: 2em;
+    overflow: visible;
 }

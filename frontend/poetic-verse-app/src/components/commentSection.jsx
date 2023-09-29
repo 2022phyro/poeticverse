@@ -27,64 +27,72 @@ export const CommentObject = (props) => {
 }
 function CommentSection({ id, type, ...props }) {
   const [comments, setCmm] = useState([]);
-  const [newcmm, setLoad] = useState(true);
-  const [val, setVal] = useState('')
+  const [val, setVal] = useState('');
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const url = type === 'poem' ? '/poem/comments' : '/comment/comments';
   const data = type === 'poem' ? { poem_id: id } : { parent_id: id };
-  const navig = useNavigate()
+  const navig = useNavigate();
+
+  const handleIconClick = () => {
+    // Trigger form submission when the icon is clicked
+    handleSubmit(new Event('submit'));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const bodyValue = val.trim();
-    setVal('')
+    setVal('');
     if (bodyValue) {
       data['body'] = bodyValue;
       if (checkAuth()) {
         api(true)
           .post('/comment', data)
           .then(() => {
-            setLoad(true);
+            // Reload the comments after posting
+            loadComments();
           })
           .catch((err) => {
-            if (err.status_code == 401) {
-              navig('/feed/loggedout')
+            if (err.status_code === 401) {
+              navig('/feed/loggedout');
             }
             console.error(err);
           });
       } else {
-        navig('/feed/loggedout')
+        navig('/feed/loggedout');
       }
     }
   };
 
-  useEffect(() => {
-    // Update the 'id' and 'newcmm' when the 'id' in the search params changes
-    const newId = searchParams.get('id');
-    if (newId !== id) {
-      setCmm([]);
-      data['poem_id'] = newId;
-      setLoad(true);
-    }
-  }, [id]);
+  const handleChange = (e) => {
+    setVal(e.target.value);
+  };
+
+  const loadComments = () => {
+    api()
+      .get(`${url}?id=${id}`)
+      .then((res) => {
+        setCmm(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   useEffect(() => {
-    if (newcmm) {
-      api()
-        .get(`${url}?id=${id}`)
-        .then((res) => {
-          setCmm(res.data);
-          setLoad(false);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+    // Watch for changes in the 'id' query parameter
+    const newId = searchParams.get('id');
+    if (newId !== id) {
+      // Update 'id' and load comments
+      data['poem_id'] = newId;
+      loadComments();
     }
-  }, [newcmm, id, url]);
-  const handleChange = (e) => {
-    setVal(e.target.value)
-  }
+  }, [id, searchParams]);
+
+  useEffect(() => {
+    // Load comments when the component initially mounts
+    loadComments();
+  }, [id, url]);
 
   return (
     <>
@@ -100,9 +108,7 @@ function CommentSection({ id, type, ...props }) {
       <div className='create-comment'>
         <form onSubmit={handleSubmit}>
           <textarea type='text' required name='body' value={val} onChange={handleChange}/>
-          <button type='submit' className='submit-button'>
-            <Icon path='paper-airplane' className='submit-comment' />
-          </button>
+          <Icon path='paper-airplane' className='submit-comment' onClick={handleIconClick} />
         </form>
       </div>
     </>

@@ -3,7 +3,7 @@ import { Icon, Avatar } from '../components/navbar';
 import '../styles/Profile.css';
 import { Link, useNavigate, Outlet } from 'react-router-dom';
 import FloatingProfile from '../components/FloatingProfile';
-import { api } from '../utils';
+import { api, usePopup } from '../utils';
 
 function PictureUploader(props) {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -65,8 +65,8 @@ function PictureUploader(props) {
 
 const Profile = () => {
   const [activeButton, setActiveButton] = useState(null);
-  const [HandleDelete, setHandleDelete] = useState(false);
   const [pro, setPro] = useState({hellow: "yeos"});
+  const openPopUp = usePopup()
   
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName);
@@ -77,7 +77,9 @@ const Profile = () => {
   };
 
   const handleDelete = () => {
-    setHandleDelete(!HandleDelete)
+    const message = `We're saddened to see you considering departure from our poetic community.
+     Before you go, we'd like to offer you a choice, a path that suits your poetic journey best. Please select one of the following options`
+    openPopUp(message, 'Delete', handleDeleteAccount)
   }
 
   //add the functionality to delte a users account
@@ -109,32 +111,6 @@ const Profile = () => {
           </div>
       <Outlet/>
       <>
-      {HandleDelete && 
-                      <div className="overlay">
-                      <div className="delete-acc">
-                      <div className="delete-acc-header">
-                        <h2>Delete Account</h2>
-                        <button className="close-button" onClick={handleDelete}>
-                          <span>&times;</span>
-                        </button>
-                      </div>
-                      <div className="delete-acc-content">
-                        <div className="delete-acc-icon">
-                        <Icon width='60' className='del' path= 'trash' />
-                        </div>
-                        <p>We&apos;re saddened to see you considering departure from our poetic community. Before you go, we&apos;d like to offer you a choice, a path that suits your poetic journey best. Please select one of the following options</p>
-                      </div>
-                      <div className="delete-acc-footer">
-                        <button className="delete-acc-button-1" onClick={handleDelete}>
-                          Cancel
-                        </button>&nbsp;&nbsp;
-                        <button className="delete-acc-button-2" onClick={handleDeleteAccount}>
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                    </div>}
-                    
         <div className="divider"></div>
         <div className="Profile-container">
           <div className="profile-sidebar">

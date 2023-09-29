@@ -1,5 +1,6 @@
 import * as ReactDOM from 'react-dom/client'
 import './styles/all.css'
+import './styles/feed.css';
 import './styles/build.css'
 import './styles/loader.css'
 import Index from './routes/root.jsx'

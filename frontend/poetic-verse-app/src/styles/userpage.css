@@ -9,10 +9,13 @@
     margin-bottom: 20px;
 }
 .user-body {
-    min-width: calc(100% - 370px);
+    max-width: 900px;
+    /* padding: 20px; */
+    width: 100%;
 }
 .part {
     position: relative;
+    width: 100%;
 }
 .delete-icon {
     position: absolute;
@@ -65,4 +68,21 @@
 }
 .tab-body {
     margin-top: 20px;
+    /* width: 100%; */
 }
+.tab-body > div {
+    border: 1px solid red;
+    width: fit-content;
+}
+.tab-body > div > ul {
+    background-color: blue;
+    width: fit-content;
+    overflow-y: hidden;
+}
+.tab-body >div >ul >li {
+    background-color: aqua;
+    width: 100%;
+}
+/* .tab-body ul {
+    width: 100%;
+} */

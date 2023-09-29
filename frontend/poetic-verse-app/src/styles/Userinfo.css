@@ -1,7 +1,10 @@
 .parent-container{
     width: 100%;
     padding: 20px;
-    overflow: hidden;
+    overflow: visible;
+}
+.parent-container form {
+    overflow: visible;
 }
 .field{
     margin-top: 1rem;
@@ -17,7 +20,7 @@
     width: 50%;
     padding: 6px 10px;
     font-size: 18px;
-    color: white;
+    color: white;   
 }
 .input-field-1{
     background: var(--primary-dark);

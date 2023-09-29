@@ -33,7 +33,7 @@ export function Login() {
         </div>
         <div className="auth" style={item}>
         <div className='wrapper'>
-          <div className="auth-body">
+          <div className="auth-body login">
             <h2>Login</h2>
             <Formik
               initialValues={{login: "", password: ""}}
@@ -79,7 +79,7 @@ export function Login() {
                 <button type="submit" className="auth-bodyButton">
                 Login
                 </button>
-                {apiError && <p className="loginerr">{apiError}</p>}
+                {apiError && <p className="loginerr checkerror">{apiError}</p>}
             </Form>
             </Formik>
             <Link to={`/auth/signup`}>Don&apos;t have an account? Join here</Link>
@@ -174,7 +174,7 @@ export function Signup() {
                 <button type="submit" className="auth-bodyButton">
                 Signup
                 </button>
-                {apiError && <p className="loginerr">{apiError}</p>}
+                {apiError && <p className="loginerr checkerror">{apiError}</p>}
                 <Link to={`/auth/login`}>Already have an account? Click here</Link>
             </Form>
 

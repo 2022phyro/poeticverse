@@ -4,7 +4,7 @@
  */
 import axios from 'axios'
 import * as Yup from 'yup';
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useReducer, useState } from 'react';
 
 export const api = (auth) => {
   const inst = axios.create({
@@ -29,6 +29,13 @@ export const initialState = {
   rank: {},
   isLoggedIn: false,
   authToken: '',
+  popUp: {
+    popupContent: "",
+    popupActive: false,
+    success: 'OK',
+    successCommand: null,
+    decision: false
+  }
 };
 
 export const UserProvider = ({ children }) => {
@@ -55,10 +62,31 @@ export const userReducer = (state, action) => {
       return { ...state, isLoggedIn: action.payload };
     case 'SET_AUTH_TOKEN':
       return { ...state, authToken: action.payload };
+    case 'SET_POP_UP':
+      return { ...state, popUp: action.payload }
     default:
       return state;
   }
 };
+// Create a custom hook for managing the popup state
+
+  export function usePopup() {
+    const { dispatch } = useUserContext()
+    const openPopUp = (popupContent, success = 'OK', successCommand = null) => {
+      const open = {
+        popupActive: true,
+        success: success,
+        successCommand: successCommand,
+        popupContent: popupContent,
+        decision: successCommand ? true : false
+      };
+      
+      dispatch({ type: 'SET_POP_UP', payload: open });
+    };
+  
+    return openPopUp;
+  }
+
 
 
 export const passwordValidationSchema = Yup.string()

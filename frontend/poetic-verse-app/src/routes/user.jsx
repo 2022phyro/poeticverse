@@ -82,7 +82,7 @@ export function ProfileSection() {
                 <UserComments myId={id} user_id={authorId}/>
             </div>
             <div style={{display: active == 'poems'? 'flex': 'none'}}>
-                <UserPoems myId={id} author={authorId}/>
+                <UserPoems url='poems' myId={id} author_id={authorId}/>
             </div>
           </div>
 
