@@ -60,8 +60,8 @@ export function ResetPassword(){
   }
   return (
     <div className="parent-container">
-      <h3>Reset Password</h3>
-      <p>Enter the new password you would like to access your account width
+      <h1>Reset Password</h1>
+      <p className='reset-msg'>Enter the new password you would like to access your account width
         After submitting if successful you will be redirected to login with
         your new credentials
       </p>
@@ -156,12 +156,12 @@ export function VerifyUserToken() {
       {isLoading ? (
         <Loader/>
       ) : (
-        <div >
+        <div className='verify-acc'>
           <h1>Click here to verify your account</h1>
           <div className="redirect-buttons">
           <button onClick={handleV}>Verify</button>
           </div>
-          <div className='loginerr'>{errm}</div>
+          <div className='loginerr verror'>{errm}</div>
         </div>
       )}
     </div>

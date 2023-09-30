@@ -9,7 +9,7 @@
     margin-bottom: 20px;
 }
 .user-body {
-    max-width: 900px;
+    max-width: 600px;
     /* padding: 20px; */
     width: 100%;
 }
@@ -71,18 +71,14 @@
     /* width: 100%; */
 }
 .tab-body > div {
-    border: 1px solid red;
-    width: fit-content;
+    /* border: 1px solid red; */
+    height: fit-content;
+    padding-bottom: 10px;
 }
 .tab-body > div > ul {
-    background-color: blue;
-    width: fit-content;
-    overflow-y: hidden;
-}
-.tab-body >div >ul >li {
-    background-color: aqua;
     width: 100%;
+    height: fit-content;
 }
-/* .tab-body ul {
-    width: 100%;
-} */
+.tab-body li {
+    position: relative;
+}

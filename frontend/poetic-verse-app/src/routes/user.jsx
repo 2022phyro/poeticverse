@@ -87,6 +87,7 @@ export function ProfileSection() {
           </div>
 
           </div>
+          <div class="divider"></div>
             <ProfileInfo {...userDetails}/>
         </>
     )

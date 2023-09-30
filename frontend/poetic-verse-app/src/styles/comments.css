@@ -1,9 +1,16 @@
 .poem-section {
-    display: block;
+    display: flex;
+    flex-flow: column;
+    max-width: 600px;
+    width: 100%;
 }
 .comment-section {
     /* padding: 20px; */
     margin-bottom: 150px;
+    max-width: 550px;
+    align-self: flex-start;
+    width: 99%;
+    /* border: 1px solid red; */
 }
 
 .comment-object {
@@ -12,6 +19,8 @@
     border-left: 1px solid var(--primary-dark);
     border-right: 1px solid var(--primary-dark);
     max-width: 500px;
+    align-self: center;
+    width: 80%;
     padding: 20px;
     border-radius: 30px;
     margin-top: 20px;
@@ -22,7 +31,7 @@
     font-size: 15px;
 }
 .comment-object .likesComment {
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 16px;
 }
 .create-comment {

@@ -225,8 +225,7 @@ export function UserLikes ({user_id, ...props}) {
     }, [user_id])
     return (
         <ul>
-            <div style={{ minHeight: '800px' }}>
-              {items.map((at) => {
+            {items.map((at) => {
                return (
                <li key={at.id}>
                         
@@ -234,7 +233,6 @@ export function UserLikes ({user_id, ...props}) {
                </li>
                )
              })}
-            </div>
         </ul>  
     )
 }
