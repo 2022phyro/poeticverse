@@ -9,7 +9,7 @@ a {
 
 }
 .background {
-    background: #0C0F15;
+    background: var(--secondary);
     font-family: 'League Gothic';
     color: #D8DBE1;
     width: 100vw;

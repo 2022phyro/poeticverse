@@ -8,7 +8,7 @@ import { createContext, useContext, useReducer, useState } from 'react';
 
 export const api = (auth) => {
   const inst = axios.create({
-    baseURL: 'https://poeticverse-api-5f5c40033c5c.herokuapp.com/v1/',
+    baseURL: 'https://poeticverse-api-5f5c40033c5c.herokuapp.com/v1/', //'http://localhost:5000/v1',
     headers: {
       'Content-Type': 'application/json'
     }

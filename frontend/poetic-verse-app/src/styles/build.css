@@ -1,9 +1,27 @@
 /*Css for all files*/
+:root[data-theme = 'dark'] {
+    --primary-dark: #3A4B6B;
+    --primary: #3A4B6B;
+    --nav-dark: #0C0F15;
+    --secondary: #cecfd0;
+    --primary-text-dark: #D8DBE1;
+    --black: #000;
+    --button: #3A4B6B;
+    --button-color: white;
+    --text: black;
+    --background: white;
+    --primary-background: #000;
+    --header-text: League Gothic;
+    --design-text: Cormorant Upright;
+    --auth-background: #cecfd0;
+    --reverse-text: black;
+}
 :root {
     --primary-dark: #3A4B6B;
     --primary: #3A4B6B;
     --nav-dark: #0C0F15;
     --secondary: #0C0F15;
+    --background: black;
     --primary-text-dark: #D8DBE1;
     --black: #000;
     --button: #3A4B6B;
@@ -164,7 +182,7 @@ button:active {
 .auth{
     width: 600px;
     height: 600px;
-    background: url("/background-scroll.svg");
+    background: url("/output.png");
     background-repeat: no-repeat;
     background-size: 80%;
     background-position: center;
@@ -208,6 +226,7 @@ button:active {
 .auth-body > form > label {
     /* padding-bottom: 20px; */
     display: block;
+    color: #0C0F15;
     font-family: 'Dancing Script', cursive;
     font-size: 20px;
     /* width: 100vw; */
@@ -266,7 +285,7 @@ button:active {
 
 @media screen and (max-width: 600px) {
     .auth {
-        background: url("/background-scroll.svg");
+        background: url("/output.png");
         width: 100vw;
         height: 100vh;
         background-position: center;
@@ -330,13 +349,13 @@ button:active {
     }
     .auth-bodyButton {
         height: 40px;
-        background: var(--auth-background);
+        background: #0C0F15;
         margin-top: 15px;
         box-shadow: 3px 3px 3px #14171f;
         border: none;
         border-radius: 5px;
         width: calc(100% - 20px);
-        color: var(--text);
+        color: white;
         font-size: 20px;
         font-family: 'Cormorant Upright', serif;
         font-weight: 600;
@@ -536,4 +555,15 @@ button:active {
     font-family: Roboto;
     max-width: 600px;
     width: 100%;
+}
+.rs-div {
+    padding: 20px;
+}
+.rs-div form {
+    overflow: visible;
+    padding: 20px 0;
+}
+.rs-div label {
+    font-family: Roboto;
+    padding-top: 20px;
 }

@@ -54,6 +54,8 @@ export function ProfileSection() {
           </div>
           <div className='user-body'>
           <img className='top-img' src='/background-user.jpeg'/>
+          <ProfileInfo {...userDetails}/>
+          <div className='tab-wrapper'>
           <ul className='tabheader'>
             <li 
               className={`tab-option ${active == 'poems' ? 'active-tab': ""}`}
@@ -73,7 +75,9 @@ export function ProfileSection() {
                 <Icon path='chat-tab'/>
                 <h3>Comments</h3>
             </li>
-          </ul>
+          </ul>            
+          </div>
+
           <div className='tab-body'>
             <div style={{display: active == 'likes'? 'flex': 'none'}}>
                 <UserLikes user_id={authorId}/>
@@ -87,8 +91,6 @@ export function ProfileSection() {
           </div>
 
           </div>
-          <div class="divider"></div>
-            <ProfileInfo {...userDetails}/>
         </>
     )
 }

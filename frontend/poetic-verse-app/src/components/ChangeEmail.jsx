@@ -5,7 +5,6 @@ import '../styles/ChangeEmail.css'
 const ChangeEmail = () => {
   return (
     <>
-     <Profile />
       <div className="parent-container">
         <h3>Change Email</h3>
         <div className="field">

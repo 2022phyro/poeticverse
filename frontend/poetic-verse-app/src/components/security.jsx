@@ -204,12 +204,13 @@ export function RequestReset() {
       {isLoading ? (
         <Loader/>
       ) : (
-        <div >
+        <div className="rs-div">
           <h1>Get a reset link</h1>
-          <p>Get a reset link you can use to safely reset your password
+          <p className='reset-msg'>Get a reset link you can use to safely reset your password
             if you have forgotten it</p>
             <form onSubmit={handleV}>
-              <input type="email" name='email' required/>
+              <label htmlFor='rs-email'>Enter your email here</label>
+              <input id='rs-email' type="email" name='email' className='input-1' required/>
              <button type="submit" className="btn">Request</button>              
             </form>
           <div className='loginerr'>{errm}</div>

@@ -71,28 +71,27 @@ function CommentTab (props) {
 export function ProfileInfo (props) {
   return (
       <>
-        <div className="Profile-container">
-
-          <div className="profile-sidebar">
-            <div className="profile-content">
-              <div className="">
-                <Avatar source={props.profile_picture} className='profile-img'/>
-              </div>
-              <div className="profile-body">
-                <b>{`${props.first_name} ${props.last_name}`}</b>&nbsp;&nbsp;
-                <small className="verse">{props.rank}</small>
-                <aside>
-                    <div className='user-age'>
-                    <Icon path='time-round'/>
-                    <p>Been a member since {getRelativeTime(props.created_at)} ago</p>
-                    </div>
-                    <div className='user-bio'>
-                      <p><span className='quote'>&quot;</span>{props.bio}</p>
-                      <span className='quote q1'>&quot;</span>
-                    </div>
-                    
-                </aside>
-              </div>
+        <div>
+          <div>
+          <img src='/background-user.jpeg'/>
+            <div className="">
+              <Avatar source={props.profile_picture}/>
+            </div>
+            <div>
+              <b>{`${props.first_name} ${props.last_name}`}</b>&nbsp;&nbsp;
+              <small>{props.rank}</small>
+              <aside>
+                  <div>
+                  <Icon path='time-round'/>
+                  <p>Been a member since {getRelativeTime(props.created_at)} ago</p>
+                  </div>
+                  <div className='user-bio'>
+                  <span className='quote'>&quot;</span>
+                    <p>{props.bio}</p>
+                    <span className='q2'>&quot;</span>
+                  </div>
+                  
+              </aside>
             </div>
           </div>
         </div>

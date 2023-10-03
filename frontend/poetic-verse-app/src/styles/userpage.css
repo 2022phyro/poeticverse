@@ -1,16 +1,29 @@
 .tabheader {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
+
     display: flex;
     justify-content: space-evenly;
     background-color: var(--nav-dark);
     border-radius: 9999px;
-    margin-bottom: 20px;
+    z-index: 2;
+    color: white;
+    border: 1px solid var(--primary);
+    /* margin-bottom: 20px; */
+}
+.tab-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--background);
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
 }
 .user-body {
     max-width: 600px;
     /* padding: 20px; */
+    /* position: absolute; */
+    top: 0;
+    overflow: scroll;
+    height: calc(100vh - 70px - 15px);
     width: 100%;
 }
 .part {
@@ -48,10 +61,30 @@
     font-family: Cormorant Upright;
     margin-top: 10px;
     position: relative;
+    padding: 0 10px;
+    max-height: 250px;
+    border: 1px solid var(--primary);
+    border-radius: 10px;
 }
 .user-bio .quote {
     font-size: 46px;
     font-weight: 600;
+    position: sticky;
+    top: 0;
+    left: 0;
+    /* margin-top: -0.4em; */
+    z-index: 4;
+    /* background-color: red; */
+}
+.user-bio .q2 {
+    font-size: 46px;
+    font-weight: 600;
+    position: sticky;
+    bottom: 0;
+    right: 0;
+    float: right;
+    /* margin-bottom: -0.4em; */
+    z-index: 4;
 }
 .q1 {
     /* position: absolute; */
@@ -59,12 +92,15 @@
     float: right;
 }
 
-.top-img {
+.top-img, .side-img {
     width: 100%;    
     height: 200px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 
+}
+.side-img {
+    display: none;
 }
 .tab-body {
     margin-top: 20px;
@@ -81,4 +117,45 @@
 }
 .tab-body li {
     position: relative;
+}
+/* .user-container{
+    background: var(--black);
+    width: 280px;
+    height: 100%;
+    position: fixed;
+    font-weight: 300;
+    font-family: 'League Gothic';
+    z-index: 3;
+    right: 40px;
+    /* padding: 20px 10px;
+} */
+@media (max-width: 1199px) {
+    /* .user-container {
+        position: absolute;
+        width: 90%;
+        height: fit-content;
+        z-index: 3;
+    }
+    .profile-img{
+        background: linear-gradient(200deg, var(--primary-dark), var(--nav-dark));
+        position: absolute;
+        background-position: center;
+        background-size: cover;
+        max-width: 250px;
+        width: 90px;
+        height: 90px;
+        background-repeat: no-repeat;
+        /* margin-top: -1.5em; */
+        top: 150px;
+        margin-left: 30px;
+        /* z-index: 3; */
+        border-radius: 10px;
+        background-blend-mode: darken; 
+    } */
+    .top-img {
+        display: none;
+    }
+    /* .side-img {
+        display: block;
+    } */
 }

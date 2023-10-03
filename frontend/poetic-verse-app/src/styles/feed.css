@@ -2,9 +2,9 @@
     display: none;
 }
 body{
-    background-color: #000;
+    background-color: var(--background);
     font-family: 'League Gothic';
-    color: #D8DBE1;
+    color: var(--text);
     /* display: flex;
     flex-flow: row wrap; */
 }
@@ -24,7 +24,7 @@ body{
    border: 1px solid red;
    overflow: visible;
    width: 300px;
-   background: #000;
+   background: var(--background);
    
 }
 
@@ -88,6 +88,7 @@ body{
     height: 48px;
     margin-left: 20px;
     border-radius: 9999px;
+    color: #D8DBE1;
     background: var(--primary-dark);
     position: absolute;
     bottom: 86px;
@@ -128,7 +129,7 @@ body{
     flex-flow: column;
     white-space: pre-line;
     border-radius: 19px;
-    background: var(--nav-dark);
+    background: var(--secondary);
     margin-bottom: 9px;
 }
 .poem-object h4 {
@@ -137,7 +138,7 @@ body{
 }
 
 .poem-object p {
-    color: #D8DBE1;
+    color: var(--text);
     font-family: Roboto;
     font-size: 15px;
     font-style: normal;
@@ -209,6 +210,7 @@ body{
 .title h3 {
     font-size: 32px;
     font-weight: 600;
+    color: var(--text);
 }
 @media screen and (max-width: 630px) {
 
@@ -470,7 +472,6 @@ body{
         /* flex-shrink: 0; */
         white-space: pre-line;
         border-radius: 19px;
-        background: var(--secondary);
         margin-bottom: 9px;
     }
     .explore {

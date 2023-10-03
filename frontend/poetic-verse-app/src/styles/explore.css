@@ -34,7 +34,7 @@
 }
 
 .search-user-result {
-    background: var(--nav-dark);
+    background: var(--secondary);
     padding: 20px;
     border-radius: 10px;
 }

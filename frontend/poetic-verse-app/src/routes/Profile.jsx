@@ -11,6 +11,7 @@ function PictureUploader(props) {
 
   const handleImageUpload = () => {
     if (!selectedImage) {
+      console.log('Debugging')
       return;
     }
 
@@ -73,7 +74,11 @@ const Profile = () => {
   };
 
   const getButtonBackgroundColor = (buttonName) => {
-    return activeButton === buttonName ? '#3A4B6B' : '';
+    // return activeButton === buttonName ? '#3A4B6B' : '';
+    return {
+      'background-color': activeButton === buttonName ? '#3A4B6B' : 'transparent',
+      'color': activeButton === buttonName ? 'white' : 'var(--text)',
+    }
   };
 
   const handleDelete = () => {
@@ -127,7 +132,7 @@ const Profile = () => {
                   <Link to={{pathname:"/feed/settings/userinfo", state:pro}}>
                     <div
                       className="list-item"
-                      style={{ backgroundColor: getButtonBackgroundColor('userinfo') }}
+                      style={ getButtonBackgroundColor('userinfo')}
                       onClick={() => handleButtonClick('userinfo')}
                     >
                       <Icon className="create-icon" path="user-info" />
@@ -138,7 +143,7 @@ const Profile = () => {
                   <Link to={{pathname:"/feed/settings/resetpassword", state: {pro}}}>
                     <div
                       className="list-item"
-                      style={{ backgroundColor: getButtonBackgroundColor('resetpassword') }}
+                      style={getButtonBackgroundColor('resetpassword')}
                       onClick={() => handleButtonClick('resetpassword')}
                     >
                       <Icon className="create-icon" path="lock" />
@@ -148,7 +153,7 @@ const Profile = () => {
                   <Link to= '/feed/settings/verifyUser' >
                   <div 
                   className="list-item"
-                  style={{ backgroundColor: getButtonBackgroundColor('verifyUser') }}
+                  style={getButtonBackgroundColor('verifyUser') }
                       onClick={() => handleButtonClick('verifyUser')}
                   >
                     <Icon className="create-icon" width="20" path="verify" />
@@ -158,7 +163,7 @@ const Profile = () => {
                   <Link to = '/feed/settings/changeEmail'>
                   <div 
                   className="list-item"
-                      style={{ backgroundColor: getButtonBackgroundColor('changeEmail') }}
+                      style={getButtonBackgroundColor('changeEmail') }
                       onClick={() => handleButtonClick('changeEmail')}>
                     <Icon className="create-icon" path="email" />
                     <b>Change Email</b>
