@@ -1,7 +1,0 @@
-__pycache__
-.env
-.vscode
-celerybeat-schedule.bak
-celerybeat-schedule.dat
-celerybeat-schedule.dir
-run.sh

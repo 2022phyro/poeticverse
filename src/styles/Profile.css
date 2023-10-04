@@ -1,0 +1,97 @@
+.Profile-container{
+    background: var(--background);
+    width: 280px;
+    height: 100%;
+    position: fixed;
+    font-weight: 300;
+    font-family: 'League Gothic';
+    right: 40px;
+    padding: 20px 10px;
+}
+.divider{
+    width: 2px;
+    height: 100%;
+    background-color: var(--nav-dark);
+    position: fixed;
+    right: 25em;
+}
+.profile-picture-uploader {
+    background: linear-gradient(200deg, var(--primary-dark), var(--nav-dark));
+    padding: 1px;
+    border-radius: 10px;
+    position: relative;
+    width: fit-content;
+
+}
+.profile-img{
+    background: linear-gradient(200deg, var(--primary-dark), var(--nav-dark));
+    background-position: center;
+    background-size: cover;
+    max-width: 250px;
+    width: 100%;
+    max-height: 270px;
+    background-repeat: no-repeat;
+    
+    border-radius: 10px;
+    background-blend-mode: darken;
+}
+.edit-icon{
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    background: var(--primary);
+    border-radius: 5px;
+}
+.profile-body{
+    /* margin-top: 1em; */
+    font-size: 20px;
+}
+.verse{
+    color: var(--primary-dark);
+}
+.list-group{
+    /* margin-top: 2em; */
+        /* border: 1px solid white; */
+}
+.list-item-1{
+    background-color: var(--nav-dark);
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 1em;
+    padding: 10px;
+    border-radius: 8px;
+    align-items: center;
+    transition: .3s ease all;
+}
+.list-item{
+    color: var(--text);
+    margin-top: 10px;
+    border: 1px solid var(--nav-dark);
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 1em;
+    padding: 10px;
+    border-radius: 8px;
+    align-items: center;
+    transition: .3s ease all;
+}
+ .list-item-1:hover{
+    background-color: var(--primary);
+    cursor: pointer;
+    color: white;
+}
+
+.list-item:hover{
+    background-color: var(--primary);
+    cursor: pointer;
+    color: white;
+}
+@media (max-width: 1199px) {
+    .Profile-container {
+        position: static;
+        width: 90%;
+        height: fit-content;
+        display: none;
+    }
+
+}

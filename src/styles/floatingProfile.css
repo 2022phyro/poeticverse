@@ -1,0 +1,55 @@
+.floatingProfile{
+    position: absolute;
+    bottom: 40px;
+    display: none;
+    right: 50px;
+}
+.floater{
+    background-color: var(--primary-dark);
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.floater-content{
+    background-color: var(--nav-dark);
+    width: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 1em;
+    padding: 10px 10px;
+    border-radius: 8px;
+    height: auto;
+    color: white;
+    position: absolute;
+    right: 40px;
+    bottom: 100px;
+    z-index: 1;
+}
+.list  {
+    color: white;
+    font-family: Roboto;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+}
+.list p {
+    width: 110px;
+}
+.inf{
+    width: 30px;
+}
+@media (max-width: 1199px){
+    .floatingProfile{
+        display: block;
+    }
+}
