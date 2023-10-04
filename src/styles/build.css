@@ -112,6 +112,7 @@ a {
 .start-header {
     height: 90px;
     display: flex;
+    z-index: 3;
 }
 .start-header .logo {
     left: 30px;
