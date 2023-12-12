@@ -10,6 +10,7 @@ Whether you're an experienced poet looking to share your creations, a poetry rea
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [Site](#Site)
+- [Author](#Author)
 ## Features
 - **Create and Share Poems**: Compose your poems directly within the website. Add titles, tags, and descriptions to your poems for better visibility. Choose whether to make your poems public or private.
 - **Discover and Explore Poetry**: Browse a diverse collection of poems by genre, style, and theme. Use the search feature to find poems and poets of interest. Discover trending poems and poets in the community.
